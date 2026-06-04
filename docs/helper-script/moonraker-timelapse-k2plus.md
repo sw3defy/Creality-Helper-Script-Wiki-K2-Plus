@@ -1,25 +1,29 @@
 # Moonraker Timelapse — K2 Plus
 
-Moonraker Timelapse captures a frame at each layer change to create a timelapse of your print.
+Moonraker Timelapse is a third-party Moonraker component that creates timelapse recordings of prints by capturing a frame at each layer change.
 
 ---
 
 ## Installation
 
-From the `[Install] Menu` install **Moonraker Timelapse**.
+Make sure you have followed the [Install Helper Script](helper-script-installation.md) section, then from the `[Install] Menu` install **Moonraker Timelapse**.
+
+The component is installed to `/mnt/UDISK/printer_data/` and registered in `/mnt/UDISK/printer_data/config/moonraker.conf`.
 
 ---
 
 ## Timelapse Video Location
+
+Completed timelapse videos are saved to:
 
 ```
 /mnt/UDISK/printer_data/timelapse/
 ```
 
 !!! note "Path difference from K1"
-    On K1 timelapse videos are at `/usr/data/printer_data/timelapse/`. On K2 Plus: `/mnt/UDISK/printer_data/timelapse/`.
+    On K1, timelapse videos are saved to `/usr/data/printer_data/timelapse/`. On K2 Plus the path is `/mnt/UDISK/printer_data/timelapse/`.
 
-Download via Fluidd's file manager or SCP:
+Videos can be downloaded directly from Fluidd's file manager under the **Timelapse** section, or via SCP:
 
 ```bash
 scp root@<printer-ip>:/mnt/UDISK/printer_data/timelapse/my_print.mp4 ./
@@ -29,14 +33,20 @@ scp root@<printer-ip>:/mnt/UDISK/printer_data/timelapse/my_print.mp4 ./
 
 ## Slicer Setup
 
-Layer change G-code:
+Add the following to your slicer's layer change G-code:
 
 ```gcode
 TIMELAPSE_TAKE_FRAME
 ```
 
-End G-code:
+And add this to your `END_PRINT` macro or slicer end G-code:
 
 ```gcode
 TIMELAPSE_RENDER
 ```
+
+---
+
+## Camera
+
+The K2 Plus streams video via WebRTC (service `S97webrtc`). Moonraker Timelapse captures frames from the MJPEG stream on `127.0.0.1:8080`. Ensure the camera is working in Fluidd before enabling timelapse.

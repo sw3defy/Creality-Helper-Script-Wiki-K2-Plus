@@ -1,57 +1,36 @@
+# Change WiFi Location — K2 Plus
+
+The K2 Plus connects to your local WiFi network during initial setup. If you move the printer or change your network, you can reconnect directly from the touchscreen.
+
 ---
-hide:
-  - toc
+
+## Change WiFi from Touchscreen
+
+- On the touchscreen go to **Settings → Network**
+- Tap your current network to disconnect, or tap **+** to add a new network
+- Select your network from the list and enter the password
+- The printer reconnects and displays the new IP address
+
 ---
-By default, Wi-Fi location is not set to your own country. Mine is set to GB (Great Britain) while I am in France.
 
-This can be disturbing in some cases because not all countries use the same Wi-Fi frequencies.
+## Find Your Printer's IP Address
 
-Only make these changes if you are experiencing stability issues with your printer's Wi-Fi.
+After connecting, the IP address is shown in **Settings → Network**.
 
-!!! Note
-    **This procedure must be repeated after restoring the printer to factory settings or if you update the firmware.**
+You can also find it from your router's DHCP client list — look for a device named `K2Plus-XXXX` where `XXXX` is the last 4 characters of your printer's MAC address.
 
+---
 
-## Configuration
-<hr>
+## Set a Static IP
 
-- Connect to SSH (Guide is available <a href="../../firmwares/ssh-connection">here</a>).
+For a stable IP that does not change between reboots, configure a DHCP reservation on your router (recommended). Assign a permanent IP to the printer's MAC address — this requires no changes on the printer itself and survives factory resets.
 
-- Enter the following command to check all available locations:
+---
 
-    ```
-    cat /usr/share/zoneinfo/zone.tab
-    ```
+## Reconnect After Factory Reset
 
-- Locate the two letters specific to your location in the list that appears.
+After a factory reset the printer loses its WiFi credentials. Reconnect from the touchscreen:
 
-- On the left part of the window, go to the `/usr/data/` folder and right-click on the `wpa_supplicant.conf` file then select `Open with default text editor`:
+**Settings → Network → select your network → enter password**
 
-    <img width="900" src="../../assets/img/Change-Wi‐Fi-location/Wifi_01.png">
-
-- In the new editing window that appears, modify the country line by replacing the two letters corresponding to your location, like this:
-
-    <img width="900" src="../../assets/img/Change-Wi‐Fi-location/Wifi_02.png">
-
-- Then click on `Save file` button on the top:
-
-    <img width="900" src="../../assets/img/Change-Wi‐Fi-location/Wifi_03.png">
-
-- And confirm the file replacement by clicking `Yes` button:
-
-    <img width="900" src="../../assets/img/Change-Wi‐Fi-location/Wifi_04.png">
-
-- On the right part of the window, in SSH command prompt, enter this command to reboot your printer:
-
-    ```
-    reboot
-    ```
-
-- After restarting, the printer's Wi-Fi will be set to your own country.
-
-<br />
-
-**If you like my work, don't hesitate to support me by paying me a 🍺 or a ☕. Thank you 🙂**
-
-<a href="https://ko-fi.com/guilouz" target="_blank"><img width="350" src="../../assets/img/home/Ko-fi.png"></a>
-
+Root access must also be re-enabled after a factory reset. See [Enable Root Access](../firmwares/install-and-update-rooted-firmware-k2plus.md#enable-root-access).

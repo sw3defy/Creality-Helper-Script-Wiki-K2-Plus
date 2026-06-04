@@ -1,85 +1,68 @@
+# Change Date & Time — K2 Plus
+
+The K2 Plus syncs its clock via NTP (Network Time Protocol) when connected to the internet. If the date and time are incorrect it can cause SSL certificate errors when cloning the Helper Script.
+
 ---
-hide:
-  - toc
+
+## Check Current Date and Time
+
+```bash
+date
+```
+
 ---
-In some cases date and time are not correct and defined by default to Sun Mar  1 13:29:37 CET 2020.<br />
-This guide explains how to set the correct date and time on your printer based on your time zone.
 
-!!! Note
-    **This procedure must be repeated after restoring the printer to factory settings or if you update the firmware.**
+## Sync Time via NTP (Recommended)
 
-<br />
+If connected to the internet, restart the NTP service:
 
-- Connect to SSH (Guide is available <a href="../../firmwares/ssh-connection">here</a>).
+```bash
+/etc/init.d/S98sysntpd restart
+sleep 5
+date
+```
 
-- Enter this command to see the current date and time defined on your printer:
+---
 
-    ```
-    date
-    ```
-    
-    If date and time are correct, there is no need to continue.
+## Set Time Manually
 
-- Enter this command to see the current time zone defined on your printer:
+If the printer is not connected to the internet:
 
-    ```
-    ls -l /etc/localtime | awk '{print $6, $7, $8, $9, $10, $11}'
-    ```
+```bash
+# Format: MMDDhhmm[[CC]YY][.ss]
+# Example: June 4, 2026, 14:30
+date 060414302026
+```
 
-    By default I get this (I live in France so this is not correct):
-    
-    ```
-    Jan 10 16:04 /etc/localtime -> ../usr/share/zoneinfo/Asia/Shanghai
-    ```
+---
 
-- Enter this command to delete the current time zone:
+## Set Timezone
 
-    ```
-    rm -rf /etc/localtime
-    ```
+The K2 Plus timezone is configured in `system_config.json`. To change it:
 
-- Enter this command to display the list of available zones:
+```bash
+# View current timezone setting
+python3 -c "import json; d=json.load(open('/mnt/UDISK/creality/userdata/config/system_config.json')); print(d['user_info']['time_zone'])"
 
-    ```
-    ls /usr/share/zoneinfo | grep '^[A-Z]'
-    ```
+# The timezone is set by the Creality UI — change it from
+# Settings → System → Time Zone on the touchscreen
+```
 
-- Enter this command to display the list of cities available in the chosen zone (by replacing the `XXX` with the zone):
+---
 
-    ```
-    ls /usr/share/zoneinfo/XXX | grep '^[A-Z]'
-    ```
+## Fix SSL Errors When Cloning
 
-    !!! Example
-        ```
-        ls /usr/share/zoneinfo/Europe | grep '^[A-Z]'
-        ```
+If you see SSL certificate errors when running `git clone`:
 
-- When you have find your current time zone, enter this command to define it  (by replacing the `XXX` with the zone and `YYY` by the city):
+```bash
+# Sync time first
+/etc/init.d/S98sysntpd restart
+sleep 10
 
-    ```
-    ln -s /usr/share/zoneinfo/XXX/YYY /etc/localtime
-    ```
+# If still failing, disable SSL verification temporarily
+git config --global http.sslVerify false
+git clone --depth 1 https://github.com/sw3defy/Creality-Helper-Script-K2-Plus.git /mnt/UDISK/helper-script
 
-    !!! Example
-        ```
-        ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
-        ```
-
-- Enter this command to restart NTP server to take effect:
-
-    ```
-    /etc/init.d/S49ntp restart
-    ```
-
-- Then enter this command again to see the changes applied:
-
-    ```
-    date
-    ```
-
-<br />
-
-**If you like my work, don't hesitate to support me by paying me a 🍺 or a ☕. Thank you 🙂**
-
-<a href="https://ko-fi.com/guilouz" target="_blank"><img width="350" src="../../assets/img/home/Ko-fi.png"></a>
+# Re-enable after cloning
+git config --global http.sslVerify true
+```

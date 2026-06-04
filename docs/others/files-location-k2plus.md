@@ -1,6 +1,8 @@
 # Files Location — K2 Plus
 
-All persistent data on the K2 Plus lives under `/mnt/UDISK/`. There is no `/usr/data/` path — this differs from the K1 Series.
+All persistent data on the K2 Plus lives under `/mnt/UDISK/`. There is no `/usr/data/` path on the K2 Plus — this differs from the K1 Series.
+
+Connect via [SSH](../firmwares/ssh-connection.md) to access these locations.
 
 ---
 
@@ -21,7 +23,7 @@ All persistent data on the K2 Plus lives under `/mnt/UDISK/`. There is no `/usr/
 
 | Resource | Path |
 |---|---|
-| System config | `/mnt/UDISK/creality/userdata/config/system_config.json` |
+| System config (self-check flag, etc.) | `/mnt/UDISK/creality/userdata/config/system_config.json` |
 | Creality timelapse videos | `/mnt/UDISK/creality/userdata/delay_image/video/` |
 | AI image data | `/mnt/UDISK/ai_image/` |
 | Layer image data | `/mnt/UDISK/layers_image/` |
@@ -30,7 +32,7 @@ All persistent data on the K2 Plus lives under `/mnt/UDISK/`. There is no `/usr/
 
 ## Read-Only System Paths
 
-These paths live on a read-only partition and **cannot be edited in place**.
+These paths live on a read-only partition and **cannot be edited in place**. Modifying them requires overlaying or replacing the binary/file via the helper script approach.
 
 | Resource | Path |
 |---|---|
@@ -49,13 +51,13 @@ These paths live on a read-only partition and **cannot be edited in place**.
 
 The K2 Plus uses OpenWrt-style rc.d init scripts. There is no `systemd` or `supervisord`.
 
-| Service | Script |
-|---|---|
-| Klipper MCU bridge | `/etc/init.d/S54klipper_mcu` |
-| Klipper (klippy) | `/etc/init.d/S55klipper` |
-| Moonraker | `/etc/init.d/S56moonraker` |
-| Nginx | `/etc/init.d/S80nginx` |
-| WebRTC (camera) | `/etc/init.d/S97webrtc` |
+| Service | Start script | Stop script |
+|---|---|---|
+| klipper MCU bridge | `/etc/init.d/S54klipper_mcu` | `/etc/rc.d/K54klipper_mcu` (if present) |
+| Klipper (klippy) | `/etc/init.d/S55klipper` | — |
+| Moonraker | `/etc/init.d/S56moonraker` | — |
+| Nginx | `/etc/init.d/S80nginx` | — |
+| WebRTC (camera) | `/etc/init.d/S97webrtc` | `/etc/rc.d/K97webrtc` |
 
 To restart a service over SSH:
 
@@ -66,4 +68,4 @@ To restart a service over SSH:
 ```
 
 !!! note "No supervisorctl on K2 Plus"
-    The `supervisorctl` command is not available. Use the rc.d init scripts above instead.
+    Unlike the K1 Series, the K2 Plus does not use Supervisor Lite. The `supervisorctl` command is not available. Use the rc.d init scripts above instead.

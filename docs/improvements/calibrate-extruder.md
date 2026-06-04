@@ -1,105 +1,82 @@
-On an extruder, the rotation_distance is the amount of distance the filament travels for one full rotation of the stepper motor. The best way to get an accurate value for this setting is to use a "measure and trim" procedure.
+# Calibrate Extruder — K2 Plus
 
-## Procedure
-<hr>
+Extruder calibration (also called e-step calibration) ensures the printer extrudes exactly the amount of filament requested. This improves dimensional accuracy and reduces under/over-extrusion.
 
-- Remove PTFE tube from the Extruder for the measure.
+---
 
-- Heat the Hotend to an appropriate temperature and insert filament in it.
+## When to Calibrate
 
-- Use a marker to place a mark on the filament 120mm from the inlet of the extruder.
+Calibrate your extruder when:
 
-- Then use a digital caliper to measure the actual distance from that mark as accurately as possible.
+- Installing a new extruder or drive gear
+- Changing filament diameter significantly
+- Noticing consistent under or over-extrusion that is not resolved by slicer flow rate adjustments
+- After any extruder hardware modification
 
-    Note this value of 120mm as the `<initial_mark_distance>`.
+The K2 Plus uses a direct drive extruder. The stock `rotation_distance` in `printer.cfg` is `6.9` — this is a good starting point but may need fine-tuning for your specific hardware.
 
-- Via the console section of Fluidd, extrude 100mm of filament with the following command sequence.
+---
 
-    Note this value of 100mm as the `<requested_extrude_distance>`:
+## Method 1 — Mark and Measure (Cold)
 
-    ```
-    G91
-    ```
+This is the most accurate method.
 
-    ```
-    G1 E100 F100
-    ```
+1. Remove the bowden tube from the extruder or work with filament loaded.
 
-- Wait for extruder to complete the movement (this will take several seconds). It's important to use a slow extrusion speed for this test, as a faster speed can cause high pressure in the extruder which will skew the results. So don't use the EXTRUDE button from Fluidd or the screen for this test as they extrude at a fast rate.
+2. Mark the filament **120mm** from the extruder entry point with a marker.
 
-- Then use a digital caliper to measure the new distance from the inlet of the extruder to the mark on the filament.
+3. From the Fluidd console, command the extruder to move 100mm:
 
-    Note this value as `<measured_distance>`.
-
-- Then calculate:
-
-    `<initial_mark_distance>` :fontawesome-solid-minus: `<measured_distance>` :fontawesome-solid-arrow-right-long: `<extrusion_distance>`
-
-- Then retrieve the current rotation_distance value from the `printer.cfg` file at the `rotation_distance:` line of the `[extruder]` section:
-
-    ```
-    [extruder]
-    max_extrude_only_distance: 1000.0
-    max_extrude_cross_section: 80
-    step_pin: nozzle_mcu:PB1
-    dir_pin: nozzle_mcu:PB0
-    enable_pin: !nozzle_mcu:PB2
-    microsteps: 16
-    rotation_distance: 6.9
+    ```gcode
+    M83          ; relative extrusion
+    G1 E100 F100 ; extrude 100mm slowly
     ```
 
-    Note this value as `<current_rotation_distance>`.
+4. Measure the distance from the extruder entry to your mark. If the printer extruded exactly 100mm, the distance should now be 20mm.
 
-- Calculate the rotation_distance as follows:
-
-    `<current_rotation_distance>` :fontawesome-solid-xmark: `<extrusion_distance>` :fontawesome-solid-divide: `<requested_extrude_distance>` :fontawesome-solid-arrow-right-long: `<rotation_distance>`
-
-- Then replace the new value in the `printer.cfg` file by rounding the new `rotation_distance` to three decimal places.
-
-- You can now retract filament and replace your PTFE tube in its place, your extruder is calibrated.
-
-
-## Example
-<hr>
-
-- After extruding 100mm, I measure a distance of 18 mm between the inlet of my extruder and the mark on the filament.
-
-- So I have :
-
-    - My `<initial_mark_distance>` value of 120mm.
-    - My `<requested_extrude_distance>` value of 100mm.
-    - My `<measured_distance>` value of 18mm.
-
-- So I calculate my current `<extrusion_distance>` for 100mm requested:
-
-    `<initial_mark_distance>` :fontawesome-solid-minus: `<measured_distance>` :fontawesome-solid-arrow-right-long: `<extrusion_distance>`
-
-    120mm :fontawesome-solid-minus: 18mm :fontawesome-solid-arrow-right-long: **102mm**
-
-- I get the `<current_rotation_distance>` value from the `printer.cfg` file which is **6.9**.
-
-- So I then calculate my new `<rotation_distance>` value:
-
-    `<current_rotation_distance>` :fontawesome-solid-xmark: `<extrusion_distance>` :fontawesome-solid-divide: `<requested_extrude_distance>` :fontawesome-solid-arrow-right-long: `<rotation_distance>`
-
-    6.9 :fontawesome-solid-xmark: 102mm :fontawesome-solid-divide: 100mm :fontawesome-solid-arrow-right-long: **7.038**
-
-- I replace the **rotation_distance: 6.9** line in the `printer.cfg` file with:<br />
-  **rotation_distance: 7.038**:
-
+5. Calculate the actual distance extruded:
     ```
-    [extruder]
-    max_extrude_only_distance: 1000.0
-    max_extrude_cross_section: 80
-    step_pin: nozzle_mcu:PB1
-    dir_pin: nozzle_mcu:PB0
-    enable_pin: !nozzle_mcu:PB2
-    microsteps: 16
-    rotation_distance: 7.038
+    actual_extruded = 120 - remaining_distance
     ```
 
-<br />
+6. Calculate the new `rotation_distance`:
+    ```
+    new_rotation_distance = current_rotation_distance × (100 / actual_extruded)
+    ```
 
-**If you like my work, don't hesitate to support me by paying me a 🍺 or a ☕. Thank you 🙂**
+7. Update `rotation_distance` in the `[extruder]` section of `/mnt/UDISK/printer_data/config/printer.cfg` and run `FIRMWARE_RESTART`.
 
-<a href="https://ko-fi.com/guilouz" target="_blank"><img width="350" src="../../assets/img/home/Ko-fi.png"></a>
+---
+
+## Method 2 — Flow Rate Calibration (Hot, Recommended for Fine Tuning)
+
+After setting a baseline rotation_distance, fine-tune flow with a calibration cube:
+
+1. Print a single-wall calibration cube (20×20×20mm, 1 perimeter, 0% infill).
+2. Measure wall thickness with calipers.
+3. Expected thickness = nozzle diameter (0.4mm).
+4. Adjust flow in OrcaSlicer or via `M221 S[value]` until walls measure correctly.
+5. Once happy, bake the flow rate into your filament profile rather than changing `rotation_distance` further.
+
+---
+
+## K2 Plus Extruder Notes
+
+The K2 Plus uses a high-torque dual-drive extruder. Key values in stock `printer.cfg`:
+
+```ini
+[extruder]
+rotation_distance: 6.9
+microsteps: 16
+max_extrude_only_distance: 1000.0
+pressure_advance: 0.038
+pressure_advance_smooth_time: 0.038
+```
+
+After calibrating rotation_distance, also consider tuning **Pressure Advance** for better corner quality. Run:
+
+```gcode
+SET_PRESSURE_ADVANCE ADVANCE=0.04
+```
+
+and adjust while printing until corners are sharp without bulging. Save the final value in `printer.cfg`.

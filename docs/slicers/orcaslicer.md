@@ -1,122 +1,105 @@
-OrcaSlicer is an open source slicer for FDM printers.
+# OrcaSlicer — K2 Plus
 
-You can download it here: :material-github: [GitHub](https://github.com/SoftFever/OrcaSlicer/releases/latest)
+OrcaSlicer is the recommended slicer for the K2 Plus. It has a built-in K2 Plus printer profile with the correct 350×350×360mm build volume and chamber temperature support.
 
+Download: :material-github: [GitHub Releases](https://github.com/SoftFever/OrcaSlicer/releases/latest)
 
-Here you will find custom build plates for OrcaSlicer:
+---
 
-| Creality K1/K1C |
-| :---------: |
-| <img src="../../assets/img/OrcaSlicer/K1.png"> |
+## Printer Profile
 
-| Creality K1 Max without LiDAR Area |
-| :---------: |
-| <img src="../../assets/img/OrcaSlicer/K1_Max_without_LiDAR.png"> |
+Select the built-in K2 Plus profile when setting up your printer:
 
-| Creality K1 Max with LiDAR Area |
-| :---------: |
-| <img src="../../assets/img/OrcaSlicer/K1_Max_with_LiDAR.png"> |
+**Printer → Creality → Creality K2 Plus**
 
+Key profile values:
 
-## Download Links
-<hr>
+| Setting | Value |
+|---|---|
+| Build volume | 350 × 350 × 360 mm |
+| Kinematics | CoreXY |
+| Max speed | 800 mm/s |
+| Max acceleration | 30,000 mm/s² |
+| Chamber temperature | Supported |
 
-:material-download: [Custom Build Plates for K1](https://github.com/Guilouz/Creality-Helper-Script-Wiki/raw/main/downloads/OrcaSlicer/Creality_K1.zip)
+---
 
-:material-download: [Custom Build Plates for K1 Max](https://github.com/Guilouz/Creality-Helper-Script-Wiki/raw/main/downloads/OrcaSlicer/Creality_K1_Max.zip)
+## Machine G-codes
 
+In OrcaSlicer, edit your printer preset and go to the **Machine G-code** tab. Set:
 
-## Installation
-<hr>
+**Machine start G-code:**
+```gcode
+SET_PRINT_STATS_INFO TOTAL_LAYER=[total_layer_count]
+M140 S0
+M104 S0
+START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single] CHAMBER_TEMP=[chamber_temperature]
+```
 
-- Unzip downloaded file.
+**Machine end G-code:**
+```gcode
+END_PRINT
+```
 
-- Start **OrcaSlicer** and click on the icon for editing printer presets:
+**Before layer change G-code:**
+```gcode
+;BEFORE_LAYER_CHANGE
+;[layer_z]
+G92 E0
+```
 
-    <img width="600" src="../../assets/img/OrcaSlicer/OrcaSlicer_01.png">
+**Layer change G-code:**
+```gcode
+SET_PRINT_STATS_INFO CURRENT_LAYER={layer_num + 1}
+;AFTER_LAYER_CHANGE
+;[layer_z]
+```
 
-- Click on `Set...` button in `Printable area` section:
+**Time lapse G-code** (if Moonraker Timelapse is installed):
+```gcode
+TIMELAPSE_TAKE_FRAME
+```
 
-    <img width="600" src="../../assets/img/OrcaSlicer/OrcaSlicer_02.png">
+**Change filament G-code** (if M600 Support is installed):
+```gcode
+M600
+```
 
-- Load the PNG file (the one you want) in the `Texture` box and the file `Build_Plate.stl` in the `Model` box by clicking on `Load...` button:
+---
 
-    <img width="600" src="../../assets/img/OrcaSlicer/OrcaSlicer_03.png">
+## Chamber Temperature by Material
 
-- Then save your printer profile.
+OrcaSlicer supports chamber temperature per filament profile. This maps directly to the `CHAMBER_TEMP` parameter in `START_PRINT`.
 
+| Material | Chamber temp |
+|---|---|
+| PLA | 0 (off) |
+| PETG | 35°C |
+| ABS | 50°C |
+| ASA | 50°C |
+| PA (Nylon) | 55°C |
+| PC | 65°C |
+| TPU | 0 (off) |
 
-## Configure Machine G-codes
-<hr>
+---
 
-- Start **OrcaSlicer** and click on the icon for editing printer presets:
+## Multi-Material Setup (K2 Plus Combo with CFS)
 
-    <img width="600" src="../../assets/img/OrcaSlicer/OrcaSlicer_01.png">
+For the K2 Plus Combo, configure OrcaSlicer as a multi-material printer:
 
-- Click on `Machine G-code` tab and define the following G-codes:
+- Set the number of extruders to match your loaded CFS slots (up to 16)
+- The slicer's `T0`–`T15` tool change commands are translated automatically to CFS slot addresses by the `M8200` macro in `box.cfg`
+- Set flush/purge volume to match your `box.cfg` settings (default ~140mm³)
+- Purging occurs at the CFS purge chute position (X=133–160, Y=378) — not as a line on the bed
 
-    Machine start G-code:
-    ```
-    SET_PRINT_STATS_INFO TOTAL_LAYER=[total_layer_count]
-    M140 S0
-    M104 S0
-    START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single]
-    ```
+See [CFS — Color Filament System](../helper-script/cfs-k2plus.md) for the full tool-change sequence.
 
-    Machine end G-code:
-    ```
-    END_PRINT
-    ```
+---
 
-    Before layer change G-code:
-    ```
-    ;BEFORE_LAYER_CHANGE
-    ;[layer_z]
-    G92 E0
-    ```
+## Upload G-code Files to Printer
 
-    Layer change G-code:
-    ```
-    SET_PRINT_STATS_INFO CURRENT_LAYER={layer_num + 1}
-    ;AFTER_LAYER_CHANGE
-    ;[layer_z]
-    ```
-    
-    Time lapse G-code (if you use Moonraker Timelapse feature):
-    ```
-    TIMELAPSE_TAKE_FRAME
-    ```
-
-    Change filament G-code (if you use M600 Support feature otherwise it must be PAUSE):
-    ```
-    M600
-    ```
-
-    Pause G-code (if you use M600 Support feature otherwise it must be PAUSE):
-    ```
-    M600
-    ```
-
-
-## Upload Gcode files to printer
-<hr>
-
-- In **OrcaSlicer**, click on `Connection` icon:
-
-    <img width="600" src="../../assets/img/OrcaSlicer/OrcaSlicer_04.png">
-
-- In `Hostname, IP or URL` section, enter the IP address of your printer depending Web interface you are using:
-
-    - For **Fluidd**: http://xxx.xxx.xxx.xxx:4408/ (replacing xxx.xxx.xxx.xxx by your local IP address)
-    - For **Mainsail**: http://xxx.xxx.xxx.xxx:4409/ (replacing xxx.xxx.xxx.xxx by your local IP address)
-    - If you have removed **Creality Web Interface**: http://xxx.xxx.xxx.xxx/ (replacing xxx.xxx.xxx.xxx by your local IP address)
-
-    <img width="600" src="../../assets/img/OrcaSlicer/OrcaSlicer_05.png">
-
-- You can now upload Gcode files to your printer.
-
-<br />
-
-**If you like my work, don't hesitate to support me by paying me a 🍺 or a ☕. Thank you 🙂**
-
-<a href="https://ko-fi.com/guilouz" target="_blank"><img width="350" src="../../assets/img/home/Ko-fi.png"></a>
+- Click the **Connection** icon in OrcaSlicer
+- Enter your printer's IP address:
+    - For **Fluidd**: `http://<printer-ip>:4408/`
+    - For **Mainsail**: `http://<printer-ip>:4409/`
+- Click **Connect** — you can now upload and start prints directly from the slicer

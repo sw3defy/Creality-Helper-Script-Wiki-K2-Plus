@@ -1,69 +1,67 @@
-### Configure Camera in Fluidd
-<hr>
+# Configure Camera — K2 Plus
 
-- When you first go to the original Fluidd Web Interface, the camera will not be detected because it's disabled by default.<br />
-  It's necessary to go to `Settings` → `Cameras` and enable it.
+The K2 Plus uses a WebRTC-based camera managed by the `S97webrtc` service. The MJPEG stream is available on port `8080`.
 
-- If not working, delete the existing camera and recreate it with these settings:
+---
 
-    <img width="400" src="../../assets/img/Configure-Camera/Fluidd_Camera.png">
+## Configure Camera in Fluidd
 
-- You can also use this settings (replacing xxx.xxx.xxx.xxx by your local IP address):<br />
-    `http://xxx.xxx.xxx.xxx:4408/webcam/?action=stream` for Camera URL Stream<br />
-    `http://xxx.xxx.xxx.xxx:4408/webcam/?action=snapshot` for Camera URL Snapshot
+- Go to **Settings → Cameras** in Fluidd
 
+- If the camera is not detected, delete the existing entry and recreate it:
+    - **URL Stream:** `http://<printer-ip>:4408/webcam/?action=stream`
+    - **URL Snapshot:** `http://<printer-ip>:4408/webcam/?action=snapshot`
 
-### Configure Camera in Mainsail
-<hr>
+<img width="400" src="../../assets/img/Configure-Camera/Fluidd_Camera.png">
 
-- Go to `Interface Settings` at the top right of the window and in `WEBCAMS` section.
+---
 
-- Configure your webcam like with these settings:
+## Configure Camera in Mainsail
 
-    <img width="899" src="../../assets/img/Configure-Camera/Mainsail_Camera.png">
+- Go to **Interface Settings** (top right) → **WEBCAMS**
 
-- You can also use this settings (replacing xxx.xxx.xxx.xxx by your local IP address):<br />
-    `http://xxx.xxx.xxx.xxx:4409/webcam/?action=stream` for Camera URL Stream<br />
-    `http://xxx.xxx.xxx.xxx:4409/webcam/?action=snapshot` for Camera URL Snapshot
+- Configure:
+    - **URL Stream:** `http://<printer-ip>:4409/webcam/?action=stream`
+    - **URL Snapshot:** `http://<printer-ip>:4409/webcam/?action=snapshot`
 
+---
 
-### Configure Camera in Moonraker
-<hr>
+## Configure Camera in Moonraker
 
-!!! Note
-    This can also be done from `[Tools] Menu` in <a href="../../helper-script/helper-script-installation">Installation Helper Script</a>.
+Add the following to `/mnt/UDISK/printer_data/config/moonraker.conf`:
 
-If you want to configure camera for Fluidd and Mainsail you can also configure it in Moonraker.
+```ini
+[webcam Camera]
+location: printer
+enabled: True
+service: mjpegstreamer
+target_fps: 15
+target_fps_idle: 5
+stream_url: http://<printer-ip>:8080/?action=stream
+snapshot_url: http://<printer-ip>:8080/?action=snapshot
+flip_horizontal: False
+flip_vertical: False
+rotation: 0
+aspect_ratio: 4:3
+```
 
--  Open `moonraker.conf` file:
+Click **SAVE & RESTART** in Fluidd or Mainsail to apply.
 
-    - On original Fluidd Web Interface go to `Configuration` icon on the left side.
-    - On original Mainsail Web Interface go to `Machine` tab on the left side.
+!!! note "K2 Plus config path"
+    The persistent Moonraker config lives at `/mnt/UDISK/printer_data/config/moonraker.conf` — not `/usr/data/` as on K1 Series.
 
-- Add this lines (if you don't have them) by replacing `xxx.xxx.xxx.xxx` by your local IP address:
+---
 
-    ```
-    [webcam Camera]
-    location: printer
-    enabled: True
-    service: mjpegstreamer
-    target_fps: 15
-    target_fps_idle: 5
-    stream_url: http://xxx.xxx.xxx.xxx:8080/?action=stream
-    snapshot_url: http://xxx.xxx.xxx.xxx:8080/?action=snapshot
-    flip_horizontal: False
-    flip_vertical: False
-    rotation: 0
-    aspect_ratio: 4:3
-    ```
+## Restart Camera Service
 
-- Then, click on `SAVE & RESTART` button in the top right corner.
+If the camera feed drops without a hardware fault:
 
-- Your camera will be automatically configured for Fluidd and Mainsail.
+```bash
+/etc/init.d/S97webrtc restart
+```
 
-<br />
+Or from Fluidd console (requires Useful Macros installed):
 
-**If you like my work, don't hesitate to support me by paying me a 🍺 or a ☕. Thank you 🙂**
-
-<a href="https://ko-fi.com/guilouz" target="_blank"><img width="350" src="../../assets/img/home/Ko-fi.png"></a>
-
+```gcode
+RELOAD_CAMERA
+```

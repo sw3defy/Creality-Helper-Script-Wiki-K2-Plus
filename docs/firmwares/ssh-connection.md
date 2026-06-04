@@ -1,35 +1,95 @@
+# SSH Connection — K2 Plus
+
+SSH gives you full command-line access to the K2 Plus Linux system. It is required for installing the Helper Script and for most advanced configuration.
+
+!!! note "Enable root access first"
+    SSH root access must be enabled before you can connect. See [Enable Root Access](install-and-update-rooted-firmware-k2plus.md#enable-root-access).
+
 ---
-hide:
-  - toc
+
+## Connection Details
+
+| Setting | Value |
+|---|---|
+| Host | Your printer's IP address |
+| Port | 22 (default) |
+| Username | `root` |
+| Password | `creality_2024` |
+
+!!! warning "K2 Plus password is different from K1"
+    The default root password is **`creality_2024`** — not `creality_2023` as on K1 Series printers.
+
+Find your printer's IP address in **Settings → Network** on the touchscreen.
+
 ---
-- Make sure you have enabled Root access before by following `Enable Root Access` section.
 
-- Download and install the **MobaXterm** software: :material-download: <a href="https://mobaxterm.mobatek.net/download-home-edition.html">Here</a>
+## Connect with MobaXterm (Windows)
 
-- Launch it then click on the `Session` icon:
+- Download and install **MobaXterm**: :material-download: <a href="https://mobaxterm.mobatek.net/download-home-edition.html">Here</a>
 
-    <img width="1000" src="../../assets/img/SSH-Connection/SSH_01.png">
+- Launch it and click the `Session` icon
 
-- Then on then `SSH` icon:
+- Click the `SSH` icon
 
-    <img width="700" src="../../assets/img/SSH-Connection/SSH_02.png">
+- Enter your printer's IP address in `Remote Host`, check `Specify username`, enter `root`, then click `OK`
 
-- Enter the IP address of your printer in the `Remote Host` field, check the `Specify username` box and enter the username `root` in the field then click on `OK`:
+- Enter the password `creality_2024` when prompted (it is not displayed while typing — this is normal)
 
-    <img width="700" src="../../assets/img/SSH-Connection/SSH_03.png">
+- Once connected, the left panel shows your printer's files and the right panel is the SSH terminal
 
-- On the new displayed window, enter the password `creality_2023` (it's not displayed when typing, this is normal):
+---
 
-    <img width="900" src="../../assets/img/SSH-Connection/SSH_04.png">
+## Connect from macOS or Linux
 
-- An authorization window will appear, authorize it. It's also possible that another window asking you to change the password will appear, ignore it.
+Open Terminal and run:
 
-- Once connected, on the left part of the window you have access to the folders and files of your printer and on the right part to the SSH command prompt window:
+```bash
+ssh root@<printer-ip>
+```
 
-    <img width="900" src="../../assets/img/SSH-Connection/SSH_05.png">
+Enter `creality_2024` when prompted for the password.
 
-<br />
+If you see a host key warning on reconnection after a firmware update:
 
-**If you like my work, don't hesitate to support me by paying me a 🍺 or a ☕. Thank you 🙂**
+```bash
+ssh-keygen -R <printer-ip>
+ssh root@<printer-ip>
+```
 
-<a href="https://ko-fi.com/guilouz" target="_blank"><img width="350" src="../../assets/img/home/Ko-fi.png"></a>
+---
+
+## What You See After Connecting
+
+```
+BusyBox v1.33.2 built-in shell (ash)
+
+ _____  _              __     _
+|_   _||_| ___  _ _   |  |   |_| ___  _ _  _ _
+  | |   _ |   ||   |  |  |__ | ||   || | ||_'_|
+  | |  | || | || _ |  |_____||_||_|_||___||_,_|
+  |_|  |_||_|_||_|_|  Tina is Based on OpenWrt!
+ -----------------------------------------------------
+ Tina 5.0, OpenWrt 21.02-SNAPSHOT r0-bdf710c83
+ -----------------------------------------------------
+root@K2Plus-XXXX:~#
+```
+
+The hostname suffix (e.g. `DE6C`) is the last 4 characters of your printer's MAC address.
+
+---
+
+## Transfer Files via SCP
+
+Download a file from the printer:
+
+```bash
+scp root@<printer-ip>:/mnt/UDISK/printer_data/config/printer.cfg ./
+```
+
+Upload a file to the printer:
+
+```bash
+scp ./my_config.cfg root@<printer-ip>:/mnt/UDISK/printer_data/config/
+```
+
+MobaXterm users can drag and drop files in the left panel file browser.

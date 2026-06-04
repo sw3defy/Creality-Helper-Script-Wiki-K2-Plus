@@ -1,49 +1,48 @@
+# Special Thanks
+
+## Guilouz
+
+This wiki and helper script are forked from the outstanding work of **Guilouz**, who created the original Creality Helper Script and wiki for the K1 Series and Ender-3 V3 Series.
+
+Without his foundational work — the wiki structure, the feature concepts, the macro patterns, and the deep reverse engineering of Creality's firmware — this K2 Plus adaptation would not exist.
+
+- Original wiki: [guilouz.github.io/Creality-Helper-Script-Wiki](https://guilouz.github.io/Creality-Helper-Script-Wiki/)
+- Original helper script: [github.com/Guilouz/Creality-Helper-Script](https://github.com/Guilouz/Creality-Helper-Script)
+- Support Guilouz: [ko-fi.com/guilouz](https://ko-fi.com/guilouz)
+
+**If you find this wiki useful, please also consider supporting Guilouz — his work made this possible.**
+
 ---
-hide:
-  - toc
+
+## jamincollins
+
+The archived [jamincollins/k2-improvements](https://github.com/jamincollins/k2-improvements) repository provided early community research on K2 Plus filesystem paths and service names that helped validate the K2 Plus architecture analysis in this wiki.
+
 ---
 
-Thanks to everyone who participated or indirectly participated in this project.
+## Creality
 
-- [Arksine](https://github.com/Arksine/moonraker)
-- [fluidd-core](https://github.com/fluidd-core/fluidd)
-- [mainsail-crew](https://github.com/mainsail-crew/mainsail)
-- [Entware](https://github.com/Entware/Entware)
-- [destinal](https://www.reddit.com/user/destinal/)
-- [kyleisah](https://github.com/kyleisah/Klipper-Adaptive-Meshing-Purging)
-- [pedrolamas](https://github.com/pedrolamas/klipper-virtual-pins)
-- [xand3r40r93](https://github.com/xand3r40r93/prtouch_v2_fan)
-- [Frix-x](https://github.com/Frix-x/klippain-shaketune)
-- [ballaswag](https://github.com/ballaswag)
-- [lokiagent](https://github.com/lokiagent/K1-Backup)
-- [aim6mac](https://www.youtube.com/c/aim6mac)
-- [JSTECH](https://www.youtube.com/@Jstech3d)
-- [Henlor](https://www.printables.com/model/537623-creality-build-plate-models-and-textures)
-- [Tam Anderson](https://www.facebook.com/groups/557442779831567/user/1603433384)
-- [Tom Tomich](https://github.com/Tombraider2006)
-- [PA3GMT](https://github.com/PA3GMT)
-- [3dimman](https://github.com/3dimman)
-- [victornpb](https://github.com/victornpb)
-- [Sendorm](https://www.reddit.com/user/Sendorm/)
-- [Quinn Damerell](https://github.com/QuinnDamerell/OctoPrint-OctoEverywhere)
-- [Kenneth Jiang](https://github.com/TheSpaghettiDetective/moonraker-obico)
-- [Clon1998](https://github.com/Clon1998/mobileraker_companion)
-- [crysxd](https://github.com/crysxd/OctoApp-Plugin)
-- [SimplyPrint](https://simplyprint.io/)
-- [mulder999](https://github.com/mulder999)
-- [caffeineflo](https://github.com/caffeineflo)
-- [d3dorsett](https://github.com/d3dorsett)
-- [iamlite](https://github.com/iamlite)
-- [KORSiRO](https://github.com/KORSiRO)
-- [Nastras](https://github.com/Nastras)
-- [Zuffdesign](https://github.com/zuffdesign)
-- [pellcorp](https://github.com/pellcorp)
-- [Anna Leung](https://www.facebook.com/profile.php?id=100094427077994)
-- [ceedee666](https://github.com/ceedee666)
-- [foresterr](https://github.com/foresterr)
-- BootyCall Jones
-- sozkara
-- Colt45RPM
-- NeverUsedID
+Stock K2 Plus firmware, Klipper configuration templates, and the CFS `box.cfg` implementation are copyright Creality Technology Co., Ltd.
 
-<br />
+- Creality open source repository: [github.com/CrealityOfficial](https://github.com/CrealityOfficial)
+
+---
+
+## Klipper, Moonraker, Fluidd, Mainsail
+
+This wiki documents features built on top of the open source Klipper ecosystem:
+
+- **Klipper**: [klipper3d.org](https://www.klipper3d.org/) — Kevin O'Connor and contributors
+- **Moonraker**: [github.com/Arksine/moonraker](https://github.com/Arksine/moonraker) — Eric Callahan
+- **Fluidd**: [docs.fluidd.xyz](https://docs.fluidd.xyz/) — fluidd-core team
+- **Mainsail**: [docs.mainsail.xyz](https://docs.mainsail.xyz/) — mainsail-crew
+- **KAMP**: [github.com/kyleisah/Klipper-Adaptive-Meshing-Purging](https://github.com/kyleisah/Klipper-Adaptive-Meshing-Purging) — kyleisah
+
+---
+
+## Sw3Defy
+
+This K2 Plus adaptation is maintained by **Sw3Defy**.
+
+- Wiki repository: [github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus](https://github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus)
+- Helper script repository: [github.com/sw3defy/Creality-Helper-Script-K2-Plus](https://github.com/sw3defy/Creality-Helper-Script-K2-Plus)

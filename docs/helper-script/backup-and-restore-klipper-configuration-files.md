@@ -1,42 +1,77 @@
-This allows to backup and restore Klipper configuration files (all files and folders stored in /usr/data/printer_data/config/ folder).
+# Backup & Restore Klipper Configuration Files — K2 Plus
 
+Regular backups protect your Klipper configuration from accidental deletion, factory resets, and firmware updates.
 
-## Backup
-<hr>
+---
 
-- Make sure you have followed this <a href="../../helper-script/helper-script-installation">Install Helper Script</a> section before.
+## Backup from Helper Script
 
-- In the script, enter in `[Backup & Restore] Menu` by typing ++"4"++ , validate with ++"Enter"++ and select `Backup Klipper configuration files`:
+From the helper script menu, select **option 30 — Backup Klipper configuration**.
 
-    <img width="900" src="../../assets/img/Creality-Helper-Script/Backup_Restore_Menu.png">
+The script creates a compressed archive of your entire `/mnt/UDISK/printer_data/config/` directory and saves it to `/mnt/UDISK/helper-script/backups/`. The last 5 backups are kept automatically.
 
-- When it's done, a compressed file named `backup_config.tar.gz` containing the backup is created in `/usr/data/printer_data/config/` folder accessible from Fluidd or Mainsail Web interface and it can be downloaded (right click on the file and _Download_):
+---
 
-    - On original Fluidd Web Interface go to `Configuration` icon on the left side.
-    - On original Mainsail Web Interface go to `Machine` tab on the left side.
+## Restore from Helper Script
 
-!!! Note
-    You can also use `KLIPPER_BACKUP_CONFIG` macro to backup Klipper configuration files when installing <a href="../useful-macros">Useful Macros</a> feature.
+From the helper script menu, select **option 31 — Restore Klipper configuration**.
 
+The script shows a numbered list of available backups with dates and sizes. Select the one you want to restore, confirm, and Klipper restarts automatically.
 
-## Restore
-<hr>
+---
 
-- Make sure you have followed this <a href="../../helper-script/helper-script-installation">Install Helper Script</a> section before.
+## Backup from Fluidd / Mainsail Console
 
-- Make sure `backup_config.tar.gz` file is present in `/usr/data/printer_data/config/` folder.
+Once **Useful Macros** are installed, you can trigger a backup directly from the printer interface:
 
-- In the script, enter in `[Backup & Restore] Menu` by typing ++"4"++ , validate with ++"Enter"++ and select `Restore Klipper configuration files`:
+```gcode
+KLIPPER_BACKUP_CONFIG
+```
 
-    <img width="900" src="../../assets/img/Creality-Helper-Script/Backup_Restore_Menu.png">
+The backup is saved as `backup_config.tar.gz` in your config folder, accessible via the Fluidd file manager.
 
-- When it's done, `/usr/data/printer_data/config/` folder is restored.
+---
 
-!!! Note
-    You can also use `KLIPPER_RESTORE_CONFIG` macro to restore Klipper configuration files when installing <a href="../useful-macros">Useful Macros</a> feature.
+## Backup via SSH
 
-<br />
+```bash
+# Create a timestamped backup
+tar -czf /mnt/UDISK/printer_data/config_backup_$(date +%Y%m%d_%H%M%S).tar.gz \
+    -C /mnt/UDISK/printer_data config/
 
-**If you like my work, don't hesitate to support me by paying me a 🍺 or a ☕. Thank you 🙂**
+# List backups
+ls -lh /mnt/UDISK/printer_data/config_backup_*.tar.gz
+```
 
-<a href="https://ko-fi.com/guilouz" target="_blank"><img width="350" src="../../assets/img/home/Ko-fi.png"></a>
+---
+
+## Download Backups
+
+You can download config backups via:
+
+- **Fluidd File Manager** — navigate to the config folder, select the `.tar.gz` file, and download
+- **SCP** from your computer:
+    ```bash
+    scp root@<printer-ip>:/mnt/UDISK/printer_data/config_backup_20260601.tar.gz ./
+    ```
+- **MobaXterm** — use the left panel file browser to download any file
+
+---
+
+## What to Back Up
+
+At minimum, back up these files before any firmware update or factory reset:
+
+| File | Contains |
+|---|---|
+| `printer.cfg` | Main Klipper config including SAVE_CONFIG block (Z offset, input shaper, CFS cut position) |
+| `box.cfg` | CFS positions and calibration |
+| `gcode_macro.cfg` | Stock Creality macros |
+| `printer_params.cfg` | Print parameters |
+| `useful_macros.cfg` | Helper script macros |
+| `moonraker.conf` | Moonraker extensions config |
+
+The `SAVE_CONFIG` block at the bottom of `printer.cfg` is especially important — it contains your calibrated values for bed mesh, input shaper, and CFS cut position.
+
+!!! warning "After factory reset"
+    All data under `/mnt/UDISK/printer_data/` is wiped by a factory reset. Always download a backup to your computer before performing a reset.

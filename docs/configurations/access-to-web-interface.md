@@ -1,47 +1,57 @@
-## Creality Web Interface
-<hr>
+# Access to Web Interface — K2 Plus
 
-- To access to the classic **Creality Web Interface**, just use `Creality Print` slicer as usual or just use your printer's IP address in your Web browser such as:<br />
-    `http://xxx.xxx.xxx.xxx` (replacing xxx.xxx.xxx.xxx by your local IP address).
+The K2 Plus ships with **Fluidd pre-installed** at port `4408`. No installation is required to access it.
 
-    <img src="../../assets/img/Access-to-Web-Interface/Creality_Web_Interface.png">
-
+---
 
 ## Fluidd Web Interface
-<hr>
 
-- To access to the original **Fluidd Web Interface**, just use your printer's IP address with port **4408** in your Web browser such as:<br />
-    `http://xxx.xxx.xxx.xxx:4408/` (replacing xxx.xxx.xxx.xxx by your local IP address).
+Fluidd is the primary web interface on the K2 Plus.
 
-    <img src="../../assets/img/Access-to-Web-Interface/Fluidd_Web_Interface.png">
+Open your browser and navigate to:
 
+```
+http://<printer-ip>:4408
+```
+
+Replace `<printer-ip>` with your printer's IP address (found in **Settings → Network** on the touchscreen).
+
+<img src="../../assets/img/Access-to-Web-Interface/Fluidd_Web_Interface.png">
+
+---
 
 ## Mainsail Web Interface
-<hr>
 
-- To access to the original **Mainsail Web Interface**, just use your printer's IP address with port **4409** in your Web browser such as:<br />
-    `http://xxx.xxx.xxx.xxx:4409/` (replacing xxx.xxx.xxx.xxx by your local IP address).
+Mainsail is not pre-installed. Install it via the Helper Script (option 9) to access it on port `4409`:
 
-    <img src="../../assets/img/Access-to-Web-Interface/Mainsail_Web_Interface.png">
+```
+http://<printer-ip>:4409
+```
 
+<img src="../../assets/img/Access-to-Web-Interface/Mainsail_Web_Interface.png">
 
-## Alternative
-<hr>
+---
 
-With <a href="../../helper-script/helper-script-installation">Helper Script for Creality</a> you can also remove Creality Web Interface and replace it by Fluidd or Mainsail to use one of them on port 80.
+## Creality Web Interface
 
-This can be useful in some cases if an application or hardware does not support the IP address with a defined port like the BigTreeTech Knomi V2.
+The original Creality web interface is accessible on port 80:
 
-- If you set **Fluidd** as the default Web Interface then it will be accessible with:<br />
-    `http://xxx.xxx.xxx.xxx/` and `http://xxx.xxx.xxx.xxx:4408/`
-- If you set **Mainsail** as the default Web Interface then it will be accessible with:<br />
-    `http://xxx.xxx.xxx.xxx/` and `http://xxx.xxx.xxx.xxx:4409/`
+```
+http://<printer-ip>
+```
 
-    !!! Warning
-        **Note that you will no longer be able to print via WiFi with Creality Print if you remove Creality Web Interface (but you can restore it if needed).**
+This is used by **Creality Print** for WiFi printing.
 
-<br />
+!!! warning
+    If you remove the Creality Web Interface using the Helper Script Customize Menu, WiFi printing with Creality Print will stop working. You can restore it at any time from the same menu.
 
-**If you like my work, don't hesitate to support me by paying me a 🍺 or a ☕. Thank you 🙂**
+---
 
-<a href="https://ko-fi.com/guilouz" target="_blank"><img width="350" src="../../assets/img/home/Ko-fi.png"></a>
+## Setting Fluidd or Mainsail as Default (Port 80)
+
+With the Helper Script you can replace the Creality Web Interface with Fluidd or Mainsail on port 80. Useful for hardware that does not support custom port numbers.
+
+Configure from Helper Script → Customize Menu → **Remove & Restore Creality Web Interface**.
+
+- **Fluidd** as default: accessible at both `http://<ip>/` and `http://<ip>:4408/`
+- **Mainsail** as default: accessible at both `http://<ip>/` and `http://<ip>:4409/`
