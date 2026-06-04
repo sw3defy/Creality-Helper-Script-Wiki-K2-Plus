@@ -110,6 +110,9 @@ nav:
             - Install & Update Rooted Firmware: firmwares/install-and-update-rooted-firmware-k1.md
             - Restore Previous Firmware: firmwares/restore-previous-firmware-k1.md
             - Firmware Recovery: firmwares/firmware-recovery-k1.md
+        - K2 Plus Series:
+            - Install & Update Firmware: firmwares/install-and-update-rooted-firmware-k2plus.md
+            - Restore Previous Firmware: helper-script/restore-a-previous-firmware-k2plus.md
         - Ender-3 V3 Series:
             - Install & Update Rooted Firmware: firmwares/install-and-update-rooted-firmware-ender3.md
             - Restore Previous Firmware: firmwares/restore-previous-firmware-ender3.md
@@ -192,6 +195,30 @@ nav:
                 - Fix Printing Gcode files from Folder: helper-script/fix-printing-gcode-files-from-folder.md
                 - Restore a previous Firmware: helper-script/restore-a-previous-firmware-ender3.md
                 - Reset Factory Settings: helper-script/reset-factory-settings.md
+        - K2 Plus Series:
+            - Install Menu:
+                - Moonraker and Nginx: helper-script/moonraker-k2plus.md
+                - Fans Control Macros: helper-script/fans-control-macros-k2plus.md
+                - Improved Shapers Calibrations: helper-script/improved-shapers-calibrations-k2plus.md
+                - Klipper Adaptive Meshing & Purging: helper-script/klipper-adaptive-meshing-and-purging-k2plus.md
+                - Useful Macros: helper-script/useful-macros-k2plus.md
+                - Save Z-Offset Macros: helper-script/save-z-offset-macros-k2plus.md
+                - M600 Support: helper-script/m600-support-k2plus.md
+                - Git Backup: helper-script/git-backup.md
+                - Moonraker Timelapse: helper-script/moonraker-timelapse-k2plus.md
+                - USB Camera Support: helper-script/usb-camera-support.md
+                - OctoEverywhere: helper-script/octoeverywhere.md
+                - Moonraker Obico: helper-script/moonraker-obico.md
+                - GuppyFLO: helper-script/guppyflo.md
+                - Mobileraker Companion: helper-script/mobileraker-companion-k2plus.md
+                - OctoApp Companion: helper-script/octoapp-companion.md
+                - SimplyPrint: helper-script/simplyprint-k2plus.md
+                - CFS (Color Filament System): helper-script/cfs-k2plus.md
+            - Backup & Restore Menu:
+                - Backup & Restore Klipper configuration files: helper-script/backup-and-restore-klipper-configuration-files.md
+            - Tools Menu:
+                - Restore a previous Firmware: helper-script/restore-a-previous-firmware-k2plus.md
+                - Reset Factory Settings: helper-script/reset-factory-settings.md
     - Configuration / Use:
         - Access to Web Interface: configurations/access-to-web-interface.md
         - Configure Camera: configurations/configure-camera.md
@@ -200,10 +227,14 @@ nav:
         - K1 Series:
             - Improve Hotend Cooling: improvements/improve-hotend-cooling-k1.md
             - Bondtech LGX Lite Pro Upgrade Kit: improvements/bondtech-lgx-pro-lite-upgrade-kit.md
+        - K2 Plus Series:
+            - Heated Chamber: improvements/heated-chamber-k2plus.md
         - Calibrate Extruder: improvements/calibrate-extruder.md
     - Others:
         - K1 Series:
             - Boards Layout: others/boards-layout-k1.md
+        - K2 Plus Series:
+            - Files Location: others/files-location-k2plus.md
         - Files Location: others/files-location.md
         - Useful Links: others/useful-links.md
     - Slicers: 
