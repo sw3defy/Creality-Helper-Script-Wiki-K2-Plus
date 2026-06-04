@@ -3,7 +3,7 @@
 This guide explains how to install firmware on the Creality K2 Plus and K2 Plus Combo, and how to enable root SSH access.
 
 !!! warning "This is the K2 Plus guide"
-    If you have a **K1, K1C, or K1 Max**, use the [K1 Series firmware guide](install-and-update-rooted-firmware-k1.md) instead. The K2 Plus uses a completely different filesystem, service manager, and firmware update path. Do not mix the two.
+    If you have a **K1, K1C, or K1 Max**, use the [K1 Series firmware guide](install-and-update-rooted-firmware-k2plus.md) instead. The K2 Plus uses a completely different filesystem, service manager, and firmware update path. Do not mix the two.
 
 ---
 
@@ -112,7 +112,7 @@ echo "all" | /usr/bin/nc -U /var/run/wipe.sock
 
 ## SSH Connection
 
-See the [SSH Connection](../firmwares/ssh-connection.md) guide for how to find your printer's IP address and connect from Windows, macOS, or Linux.
+See the [SSH Connection](ssh-connection.md) guide for how to find your printer's IP address and connect from Windows, macOS, or Linux.
 
 Once connected you will see:
 

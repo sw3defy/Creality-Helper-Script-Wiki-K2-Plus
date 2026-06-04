@@ -29,7 +29,7 @@ The helper script takes a safe, reversible approach to every feature:
 
 ## Installation
 
-Connect via SSH. See [SSH Connection](ssh-connection.md).
+Connect via SSH. See [SSH Connection](../firmwares/ssh-connection.md).
 
 The K2 Plus does **not** have `git`, `wget`, or `curl` available in the stock firmware. Use Python3 to download and install the helper script.
 
