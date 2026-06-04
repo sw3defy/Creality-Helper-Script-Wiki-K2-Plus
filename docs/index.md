@@ -1,18 +1,36 @@
+# Creality K2 Plus — Helper Script Wiki
+
+This wiki covers the full process to root the **Creality K2 Plus** and **K2 Plus Combo** and add features using the Creality Helper Script.
+
+The advantage is having full access to the firmware and configuration files to make changes.
+
+!!! warning "K2 Plus specific"
+    This wiki is written specifically for the **Creality K2 Plus** and **K2 Plus Combo**.
+    For K1 Series or Ender-3 V3 Series, see the [original wiki](https://guilouz.github.io/Creality-Helper-Script-Wiki/).
+
+!!! danger "Read before proceeding"
+    If you don't know what you're doing, I don't recommend following this guide.
+    Rooting your printer and modifying system files can cause issues if done incorrectly.
+
 ---
-hide:
-  - toc
+
+## Key Differences from K1 Series
+
+| Item | K1 Series | K2 Plus |
+|---|---|---|
+| Persistent data path | `/usr/data/` | `/mnt/UDISK/` |
+| Root password | `creality_2023` | `creality_2024` |
+| Service manager | Supervisor Lite | OpenWrt rc.d |
+| Restart services | `supervisorctl restart` | `/etc/init.d/S55klipper restart` |
+| Fluidd pre-installed | No | **Yes** (port 4408) |
+| Chamber heater | No | **Yes** (heater_generic) |
+| Multi-material (CFS) | No | **Yes** (Combo model) |
+| Accelerometer | ADXL345 | LIS2DW |
+| Kinematics | CoreXY | CoreXY |
+| Print volume | 220×220×250 (K1) | **350×350×360** |
+
 ---
 
-<img width="900" src="assets/img/home/home.png">
+## Wiki
 
-This guide explains the whole process to root Creality K1 Series and Ender-3 V3 Series and add<br />features to your printer using Creality Helper Script.
-
-The advantage is having full access to the firmware and configuration files to be able to make changes.
-
-If you don't know what you're doing, I don't recommend following this guide.
-
-<br />
-
-**If you like my work, don't hesitate to support me by paying me a 🍺 or a ☕. Thank you 🙂**
-
-<a href="https://ko-fi.com/guilouz" target="_blank"><img width="350" src="assets/img/home/Ko-fi.png"></a>
+Guide is available here: [Wiki](https://sw3defy.github.io/Creality-Helper-Script-Wiki-K2-Plus/)

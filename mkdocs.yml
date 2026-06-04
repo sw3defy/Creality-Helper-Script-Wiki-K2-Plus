@@ -102,145 +102,60 @@ markdown_extensions:
 nav:
     - About: index.md
     - Changelog: changelog.md
-    - Discussions: https://github.com/Guilouz/Creality-K1-Series/discussions
+    - Discussions: https://github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus/discussions
     - YouTube: youtube.md
     - Special Thanks: special-thanks.md
     - Firmwares:
-        - K1 Series:
-            - Install & Update Rooted Firmware: firmwares/install-and-update-rooted-firmware-k1.md
-            - Restore Previous Firmware: firmwares/restore-previous-firmware-k1.md
-            - Firmware Recovery: firmwares/firmware-recovery-k1.md
-        - K2 Plus Series:
-            - Install & Update Firmware: firmwares/install-and-update-rooted-firmware-k2plus.md
-            - Restore Previous Firmware: helper-script/restore-a-previous-firmware-k2plus.md
-        - Ender-3 V3 Series:
-            - Install & Update Rooted Firmware: firmwares/install-and-update-rooted-firmware-ender3.md
-            - Restore Previous Firmware: firmwares/restore-previous-firmware-ender3.md
+        - Install & Update Firmware: firmwares/install-and-update-rooted-firmware-k2plus.md
+        - Restore Previous Firmware: helper-script/restore-a-previous-firmware-k2plus.md
         - Reset Factory Settings: firmwares/reset-factory-settings.md
         - SSH Connection: firmwares/ssh-connection.md
         - Change Date & Time: firmwares/change-date-and-time.md
-    - Helper Script for Creality:
+    - Helper Script for Creality K2 Plus:
         - Install Helper Script: helper-script/helper-script-installation.md
-        - K1 Series:
-            - Install Menu: 
-                - Moonraker and Nginx: helper-script/moonraker-k1.md
-                - Fluidd: helper-script/fluidd-k1.md
-                - Mainsail: helper-script/mainsail.md
-                - Entware: helper-script/entware.md
-                - Klipper Gcode Shell Command: helper-script/klipper-gcode-shell-command.md
-                - Klipper Adaptive Meshing & Purging: helper-script/klipper-adaptive-meshing-and-purging.md
-                - Buzzer Support: helper-script/buzzer-support.md
-                - Nozzle Cleaning Fan Control: helper-script/nozzle-cleaning-fan-control.md
-                - Fans Control Macros: helper-script/fans-control-macros.md
-                - Improved Shapers Calibrations: helper-script/improved-shapers-calibrations.md
-                - Useful Macros: helper-script/useful-macros.md
-                - Save Z-Offset Macros: helper-script/save-z-offset-macros.md
-                - Screws Tilt Adjust Support: helper-script/screws-tilt-adjust-support.md
-                - M600 Support: helper-script/m600-support.md
-                - Git Backup: helper-script/git-backup.md
-                - Moonraker Timelapse: helper-script/moonraker-timelapse.md
-                - Camera Settings Control: helper-script/camera-settings-control.md
-                - USB Camera Support: helper-script/usb-camera-support.md
-                - OctoEverywhere: helper-script/octoeverywhere.md
-                - Moonraker Obico: helper-script/moonraker-obico.md
-                - GuppyFLO: helper-script/guppyflo.md
-                - Mobileraker Companion: helper-script/mobileraker-companion.md
-                - OctoApp Companion: helper-script/octoapp-companion.md
-                - SimplyPrint: helper-script/simplyprint.md
-            - Customize Menu:
-                - Custom Boot Display: helper-script/custom-boot-display.md
-                - Remove & Restore Creality Web Interface: helper-script/remove-and-restore-creality-web-interface.md
-                - Guppy Screen: helper-script/guppy-screen.md
-                - Creality Dynamic Logos for Fluidd: helper-script/creality-dynamic-logos-for-fluidd.md
-            - Backup & Restore Menu:
-                - Backup & Restore Klipper configuration files: helper-script/backup-and-restore-klipper-configuration-files.md
-                - Backup & Restore Moonraker database: helper-script/backup-and-restore-moonraker-database.md
-            - Tools Menu:
-                - Prevent & Allow updating Klipper configuration files: helper-script/prevent-and-allow-updating-klipper-configuration-files.md
-                - Fix Printing Gcode files from Folder: helper-script/fix-printing-gcode-files-from-folder.md
-                - Restore a previous Firmware: helper-script/restore-a-previous-firmware-k1.md
-                - Reset Factory Settings: helper-script/reset-factory-settings.md
-        - Ender-3 V3 Series:
-            - Install Menu: 
-                - Updated Moonraker: helper-script/moonraker-ender3.md
-                - Updated Fluidd: helper-script/fluidd-ender3.md
-                - Mainsail: helper-script/mainsail.md
-                - Entware: helper-script/entware.md
-                - Klipper Gcode Shell Command: helper-script/klipper-gcode-shell-command.md
-                - Klipper Adaptive Meshing & Purging: helper-script/klipper-adaptive-meshing-and-purging.md
-                - Buzzer Support: helper-script/buzzer-support.md
-                - Improved Shapers Calibrations: helper-script/improved-shapers-calibrations.md
-                - Useful Macros: helper-script/useful-macros.md
-                - Save Z-Offset Macros: helper-script/save-z-offset-macros.md
-                - M600 Support: helper-script/m600-support.md
-                - Git Backup: helper-script/git-backup.md
-                - Moonraker Timelapse: helper-script/moonraker-timelapse.md
-                - Nebula Camera Settings Control: helper-script/nebula-camera-settings-control.md
-                - USB Camera Support: helper-script/usb-camera-support.md
-                - OctoEverywhere: helper-script/octoeverywhere.md
-                - Moonraker Obico: helper-script/moonraker-obico.md
-                - GuppyFLO: helper-script/guppyflo.md
-                - Mobileraker Companion: helper-script/mobileraker-companion.md
-                - OctoApp Companion: helper-script/octoapp-companion.md
-                - SimplyPrint: helper-script/simplyprint.md
-            - Customize Menu:
-                - Remove & Restore Creality Web Interface: helper-script/remove-and-restore-creality-web-interface.md
-                - Guppy Screen: helper-script/guppy-screen.md
-                - Creality Dynamic Logos for Fluidd: helper-script/creality-dynamic-logos-for-fluidd.md
-            - Backup & Restore Menu:
-                - Backup & Restore Klipper configuration files: helper-script/backup-and-restore-klipper-configuration-files.md
-                - Backup & Restore Moonraker database: helper-script/backup-and-restore-moonraker-database.md
-            - Tools Menu:
-                - Prevent & Allow updating Klipper configuration files: helper-script/prevent-and-allow-updating-klipper-configuration-files.md
-                - Fix Printing Gcode files from Folder: helper-script/fix-printing-gcode-files-from-folder.md
-                - Restore a previous Firmware: helper-script/restore-a-previous-firmware-ender3.md
-                - Reset Factory Settings: helper-script/reset-factory-settings.md
-        - K2 Plus Series:
-            - Install Menu:
-                - Moonraker and Nginx: helper-script/moonraker-k2plus.md
-                - Fans Control Macros: helper-script/fans-control-macros-k2plus.md
-                - Improved Shapers Calibrations: helper-script/improved-shapers-calibrations-k2plus.md
-                - Klipper Adaptive Meshing & Purging: helper-script/klipper-adaptive-meshing-and-purging-k2plus.md
-                - Useful Macros: helper-script/useful-macros-k2plus.md
-                - Save Z-Offset Macros: helper-script/save-z-offset-macros-k2plus.md
-                - M600 Support: helper-script/m600-support-k2plus.md
-                - Git Backup: helper-script/git-backup.md
-                - Moonraker Timelapse: helper-script/moonraker-timelapse-k2plus.md
-                - USB Camera Support: helper-script/usb-camera-support.md
-                - OctoEverywhere: helper-script/octoeverywhere.md
-                - Moonraker Obico: helper-script/moonraker-obico.md
-                - GuppyFLO: helper-script/guppyflo.md
-                - Mobileraker Companion: helper-script/mobileraker-companion-k2plus.md
-                - OctoApp Companion: helper-script/octoapp-companion.md
-                - SimplyPrint: helper-script/simplyprint-k2plus.md
-                - CFS (Color Filament System): helper-script/cfs-k2plus.md
-            - Backup & Restore Menu:
-                - Backup & Restore Klipper configuration files: helper-script/backup-and-restore-klipper-configuration-files.md
-            - Tools Menu:
-                - Restore a previous Firmware: helper-script/restore-a-previous-firmware-k2plus.md
-                - Reset Factory Settings: helper-script/reset-factory-settings.md
+        - Install Menu:
+            - Moonraker and Nginx: helper-script/moonraker-k2plus.md
+            - Fans Control Macros: helper-script/fans-control-macros-k2plus.md
+            - Improved Shapers Calibrations: helper-script/improved-shapers-calibrations-k2plus.md
+            - Klipper Adaptive Meshing & Purging: helper-script/klipper-adaptive-meshing-and-purging-k2plus.md
+            - Useful Macros: helper-script/useful-macros-k2plus.md
+            - Save Z-Offset Macros: helper-script/save-z-offset-macros-k2plus.md
+            - M600 Support: helper-script/m600-support-k2plus.md
+            - Git Backup: helper-script/git-backup.md
+            - Moonraker Timelapse: helper-script/moonraker-timelapse-k2plus.md
+            - USB Camera Support: helper-script/usb-camera-support.md
+            - OctoEverywhere: helper-script/octoeverywhere.md
+            - Moonraker Obico: helper-script/moonraker-obico.md
+            - GuppyFLO: helper-script/guppyflo.md
+            - Mobileraker Companion: helper-script/mobileraker-companion-k2plus.md
+            - OctoApp Companion: helper-script/octoapp-companion.md
+            - SimplyPrint: helper-script/simplyprint-k2plus.md
+            - CFS (Color Filament System): helper-script/cfs-k2plus.md
+        - Customize Menu:
+            - Remove & Restore Creality Web Interface: helper-script/remove-and-restore-creality-web-interface-k2plus.md
+            - Guppy Screen: helper-script/guppy-screen.md
+            - Creality Dynamic Logos for Fluidd: helper-script/creality-dynamic-logos-for-fluidd.md
+        - Backup & Restore Menu:
+            - Backup & Restore Klipper configuration files: helper-script/backup-and-restore-klipper-configuration-files.md
+            - Backup & Restore Moonraker database: helper-script/backup-and-restore-moonraker-database-k2plus.md
+        - Tools Menu:
+            - Prevent & Allow updating Klipper configuration files: helper-script/prevent-and-allow-updating-klipper-configuration-files.md
+            - Fix Printing Gcode files from Folder: helper-script/fix-printing-gcode-files-from-folder.md
+            - Restore a previous Firmware: helper-script/restore-a-previous-firmware-k2plus.md
+            - Reset Factory Settings: helper-script/reset-factory-settings.md
     - Configuration / Use:
         - Access to Web Interface: configurations/access-to-web-interface.md
         - Configure Camera: configurations/configure-camera.md
         - Change WiFi Location: configurations/change-wifi-location.md
     - Improvements:
-        - K1 Series:
-            - Improve Hotend Cooling: improvements/improve-hotend-cooling-k1.md
-            - Bondtech LGX Lite Pro Upgrade Kit: improvements/bondtech-lgx-pro-lite-upgrade-kit.md
-        - K2 Plus Series:
-            - Heated Chamber: improvements/heated-chamber-k2plus.md
+        - Heated Chamber: improvements/heated-chamber-k2plus.md
         - Calibrate Extruder: improvements/calibrate-extruder.md
     - Others:
-        - K1 Series:
-            - Boards Layout: others/boards-layout-k1.md
-        - K2 Plus Series:
-            - Files Location: others/files-location-k2plus.md
-        - Files Location: others/files-location.md
+        - Files Location: others/files-location-k2plus.md
         - Useful Links: others/useful-links.md
-    - Slicers: 
+    - Slicers:
         - OrcaSlicer: slicers/orcaslicer.md
-    - STL Files: 
+    - STL Files:
         - Printables (Guilouz): https://www.printables.com/@Guilouz/models
         - Makerworld (Guilouz): https://makerworld.com/en/u/3879767814
         - Printables (Henlor): https://www.printables.com/fr/@Henlor_358992/models
-
