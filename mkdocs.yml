@@ -1,8 +1,8 @@
-site_name: Wiki for Creality Helper Script
-site_description: Documentation
+site_name: Creality K2 Plus — Helper Script Wiki
+site_description: Complete guide to rooting the Creality K2 Plus and adding features with the Helper Script.
 
 repo_name: GitHub
-repo_url: https://github.com/Guilouz/Creality-Helper-Script-Wiki
+repo_url: https://github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus
 
 theme:
     name: material
