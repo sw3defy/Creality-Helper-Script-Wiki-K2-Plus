@@ -1,67 +1,80 @@
 # Configure Camera — K2 Plus
 
-The K2 Plus uses a WebRTC-based camera managed by the `S97webrtc` service. The MJPEG stream is available on port `8080`.
+The K2 Plus uses a **proprietary WebRTC camera system** that is fundamentally incompatible with the standard MJPEG stream URLs used by Fluidd and Mainsail. This page explains why, and what your options are.
 
 ---
 
-## Configure Camera in Fluidd
+## How the K2 Plus Camera Works
 
-- Go to **Settings → Cameras** in Fluidd
+The camera on the K2 Plus is managed by two Creality-proprietary processes:
 
-- If the camera is not detected, delete the existing entry and recreate it:
-    - **URL Stream:** `http://<printer-ip>:4408/webcam/?action=stream`
-    - **URL Snapshot:** `http://<printer-ip>:4408/webcam/?action=snapshot`
+| Process | Purpose |
+|---|---|
+| `cam_app` | Captures frames from the UVC camera hardware |
+| `webrtc_local` | Serves a WebRTC stream on port 8000 for Creality's cloud and touchscreen |
 
-<img width="400" src="../../assets/img/Configure-Camera/Fluidd_Camera.png">
-
----
-
-## Configure Camera in Mainsail
-
-- Go to **Interface Settings** (top right) → **WEBCAMS**
-
-- Configure:
-    - **URL Stream:** `http://<printer-ip>:4409/webcam/?action=stream`
-    - **URL Snapshot:** `http://<printer-ip>:4409/webcam/?action=snapshot`
+The camera works in:
+- ✅ Creality touchscreen live view
+- ✅ Creality Print app (WiFi printing)
+- ❌ Fluidd
+- ❌ Mainsail
 
 ---
 
-## Configure Camera in Moonraker
+## Why the Camera Doesn't Work in Fluidd / Mainsail
 
-Add the following to `/mnt/UDISK/printer_data/config/moonraker.conf`:
+Fluidd and Mainsail expect a standard MJPEG stream URL (e.g. `http://<ip>:8080/?action=stream`). The K2 Plus does not provide one. Here is what was found during hardware investigation:
 
-```ini
-[webcam Camera]
-location: printer
-enabled: True
-service: mjpegstreamer
-target_fps: 15
-target_fps_idle: 5
-stream_url: http://<printer-ip>:8080/?action=stream
-snapshot_url: http://<printer-ip>:8080/?action=snapshot
-flip_horizontal: False
-flip_vertical: False
-rotation: 0
-aspect_ratio: 4:3
+**WebRTC on port 8000 is proprietary.** The `webrtc_local` process serves a Creality-specific WebRTC signaling endpoint at `/call/webrtc_local`. This is not compatible with any of the WebRTC camera types in Fluidd or Mainsail (camera-streamer, go2rtc, MediaMTX).
+
+**The V4L2 camera device reports zero capabilities.** When queried directly, `/dev/video0` reports `capabilities: 0x0` — meaning no video capture, no streaming, no read/write. The camera hardware is completely locked behind `cam_app` and cannot be accessed via standard Linux V4L2 APIs.
+
+**Entware is not compatible with the K2 Plus.** The K2 Plus uses **armhf** (hard-float ARM ABI) compiled with Linaro GCC 5.3. Entware only provides **armv7sf** (soft-float) binaries. Installing Entware packages results in "not found" errors even when the binary exists on disk. This means `mjpg-streamer` from Entware cannot be installed.
+
+**`cam_app` uses a proprietary socket interface.** The camera output is delivered via `/tmp/delivery_socket100` using an undocumented binary protocol. No community documentation exists for this protocol.
+
+---
+
+## Current Status
+
+| Approach | Result |
+|---|---|
+| WebRTC (camera-streamer) in Fluidd/Mainsail | ❌ Incompatible protocol |
+| WebRTC (go2rtc) in Fluidd/Mainsail | ❌ Incompatible protocol |
+| MJPEG-Streamer via Entware | ❌ Entware incompatible (wrong ARM ABI) |
+| Direct V4L2 access from Python3 | ❌ Camera reports zero capabilities |
+| Intercepting cam_app socket output | ❌ Undocumented proprietary protocol |
+
+**The camera cannot currently be used in Fluidd or Mainsail on the K2 Plus.**
+
+---
+
+## Workarounds
+
+### View camera via Creality web interface
+
+The camera is accessible through the Creality web interface at port 80:
+
+```
+http://<printer-ip>/
 ```
 
-Click **SAVE & RESTART** in Fluidd or Mainsail to apply.
+This works in any browser but requires using the Creality interface rather than Fluidd or Mainsail.
 
-!!! note "K2 Plus config path"
-    The persistent Moonraker config lives at `/mnt/UDISK/printer_data/config/moonraker.conf` — not `/usr/data/` as on K1 Series.
+### Use Fluidd/Mainsail for everything except camera
+
+Fluidd and Mainsail work perfectly for all printer control, temperature monitoring, file management, macros, and print management. Only the camera feed is unavailable.
 
 ---
 
-## Restart Camera Service
+## Future Solutions
 
-If the camera feed drops without a hardware fault:
+If you find a working solution for the K2 Plus camera in Fluidd/Mainsail, please open a discussion at:
 
-```bash
-/etc/init.d/S97webrtc restart
-```
+[github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus/discussions](https://github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus/discussions)
 
-Or from Fluidd console (requires Useful Macros installed):
+Possible future approaches that have not been fully explored:
 
-```gcode
-RELOAD_CAMERA
-```
+- Reverse engineering the `cam_app` socket protocol
+- Compiling a custom `mjpg-streamer` for armhf from source
+- Using the Creality firmware's own streaming infrastructure

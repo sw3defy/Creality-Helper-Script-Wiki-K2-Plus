@@ -35,8 +35,9 @@ theme:
   features:
     - navigation.indexes
     - navigation.tracking
-    - navigation.expand
     - navigation.top
+    - navigation.integrate
+    - toc.integrate
     - search.highlight
     - search.share
     - content.code.copy
