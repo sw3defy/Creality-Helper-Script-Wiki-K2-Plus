@@ -1,5 +1,11 @@
 # Creality K2 Plus — Helper Script Wiki
 
+<div style="display:flex;gap:20px;margin-bottom:20px;">
+<div style="flex:1;text-align:center;"><img src="https://drive.google.com/thumbnail?id=1CIxSAh3cxYCOOIXIYoKQgjuqBXqa_m67&sz=w600" alt="Creality K2 Plus"><br><strong>Creality K2 Plus</strong></div>
+<div style="flex:1;text-align:center;"><img src="https://drive.google.com/thumbnail?id=1rho-b_3_4d2JEmcygVluVi7r-sPNvQe9&sz=w600" alt="Creality K2 Plus Combo"><br><strong>Creality K2 Plus Combo (with CFS)</strong></div>
+</div>
+
+
 This wiki covers the complete process to root the **Creality K2 Plus** and **K2 Plus Combo**, and add features using the Creality K2 Plus Helper Script.
 
 The advantage of rooting your printer is having full access to the firmware and configuration files, enabling you to install community tools, improve print quality, and extend your printer far beyond its factory defaults.
@@ -13,6 +19,17 @@ The advantage of rooting your printer is having full access to the firmware and 
     For K1 Series, K1C, K1 Max, or Ender-3 V3 Series — see the [original Guilouz wiki](https://guilouz.github.io/Creality-Helper-Script-Wiki/).
 
 ---
+
+
+---
+
+## Support This Project
+
+If you find this wiki and helper script useful, consider supporting the work!
+
+<a href="https://buymeacoffee.com/sw3defy" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50"></a>
+&nbsp;&nbsp;
+<a href="https://ko-fi.com/sw3defy" target="_blank"><img src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" alt="Support me on Ko-fi" height="50"></a>
 
 ## About This Wiki
 

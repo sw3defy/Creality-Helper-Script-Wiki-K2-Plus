@@ -1,25 +1,71 @@
-/* Section headers in left nav - blue */
-.md-nav--primary .md-nav__item--section .md-nav__link {
-  color: #4051b5 !important;
+/* Blue section/category headers in left nav */
+.md-nav--primary .md-nav__item--section > .md-nav__link,
+.md-nav--primary .md-nav__item--nested > .md-nav__link {
+  color: #4fc3f7 !important;
   font-weight: 700;
 }
 
-.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link {
-  color: #4051b5 !important;
-  font-weight: 700;
-}
-
-.md-nav__item--nested > .md-nav__link {
-  color: #4051b5 !important;
-  font-weight: 700;
-}
-
-/* Hide table of contents on the right */
+/* Hide right table of contents panel */
 .md-sidebar--secondary {
   display: none !important;
 }
 
-/* Expand main content to fill the space */
 .md-content {
   max-width: 100% !important;
+}
+
+/* Remove pointer events from section toggle labels */
+.md-nav__item--nested > label,
+.md-nav__item--section > label {
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+/* Keep all nav expanded */
+.md-nav__toggle {
+  display: none !important;
+}
+
+/* Force expand all nested nav items */
+.md-nav__item--nested .md-nav {
+  display: block !important;
+}
+
+/* Hide all expand/collapse arrows */
+.md-nav__icon {
+  display: none !important;
+}
+
+.md-nav {
+  display: block !important;
+}
+
+/* Fix gap when active item selected */
+.md-nav__item--active > .md-nav {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Remove all margins and padding from active nav items */
+.md-nav__item--active {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.md-nav__item--active > .md-nav {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.md-sidebar__inner {
+  padding: 0 !important;
+}
+
+.md-nav--secondary {
+  display: none !important;
+}
+
+/* Hide the nested toc that appears when a page is active */
+.md-nav__item--active > .md-nav--secondary {
+  display: none !important;
 }

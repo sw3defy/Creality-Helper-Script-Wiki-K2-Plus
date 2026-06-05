@@ -46,3 +46,13 @@ This K2 Plus adaptation is maintained by **Sw3Defy**.
 
 - Wiki repository: [github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus](https://github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus)
 - Helper script repository: [github.com/sw3defy/Creality-Helper-Script-K2-Plus](https://github.com/sw3defy/Creality-Helper-Script-K2-Plus)
+
+## Sw3Defy
+
+This wiki and helper script were created and maintained by **Sw3Defy**.
+
+If you find it useful, consider leaving a small tip:
+
+<a href="https://buymeacoffee.com/sw3defy" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50"></a>
+&nbsp;&nbsp;
+<a href="https://ko-fi.com/sw3defy" target="_blank"><img src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" alt="Support me on Ko-fi" height="50"></a>

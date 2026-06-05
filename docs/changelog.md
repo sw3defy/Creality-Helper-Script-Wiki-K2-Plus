@@ -10,7 +10,7 @@ Extensive investigation was conducted to enable the K2 Plus camera in Fluidd and
 - **Python3 MJPEG streamer** — Attempted to read frames directly from `/dev/video0` using Python3 ctypes and the V4L2 API. Failed because the device reports no capabilities
 - **cam_app socket interception** — `cam_app` outputs to `/tmp/delivery_socket100` using an undocumented binary protocol. No community documentation exists for this protocol
 
-**Conclusion:** The K2 Plus camera cannot currently be used in Fluidd or Mainsail. The camera works only in Creality Print and on the touchscreen. See [Configure Camera](../configurations/configure-camera.md) for the full technical details.
+**Conclusion:** The K2 Plus camera cannot currently be used in Fluidd or Mainsail. The camera works only in Creality Print and on the touchscreen. See [Configure Camera](configurations/configure-camera.md) for the full technical details.
 
 If you find a working solution, please share it in the [Discussions](https://github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus/discussions).
 

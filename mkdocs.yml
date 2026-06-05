@@ -34,10 +34,9 @@ theme:
         name: Light Mode
   features:
     - navigation.indexes
-    - navigation.tracking
     - navigation.top
-    - navigation.integrate
-    - toc.integrate
+    - navigation.sections
+    - navigation.expand
     - search.highlight
     - search.share
     - content.code.copy
@@ -76,12 +75,14 @@ extra:
 
 nav:
   - About:
-      - About this Wiki: index.md
+      - About: index.md
       - Changelog: changelog.md
       - Discussions: https://github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus/discussions
       - Special Thanks: special-thanks.md
+      - No Camera Support for Fluidd/Mainsail: configurations/configure-camera.md
 
   - Firmwares:
+      - Firmwares: firmwares/index.md
       - Install & Update Firmware: firmwares/install-and-update-rooted-firmware-k2plus.md
       - Restore Previous Firmware: firmwares/restore-previous-firmware-k2plus.md
       - Reset Factory Settings: firmwares/reset-factory-settings.md
@@ -89,8 +90,10 @@ nav:
       - Change Date & Time: firmwares/change-date-and-time.md
 
   - Helper Script for Creality K2 Plus:
+      - Helper Script for Creality K2 Plus: helper-script/index.md
       - Install Helper Script: helper-script/helper-script-installation.md
       - Install Menu:
+          - Install Menu: helper-script/install-menu/index.md
           - Moonraker Extensions: helper-script/moonraker-k2plus.md
           - Fluidd (update / repair): helper-script/fluidd-k2plus.md
           - Mainsail: helper-script/mainsail-k2plus.md
@@ -100,31 +103,36 @@ nav:
           - M600 Support: helper-script/m600-support-k2plus.md
           - Klipper Adaptive Meshing & Purging: helper-script/klipper-adaptive-meshing-and-purging-k2plus.md
           - Improved Shapers Calibrations: helper-script/improved-shapers-calibrations-k2plus.md
-          - Moonraker Timelapse: helper-script/moonraker-timelapse-k2plus.md
           - OctoEverywhere: helper-script/octoeverywhere.md
           - Mobileraker Companion: helper-script/mobileraker-companion-k2plus.md
           - SimplyPrint: helper-script/simplyprint-k2plus.md
           - CFS — Color Filament System: helper-script/cfs-k2plus.md
       - Backup & Restore Menu:
+          - Backup & Restore Menu: helper-script/backup-menu/index.md
           - Backup & Restore Klipper Config: helper-script/backup-and-restore-klipper-configuration-files.md
       - Tools Menu:
+          - Tools Menu: helper-script/tools-menu/index.md
           - Restore a Previous Firmware: helper-script/restore-a-previous-firmware-k2plus.md
           - Reset Factory Settings: firmwares/reset-factory-settings.md
 
   - Configuration / Use:
+      - Configuration / Use: configurations/index.md
       - Access to Web Interface: configurations/access-to-web-interface.md
       - Configure Camera: configurations/configure-camera.md
       - Change WiFi Location: configurations/change-wifi-location.md
 
   - Improvements:
+      - Improvements: improvements/index.md
       - Heated Chamber: improvements/heated-chamber-k2plus.md
       - CFS Maintenance: improvements/cfs-maintenance-k2plus.md
       - Calibrate Extruder: improvements/calibrate-extruder.md
 
   - Others:
+      - Others: others/index.md
       - Boards Layout: others/boards-layout-k2plus.md
       - Files Location: others/files-location-k2plus.md
       - Useful Links: others/useful-links.md
 
   - Slicers:
+      - Slicers: slicers/index.md
       - OrcaSlicer: slicers/orcaslicer.md
