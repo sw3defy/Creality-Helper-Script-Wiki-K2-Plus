@@ -1,5 +1,21 @@
 # Changelog
 
+## Camera Investigation — June 5, 2026
+
+Extensive investigation was conducted to enable the K2 Plus camera in Fluidd and Mainsail. All known approaches were exhausted:
+
+- **WebRTC** — `webrtc_local` runs on port 8000 but uses a proprietary Creality protocol incompatible with Fluidd/Mainsail's WebRTC camera types (camera-streamer, go2rtc, MediaMTX)
+- **Direct V4L2 access** — `/dev/video0` reports `capabilities: 0x0`, meaning the camera hardware is completely locked behind `cam_app` and cannot be accessed via standard Linux V4L2 APIs
+- **Entware + mjpg-streamer** — Entware is incompatible with the K2 Plus due to ARM ABI mismatch (K2 Plus uses armhf hard-float, Entware only provides armv7sf soft-float binaries)
+- **Python3 MJPEG streamer** — Attempted to read frames directly from `/dev/video0` using Python3 ctypes and the V4L2 API. Failed because the device reports no capabilities
+- **cam_app socket interception** — `cam_app` outputs to `/tmp/delivery_socket100` using an undocumented binary protocol. No community documentation exists for this protocol
+
+**Conclusion:** The K2 Plus camera cannot currently be used in Fluidd or Mainsail. The camera works only in Creality Print and on the touchscreen. See [Configure Camera](../configurations/configure-camera.md) for the full technical details.
+
+If you find a working solution, please share it in the [Discussions](https://github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus/discussions).
+
+---
+
 ## Sw3Defy K2 Plus Helper Script Wiki
 
 ### v1.0.0 — June 2026

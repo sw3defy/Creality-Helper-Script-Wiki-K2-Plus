@@ -75,10 +75,11 @@ extra:
       link: https://github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus
 
 nav:
-  - About: index.md
-  - Changelog: changelog.md
-  - Discussions: https://github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus/discussions
-  - Special Thanks: special-thanks.md
+  - About:
+      - About this Wiki: index.md
+      - Changelog: changelog.md
+      - Discussions: https://github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus/discussions
+      - Special Thanks: special-thanks.md
 
   - Firmwares:
       - Install & Update Firmware: firmwares/install-and-update-rooted-firmware-k2plus.md
