@@ -35,6 +35,7 @@ theme:
   features:
     - navigation.indexes
     - navigation.tracking
+    - navigation.expand
     - navigation.top
     - search.highlight
     - search.share

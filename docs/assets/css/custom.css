@@ -1,0 +1,25 @@
+/* Section headers in left nav - blue */
+.md-nav--primary .md-nav__item--section .md-nav__link {
+  color: #4051b5 !important;
+  font-weight: 700;
+}
+
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link {
+  color: #4051b5 !important;
+  font-weight: 700;
+}
+
+.md-nav__item--nested > .md-nav__link {
+  color: #4051b5 !important;
+  font-weight: 700;
+}
+
+/* Hide table of contents on the right */
+.md-sidebar--secondary {
+  display: none !important;
+}
+
+/* Expand main content to fill the space */
+.md-content {
+  max-width: 100% !important;
+}
