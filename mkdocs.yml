@@ -103,6 +103,7 @@ nav:
           - M600 Support: helper-script/m600-support-k2plus.md
           - Klipper Adaptive Meshing & Purging: helper-script/klipper-adaptive-meshing-and-purging-k2plus.md
           - Improved Shapers Calibrations: helper-script/improved-shapers-calibrations-k2plus.md
+          - Moonraker Timelapse: helper-script/moonraker-timelapse-k2plus.md
           - OctoEverywhere: helper-script/octoeverywhere.md
           - Mobileraker Companion: helper-script/mobileraker-companion-k2plus.md
           - SimplyPrint: helper-script/simplyprint-k2plus.md
