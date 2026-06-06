@@ -1,5 +1,32 @@
 # Changelog
 
+## Helper Script Improvements — June 6, 2026
+
+Full end-to-end test of all 23 menu options completed. The following improvements were made:
+
+**Already-installed checks:**
+All install scripts (options 1-11) now detect if a feature is already installed and prompt to reinstall rather than running blindly.
+
+**Remove confirmations:**
+All remove scripts now show a warning and require y/N confirmation before removing any feature.
+
+**Backup confirmation:**
+Option 16 (Backup Klipper configuration) now asks for confirmation before running.
+
+**Restart confirmations:**
+Options 18 (Restart Klipper), 19 (Restart Moonraker), and 20 (Restart Nginx) now ask for confirmation before restarting.
+
+**Fluidd nginx restore:**
+Option 8 (Fluidd) now includes a third sub-option to restore the nginx block only (port 4408), matching the same option already available for Mainsail (port 4409).
+
+**Stub scripts for unimplemented features:**
+Options 12 (OctoEverywhere), 13 (Mobileraker Companion), and 14 (Git Backup) now show a friendly message instead of crashing. These features are not yet implemented for K2 Plus.
+
+**HelixScreen moonraker.conf cleanup:**
+HelixScreen installer adds an `[update_manager]` section to moonraker.conf which is not supported on K2 Plus. The helixscreen.sh script now automatically removes this section after installation.
+
+---
+
 ## HelixScreen Integration — June 6, 2026
 
 HelixScreen v0.99.72 was successfully installed and tested on the Creality K2 Plus.
