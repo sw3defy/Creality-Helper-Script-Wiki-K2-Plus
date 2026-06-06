@@ -56,3 +56,17 @@ If you find it useful, consider leaving a small tip:
 <a href="https://buymeacoffee.com/sw3defy" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50"></a>
 &nbsp;&nbsp;
 <a href="https://ko-fi.com/sw3defy" target="_blank"><img src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" alt="Support me on Ko-fi" height="50"></a>
+
+---
+
+## HelixScreen — prestonbrown & Contributors
+
+[HelixScreen](https://helixscreen.org) is a modern, lightweight touchscreen interface for Klipper printers, created by [prestonbrown](https://github.com/prestonbrown) and contributors.
+
+Their explicit support for the K2 series — including prebuilt armhf binaries, Python3 installer, and CFS protocol documentation — made HelixScreen integration on the K2 Plus possible.
+
+- [HelixScreen Website](https://helixscreen.org)
+- [HelixScreen GitHub](https://github.com/prestonbrown/helixscreen)
+- [K2 Series Documentation](https://helixscreen.org/dev/printers/creality-k2/)
+
+If you find HelixScreen useful, consider supporting prestonbrown directly.
