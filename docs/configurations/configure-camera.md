@@ -53,9 +53,16 @@ No manual steps required.
 ## Direct Camera Access
 
 The camera can also be accessed directly:
-http://YOUR_PRINTER_IP:4408/camera.html
 
-Or via go2rtc web interface:http://YOUR_PRINTER_IP:1984/stream.html?src=k2plus&mode=webrtc
+```
+http://YOUR_PRINTER_IP:4408/camera.html
+```
+
+Or via go2rtc web interface:
+
+```
+http://YOUR_PRINTER_IP:1984/stream.html?src=k2plus&mode=webrtc
+```
 
 ---
 
