@@ -891,9 +891,9 @@ The K2 Plus streams video via WebRTC (service `S97webrtc`). Moonraker Timelapse 
 
 ---
 
-# Configure Camera — K2 Plus
+# Camera Support for Fluidd and Mainsail — K2 Plus
 
-The K2 Plus uses a **proprietary WebRTC camera system** that is fundamentally incompatible with the standard MJPEG stream URLs used by Fluidd and Mainsail. This page explains why, and what your options are.
+The K2 Plus camera is now supported in both Fluidd and Mainsail via a custom WebRTC bridge. See the [Camera Support page](../../configurations/configure-camera.md) for full details.
 
 ---
 
@@ -1001,7 +1001,7 @@ HelixScreen is a modern, lightweight touchscreen interface for Klipper 3D printe
 Install from the helper script:
 
 
-Select **11) HelixScreen (touchscreen UI)**.
+Select **12) HelixScreen (touchscreen UI)**.
 
 Or install manually via SSH:
 
@@ -1025,7 +1025,7 @@ reboot
 
 ## Updating
 
-To update HelixScreen run the helper script and select option 11 again, or via SSH:
+To update HelixScreen run the helper script and select option 12 again, or via SSH:
 
 ```bash
 /opt/helixscreen/install.sh --update
@@ -1064,7 +1064,7 @@ OctoEverywhere provides free remote access to your printer from anywhere in the 
 
 ## Installation
 
-From the Helper Script menu, select **option 11 — OctoEverywhere**.
+From the Helper Script menu, select **option 13 — OctoEverywhere**.
 
 ---
 

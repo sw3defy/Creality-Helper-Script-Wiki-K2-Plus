@@ -110,7 +110,7 @@ Fluidd and Mainsail expect a standard MJPEG stream URL (e.g. `http://<ip>:8080/?
 | Direct V4L2 access from Python3 | ❌ Camera reports zero capabilities |
 | Intercepting cam_app socket output | ❌ Undocumented proprietary protocol |
 
-**The camera cannot currently be used in Fluidd or Mainsail on the K2 Plus.**
+**The camera is now supported in Fluidd and Mainsail. See the [Camera Support page](configure-camera.md) for details.**
 
 ---
 
