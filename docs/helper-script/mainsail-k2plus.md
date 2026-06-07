@@ -61,3 +61,9 @@ echo "[include mainsail.cfg]" >> /mnt/UDISK/printer_data/config/printer.cfg
 ```
 
 Or add it via the Fluidd/Mainsail editor.
+
+---
+
+## Camera Setup
+
+Camera support is installed separately via option **11) Camera Support for Fluidd and Mainsail**. Once installed, the camera feed appears automatically in the Mainsail dashboard after boot — no manual configuration required. See the [Camera Support page](../../configurations/configure-camera.md) for details.
