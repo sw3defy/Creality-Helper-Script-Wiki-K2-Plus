@@ -1,53 +1,5 @@
 # Changelog
 
-## Helper Script Improvements — June 6, 2026
-
-Full end-to-end test of all 24 menu options completed. The following improvements were made:
-
-**Already-installed checks:**
-All install scripts (options 1-12) now detect if a feature is already installed and prompt to reinstall rather than running blindly.
-
-**Remove confirmations:**
-All remove scripts now show a warning and require y/N confirmation before removing any feature.
-
-**Backup confirmation:**
-Option 16 (Backup Klipper configuration) now asks for confirmation before running.
-
-**Restart confirmations:**
-Options 18 (Restart Klipper), 19 (Restart Moonraker), and 20 (Restart Nginx) now ask for confirmation before restarting.
-
-**Fluidd nginx restore:**
-Option 8 (Fluidd) now includes a third sub-option to restore the nginx block only (port 4408), matching the same option already available for Mainsail (port 4409).
-
-**Stub scripts for unimplemented features:**
-Options 13 (OctoEverywhere), 14 (Mobileraker Companion), and 15 (Git Backup) now show a friendly message instead of crashing. These features are not yet implemented for K2 Plus.
-
-**HelixScreen moonraker.conf cleanup:**
-HelixScreen installer adds an `[update_manager]` section to moonraker.conf which is not supported on K2 Plus. The helixscreen.sh script now automatically removes this section after installation.
-
----
-
-## HelixScreen Integration — June 6, 2026
-
-HelixScreen v0.99.72 was successfully installed and tested on the Creality K2 Plus.
-
-**What works:**
-
-- Modern touchscreen UI replacing the stock Creality interface
-- Temperature monitoring and control
-- Print management and history
-- Homing, movement, and all Klipper controls
-- Auto-updates via Fluidd/Mainsail update manager
-- CFS (Color Filament System) support
-
-**Known limitation:**
-
-- WiFi management shows as unavailable in HelixScreen — this is cosmetic only. The K2 Plus uses a proprietary WiFi management system that HelixScreen cannot access. The printer WiFi connection is not affected.
-
-HelixScreen has been added to the helper script as option 11 and documented in the wiki. Full credit goes to [prestonbrown](https://github.com/prestonbrown) and the HelixScreen contributors for their excellent work and explicit K2 series support.
-
----
-
 ## Camera Support for Fluidd — Full Story — June 5-7, 2026
 
 After extensive research, reverse engineering, and testing, a fully working camera solution was developed for the K2 Plus that integrates the camera feed directly into the Fluidd dashboard.
@@ -103,6 +55,54 @@ The complete working solution consists of:
 **Result:** Camera feed appears automatically in Fluidd dashboard after boot with no manual steps required.
 
 Full credit to [DnG-Crafts](https://github.com/DnG-Crafts/K2-Camera) for the original WebRTC discovery and [AlexxIT](https://github.com/AlexxIT/go2rtc) for go2rtc.
+
+---
+
+## Helper Script Improvements — June 6, 2026
+
+Full end-to-end test of all 24 menu options completed. The following improvements were made:
+
+**Already-installed checks:**
+All install scripts (options 1-12) now detect if a feature is already installed and prompt to reinstall rather than running blindly.
+
+**Remove confirmations:**
+All remove scripts now show a warning and require y/N confirmation before removing any feature.
+
+**Backup confirmation:**
+Option 16 (Backup Klipper configuration) now asks for confirmation before running.
+
+**Restart confirmations:**
+Options 18 (Restart Klipper), 19 (Restart Moonraker), and 20 (Restart Nginx) now ask for confirmation before restarting.
+
+**Fluidd nginx restore:**
+Option 8 (Fluidd) now includes a third sub-option to restore the nginx block only (port 4408), matching the same option already available for Mainsail (port 4409).
+
+**Stub scripts for unimplemented features:**
+Options 13 (OctoEverywhere), 14 (Mobileraker Companion), and 15 (Git Backup) now show a friendly message instead of crashing. These features are not yet implemented for K2 Plus.
+
+**HelixScreen moonraker.conf cleanup:**
+HelixScreen installer adds an `[update_manager]` section to moonraker.conf which is not supported on K2 Plus. The helixscreen.sh script now automatically removes this section after installation.
+
+---
+
+## HelixScreen Integration — June 6, 2026
+
+HelixScreen v0.99.72 was successfully installed and tested on the Creality K2 Plus.
+
+**What works:**
+
+- Modern touchscreen UI replacing the stock Creality interface
+- Temperature monitoring and control
+- Print management and history
+- Homing, movement, and all Klipper controls
+- Auto-updates via Fluidd/Mainsail update manager
+- CFS (Color Filament System) support
+
+**Known limitation:**
+
+- WiFi management shows as unavailable in HelixScreen — this is cosmetic only. The K2 Plus uses a proprietary WiFi management system that HelixScreen cannot access. The printer WiFi connection is not affected.
+
+HelixScreen has been added to the helper script as option 11 and documented in the wiki. Full credit goes to [prestonbrown](https://github.com/prestonbrown) and the HelixScreen contributors for their excellent work and explicit K2 series support.
 
 ---
 
