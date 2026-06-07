@@ -895,6 +895,8 @@ The K2 Plus streams video via WebRTC (service `S97webrtc`). Moonraker Timelapse 
 
 The K2 Plus camera is now supported in both Fluidd and Mainsail via a custom WebRTC bridge. See the [Camera Support page](../../configurations/configure-camera.md) for full details.
 
+---
+
 # HelixScreen — K2 Plus
 
 HelixScreen is a modern, lightweight touchscreen interface for Klipper 3D printers. It replaces the stock Creality touchscreen UI with a feature-rich Klipper-native interface.
