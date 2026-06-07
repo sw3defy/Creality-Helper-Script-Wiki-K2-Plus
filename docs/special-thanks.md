@@ -95,6 +95,6 @@ This wiki is built with [Material for MkDocs](https://squidfunk.github.io/mkdocs
 
 If you find this wiki and helper script useful, consider supporting the work!
 
-<a href="https://buymeacoffee.com/sw3defy" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50"></a>
-&nbsp;&nbsp;
-<a href="https://ko-fi.com/sw3defy" target="_blank"><img src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" alt="Support me on Ko-fi" height="50"></a>
+<a href="https://buymeacoffee.com/sw3defy"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="60"></a>
+
+<a href="https://ko-fi.com/sw3defy"><img src="https://ko-fi.com/img/githubbutton_sm.svg" height="60"></a>
