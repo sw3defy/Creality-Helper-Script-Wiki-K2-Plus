@@ -128,7 +128,7 @@ Initial release of the Creality K2 Plus Helper Script Wiki and companion helper 
 - Installs to `/mnt/UDISK/helper-script/`
 - Moonraker extension approach: wraps stock read-only config with persistent `/mnt/UDISK/printer_data/config/moonraker.conf`
 - No `supervisorctl` dependency — uses OpenWrt rc.d throughout
-- Features included: Moonraker Extensions, Fluidd (repair/update), Mainsail, KAMP, Fans Control Macros, Useful Macros, Improved Shapers Calibrations, Save Z-Offset Macros, M600 Support, Moonraker Timelapse, Git Backup, OctoEverywhere, Mobileraker Companion
+- Features included: Moonraker Extensions, Fluidd (repair/update), Mainsail, KAMP, Fans Control Macros, Useful Macros, Improved Shapers Calibrations, Save Z-Offset Macros, M600 Support, Moonraker Timelapse, Camera Support for Fluidd (WebRTC via go2rtc), HelixScreen, Git Backup, OctoEverywhere, Mobileraker Companion
 - CFS-aware macros for K2 Plus Combo
 - Chamber heater integration in START_PRINT and WARMUP
 - Full K1 Max macro set ported: BELTS_SHAPER_CALIBRATION, EXCITATE_AXIS_AT_FREQ, TEST_RESONANCES_GRAPHS, AUTOTUNE_SHAPERS
