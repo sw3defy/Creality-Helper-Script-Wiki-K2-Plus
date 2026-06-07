@@ -49,4 +49,10 @@ TIMELAPSE_RENDER
 
 ## Camera
 
-The K2 Plus streams video via WebRTC (service `S97webrtc`). Moonraker Timelapse captures frames from the MJPEG stream on `127.0.0.1:8080`. Ensure the camera is working in Fluidd before enabling timelapse.
+Moonraker Timelapse uses the snapshot URL from the camera configuration to capture frames. With the K2 Plus camera solution installed, the snapshot URL is:
+
+```
+http://<printer-ip>:4409/go2rtc/api/frame.jpeg?src=k2plus
+```
+
+Ensure [Camera Support](../../configurations/configure-camera.md) is installed before enabling timelapse.
