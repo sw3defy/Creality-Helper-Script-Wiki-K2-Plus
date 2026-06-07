@@ -48,35 +48,65 @@ HelixScreen has been added to the helper script as option 11 and documented in t
 
 ---
 
-## Camera iframe Keepalive Solution — June 7, 2026
+## Camera Support for Fluidd — Full Story — June 5-7, 2026
 
-Root cause identified and fixed: go2rtc creates two internal receivers when connecting to the K2 camera and routes video to the wrong one when Fluidd requests the stream.
+After extensive research, reverse engineering, and testing, a fully working camera solution was developed for the K2 Plus that integrates the camera feed directly into the Fluidd dashboard.
 
-**Solution:**
+### Investigation (June 5, 2026)
 
-- Hidden iframe in Fluidd keeps a permanent background WebRTC connection open, maintaining correct producer routing in go2rtc
-- sessionStorage-based auto-reload detects when stream is ready and reloads Fluidd once automatically
-- Camera feed now appears after boot with no manual steps required
+All known approaches were investigated:
+
+- **WebRTC (go2rtc, camera-streamer, MediaMTX)** — The K2 Plus camera uses a proprietary Creality WebRTC protocol that is incompatible with all standard Fluidd/Mainsail WebRTC camera types
+- **Direct V4L2 access** —  reports  — completely locked behind Creality firmware
+- **Entware + mjpg-streamer** — Incompatible due to ARM ABI mismatch (K2 Plus uses armhf hard-float, Entware only provides armv7sf soft-float)
+- **Python3 MJPEG streamer** — Failed because V4L2 device reports no capabilities
+- **cam_app socket interception** —  outputs to  using an undocumented binary protocol
+
+### Breakthrough (June 6, 2026)
+
+The K2 Plus camera WebRTC protocol was reverse engineered by inspecting the raw HTTP traffic to port 8000. Key findings:
+
+- The camera accepts WebRTC SDP offers via HTTP POST to 
+- The SDP offer must be wrapped in a JSON object  and base64 encoded
+- The camera responds with a base64 encoded JSON answer containing the SDP response
+- go2rtc sends plain SDP — a Python bridge was written to translate between the formats
+
+**k2rtc.py** — A custom Python WebRTC bridge was developed that:
+1. Receives plain SDP from go2rtc
+2. Wraps it in JSON and base64 encodes it for the K2 camera
+3. Decodes the base64 JSON response and returns plain SDP to go2rtc
+
+With the correct ICE candidate configuration ( in go2rtc.yaml) the stream worked in go2rtc's stream.html.
+
+### Fluidd Integration (June 6-7, 2026)
+
+Getting the stream into Fluidd required solving several additional problems:
+
+- **Fluidd enable toggle bug** — Fluidd v1.37.1 stores the camera  state separately from Moonraker. Our Moonraker version does not support the  field. A JavaScript injection in  was used to force-enable the camera widget.
+- **WebSocket routing** — Fluidd connects to go2rtc via WebSocket at . Nginx needed a specific proxy rule to add  to the WebSocket URL.
+- **Stream not found** — go2rtc reported  because the stream was not pre-connected. The k2rtc.py pre-connect function was added.
+- **Dual receiver bug** — The root cause of intermittent failures: go2rtc creates two internal receivers when connecting to the K2 camera and routes video to the wrong one. A hidden iframe in Fluidd keeps a permanent background WebRTC connection open, forcing correct routing.
+- **Auto-reload** — sessionStorage-based JavaScript detects when the stream is ready (500KB received) and automatically reloads Fluidd once to show the camera feed.
+
+### Final Solution
+
+The complete working solution consists of:
+
+1. **k2rtc.py** — Python WebRTC bridge translating go2rtc SDP to K2 Plus base64 JSON format
+2. **go2rtc v1.9.14** — ARM hard-float stream converter
+3. **Hidden iframe** — Keeps background WebRTC connection open for correct go2rtc routing
+4. **JavaScript injection** — Auto-enables camera widget and auto-reloads page when stream is ready
+5. **camera_watchdog.py** — Monitors stream and reconnects if dropped
+6. **Nginx proxy** — Routes WebSocket with  parameter
+7. **rc.local startup** — Starts everything automatically after boot with 60 second delay
+
+**Result:** Camera feed appears automatically in Fluidd dashboard after boot with no manual steps required.
+
+Full credit to [DnG-Crafts](https://github.com/DnG-Crafts/K2-Camera) for the original WebRTC discovery and [AlexxIT](https://github.com/AlexxIT/go2rtc) for go2rtc.
 
 ---
 
-## Camera Investigation — June 5, 2026
-
-Extensive investigation was conducted to enable the K2 Plus camera in Fluidd and Mainsail. All known approaches were exhausted:
-
-- **WebRTC** — `webrtc_local` runs on port 8000 but uses a proprietary Creality protocol incompatible with Fluidd/Mainsail's WebRTC camera types (camera-streamer, go2rtc, MediaMTX)
-- **Direct V4L2 access** — `/dev/video0` reports `capabilities: 0x0`, meaning the camera hardware is completely locked behind `cam_app` and cannot be accessed via standard Linux V4L2 APIs
-- **Entware + mjpg-streamer** — Entware is incompatible with the K2 Plus due to ARM ABI mismatch (K2 Plus uses armhf hard-float, Entware only provides armv7sf soft-float binaries)
-- **Python3 MJPEG streamer** — Attempted to read frames directly from `/dev/video0` using Python3 ctypes and the V4L2 API. Failed because the device reports no capabilities
-- **cam_app socket interception** — `cam_app` outputs to `/tmp/delivery_socket100` using an undocumented binary protocol. No community documentation exists for this protocol
-
-**Conclusion:** The K2 Plus camera cannot currently be used in Fluidd or Mainsail. The camera works only in Creality Print and on the touchscreen. See [Configure Camera](configurations/configure-camera.md) for the full technical details.
-
-If you find a working solution, please share it in the [Discussions](https://github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus/discussions).
-
----
-
-## Sw3Defy K2 Plus Helper Script Wiki
+## ## Sw3Defy K2 Plus Helper Script Wiki
 
 ### v1.0.0 — June 2026
 
