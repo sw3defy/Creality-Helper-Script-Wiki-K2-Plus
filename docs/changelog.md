@@ -48,6 +48,18 @@ HelixScreen has been added to the helper script as option 11 and documented in t
 
 ---
 
+## Camera iframe Keepalive Solution — June 7, 2026
+
+Root cause identified and fixed: go2rtc creates two internal receivers when connecting to the K2 camera and routes video to the wrong one when Fluidd requests the stream.
+
+**Solution:**
+
+- Hidden iframe in Fluidd keeps a permanent background WebRTC connection open, maintaining correct producer routing in go2rtc
+- sessionStorage-based auto-reload detects when stream is ready and reloads Fluidd once automatically
+- Camera feed now appears after boot with no manual steps required
+
+---
+
 ## Camera Investigation — June 5, 2026
 
 Extensive investigation was conducted to enable the K2 Plus camera in Fluidd and Mainsail. All known approaches were exhausted:
