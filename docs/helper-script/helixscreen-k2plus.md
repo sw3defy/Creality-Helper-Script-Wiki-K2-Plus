@@ -48,7 +48,7 @@ reboot
 
 ## Updating
 
-To update HelixScreen run the helper script and select option 11 again, or via SSH:
+To update HelixScreen run the helper script and select option 12 again, or via SSH:
 
 ```bash
 /opt/helixscreen/install.sh --update

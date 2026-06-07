@@ -115,7 +115,7 @@ HelixScreen v0.99.72 was successfully installed and tested on the Creality K2 Pl
 
 - WiFi management shows as unavailable in HelixScreen — this is cosmetic only. The K2 Plus uses a proprietary WiFi management system that HelixScreen cannot access. The printer WiFi connection is not affected.
 
-HelixScreen has been added to the helper script as option 11 and documented in the wiki. Full credit goes to [prestonbrown](https://github.com/prestonbrown) and the HelixScreen contributors for their excellent work and explicit K2 series support.
+HelixScreen has been added to the helper script as option 12 and documented in the wiki. Full credit goes to [prestonbrown](https://github.com/prestonbrown) and the HelixScreen contributors for their excellent work and explicit K2 series support.
 
 ---
 
