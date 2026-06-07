@@ -79,7 +79,7 @@ nav:
       - Changelog: changelog.md
       - Discussions: https://github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus/discussions
       - Special Thanks: special-thanks.md
-      - Camera Support for Fluidd: configurations/configure-camera.md
+      - Camera Support for Fluidd and Mainsail: configurations/configure-camera.md
 
   - Firmwares:
       - Firmwares: firmwares/index.md
@@ -104,7 +104,7 @@ nav:
           - Klipper Adaptive Meshing & Purging: helper-script/klipper-adaptive-meshing-and-purging-k2plus.md
           - Improved Shapers Calibrations: helper-script/improved-shapers-calibrations-k2plus.md
           - Moonraker Timelapse: helper-script/moonraker-timelapse-k2plus.md
-          - Camera Support for Fluidd: configurations/configure-camera.md
+          - Camera Support for Fluidd and Mainsail: configurations/configure-camera.md
           - HelixScreen: helper-script/helixscreen-k2plus.md
           - OctoEverywhere: helper-script/octoeverywhere.md
           - Mobileraker Companion: helper-script/mobileraker-companion-k2plus.md
