@@ -42,7 +42,7 @@ All content has been **verified on live K2 Plus hardware via SSH**.
 
 <a href="https://buymeacoffee.com/sw3defy"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="60"></a>
 
-<a href="https://ko-fi.com/sw3defy"><img src="https://ko-fi.com/img/githubbutton_sm.svg" height="60"></a>
+<a href="https://ko-fi.com/sw3defy"><img src="https://ko-fi.com/img/githubbutton_sm.svg" height="80"></a>
 
 ## Discussions
 
