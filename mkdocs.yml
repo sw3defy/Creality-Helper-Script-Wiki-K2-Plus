@@ -79,7 +79,7 @@ nav:
       - Changelog: changelog.md
       - Discussions: https://github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus/discussions
       - Special Thanks: special-thanks.md
-      - No Camera Support for Fluidd/Mainsail: configurations/configure-camera.md
+      - Camera Support for Fluidd: configurations/configure-camera.md
 
   - Firmwares:
       - Firmwares: firmwares/index.md
