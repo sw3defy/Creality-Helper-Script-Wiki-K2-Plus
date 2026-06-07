@@ -1,80 +1,73 @@
-# Configure Camera — K2 Plus
+# Camera Support for Fluidd — K2 Plus
 
-The K2 Plus uses a **proprietary WebRTC camera system** that is fundamentally incompatible with the standard MJPEG stream URLs used by Fluidd and Mainsail. This page explains why, and what your options are.
+The K2 Plus has a built-in camera that uses a proprietary WebRTC protocol on port 8000. Through reverse engineering, a working bridge has been developed that makes the camera available in the Fluidd dashboard.
 
----
-
-## How the K2 Plus Camera Works
-
-The camera on the K2 Plus is managed by two Creality-proprietary processes:
-
-| Process | Purpose |
-|---|---|
-| `cam_app` | Captures frames from the UVC camera hardware |
-| `webrtc_local` | Serves a WebRTC stream on port 8000 for Creality's cloud and touchscreen |
-
-The camera works in:
-- ✅ Creality touchscreen live view
-- ✅ Creality Print app (WiFi printing)
-- ❌ Fluidd
-- ❌ Mainsail
+!!! success "Camera fix — tested and working!"
+    The camera feed shows automatically in the Fluidd dashboard after boot with no manual steps required.
 
 ---
 
-## Why the Camera Doesn't Work in Fluidd / Mainsail
+## How It Works
 
-Fluidd and Mainsail expect a standard MJPEG stream URL (e.g. `http://<ip>:8080/?action=stream`). The K2 Plus does not provide one. Here is what was found during hardware investigation:
+The K2 Plus camera uses a custom WebRTC signaling protocol (base64 encoded JSON over HTTP POST on port 8000). The solution consists of:
 
-**WebRTC on port 8000 is proprietary.** The `webrtc_local` process serves a Creality-specific WebRTC signaling endpoint at `/call/webrtc_local`. This is not compatible with any of the WebRTC camera types in Fluidd or Mainsail (camera-streamer, go2rtc, MediaMTX).
+1. **k2rtc.py** — A Python bridge that translates go2rtc SDP format to the K2 Plus proprietary base64 JSON WebRTC format
+2. **Hidden iframe** — Keeps a permanent background WebRTC connection open so go2rtc maintains correct internal stream routing
+3. **Auto-reload** — JavaScript in Fluidd detects when the stream is ready and automatically reloads the page once to show the camera feed
+4. **go2rtc v1.9.14** — ARM hard-float binary that converts the stream for Fluidd
+5. **camera_watchdog.py** — Monitors the stream and reconnects if it drops
+6. **Nginx proxy** — Routes WebSocket connections with correct stream source parameters
+7. **Startup service** — Auto-starts everything on boot via rc.local
 
-**The V4L2 camera device reports zero capabilities.** When queried directly, `/dev/video0` reports `capabilities: 0x0` — meaning no video capture, no streaming, no read/write. The camera hardware is completely locked behind `cam_app` and cannot be accessed via standard Linux V4L2 APIs.
-
-**Entware is not compatible with the K2 Plus.** The K2 Plus uses **armhf** (hard-float ARM ABI) compiled with Linaro GCC 5.3. Entware only provides **armv7sf** (soft-float) binaries. Installing Entware packages results in "not found" errors even when the binary exists on disk. This means `mjpg-streamer` from Entware cannot be installed.
-
-**`cam_app` uses a proprietary socket interface.** The camera output is delivered via `/tmp/delivery_socket100` using an undocumented binary protocol. No community documentation exists for this protocol.
-
----
-
-## Current Status
-
-| Approach | Result |
-|---|---|
-| WebRTC (camera-streamer) in Fluidd/Mainsail | ❌ Incompatible protocol |
-| WebRTC (go2rtc) in Fluidd/Mainsail | ❌ Incompatible protocol |
-| MJPEG-Streamer via Entware | ❌ Entware incompatible (wrong ARM ABI) |
-| Direct V4L2 access from Python3 | ❌ Camera reports zero capabilities |
-| Intercepting cam_app socket output | ❌ Undocumented proprietary protocol |
-
-**The camera cannot currently be used in Fluidd or Mainsail on the K2 Plus.**
+Full credit for the original WebRTC discovery goes to [DnG-Crafts](https://github.com/DnG-Crafts/K2-Camera).
 
 ---
 
-## Workarounds
+## Installation
 
-### View camera via Creality web interface
+Install from the helper script:
 
-The camera is accessible through the Creality web interface at port 80:
-
-```
-http://<printer-ip>/
+```sh
+sh /mnt/UDISK/helper-script/helper.sh
 ```
 
-This works in any browser but requires using the Creality interface rather than Fluidd or Mainsail.
-
-### Use Fluidd/Mainsail for everything except camera
-
-Fluidd and Mainsail work perfectly for all printer control, temperature monitoring, file management, macros, and print management. Only the camera feed is unavailable.
+Select **11) Camera Support for Fluidd**.
 
 ---
 
-## Future Solutions
+## After Installation
 
-If you find a working solution for the K2 Plus camera in Fluidd/Mainsail, please open a discussion at:
+The camera appears automatically in Fluidd after boot:
 
-[github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus/discussions](https://github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus/discussions)
+1. Printer boots up
+2. After ~60-90 seconds go2rtc connects to the K2 camera
+3. Fluidd automatically reloads once and shows the camera feed
 
-Possible future approaches that have not been fully explored:
+No manual steps required.
 
-- Reverse engineering the `cam_app` socket protocol
-- Compiling a custom `mjpg-streamer` for armhf from source
-- Using the Creality firmware's own streaming infrastructure
+!!! note "First open after boot"
+    When you first open Fluidd after boot, the page will auto-reload once within 60-90 seconds. This is normal — it happens when the background stream becomes ready.
+
+---
+
+## Direct Camera Access
+
+The camera can also be accessed directly:
+http://YOUR_PRINTER_IP:4408/camera.html
+
+Or via go2rtc web interface:http://YOUR_PRINTER_IP:1984/stream.html?src=k2plus&mode=webrtc
+
+---
+
+## Known Limitations
+
+- **Startup delay** — Camera takes 60-90 seconds after boot to appear
+- **Firmware updates** — A firmware update may remove the nginx and rc.local changes. Re-run the camera install after any firmware update.
+- **Single stream** — Only one WebRTC connection to the K2 camera at a time
+
+---
+
+## Credits
+
+- [DnG-Crafts](https://github.com/DnG-Crafts/K2-Camera) — Original K2 camera WebRTC discovery
+- [AlexxIT/go2rtc](https://github.com/AlexxIT/go2rtc) — Stream conversion software
