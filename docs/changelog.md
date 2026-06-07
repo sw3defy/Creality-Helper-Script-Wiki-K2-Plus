@@ -1,5 +1,18 @@
 # Changelog
 
+## Mainsail Camera Support — June 7, 2026
+
+Camera support extended to Mainsail in addition to Fluidd.
+
+**Changes:**
+
+- go2rtc proxy added to port 4409 (Mainsail) nginx block with `$args` passthrough for Mainsail WebSocket compatibility
+- Mainsail index.html gets JavaScript injection to force `enabled: true` on webcams (Mainsail v2.17.0 filters cameras by enabled field which Moonraker does not store)
+- Single camera entry in Moonraker named "K2 Camera" using port 4409, works for both Fluidd and Mainsail
+- go2rtc config updated with `origin: '*'` to allow cross-origin WebSocket connections between ports 4408 and 4409
+
+---
+
 ## Camera Support for Fluidd — Full Story — June 5-7, 2026
 
 After extensive research, reverse engineering, and testing, a fully working camera solution was developed for the K2 Plus that integrates the camera feed directly into the Fluidd dashboard.

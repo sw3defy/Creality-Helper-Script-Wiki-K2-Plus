@@ -1,6 +1,6 @@
-# Camera Support for Fluidd — K2 Plus
+# Camera Support for Fluidd and Mainsail — K2 Plus
 
-The K2 Plus has a built-in camera that uses a proprietary WebRTC protocol on port 8000. Through reverse engineering, a working bridge has been developed that makes the camera available in the Fluidd dashboard.
+The K2 Plus has a built-in camera that uses a proprietary WebRTC protocol on port 8000. Through reverse engineering, a working bridge has been developed that makes the camera available in both the Fluidd and Mainsail dashboards.
 
 !!! success "Camera fix — tested and working!"
     The camera feed shows automatically in the Fluidd dashboard after boot with no manual steps required.
@@ -31,13 +31,13 @@ Install from the helper script:
 sh /mnt/UDISK/helper-script/helper.sh
 ```
 
-Select **11) Camera Support for Fluidd**.
+Select **11) Camera Support for Fluidd and Mainsail**.
 
 ---
 
 ## After Installation
 
-The camera appears automatically in Fluidd after boot:
+The camera appears automatically in both Fluidd and Mainsail after boot:
 
 1. Printer boots up
 2. After ~60-90 seconds go2rtc connects to the K2 camera
