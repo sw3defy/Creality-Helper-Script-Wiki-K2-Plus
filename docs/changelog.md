@@ -40,7 +40,7 @@ Getting the stream into Fluidd required solving several additional problems:
 - **Dual receiver bug** — The root cause of intermittent failures: go2rtc creates two internal receivers when connecting to the K2 camera and routes video to the wrong one. A hidden iframe in Fluidd keeps a permanent background WebRTC connection open, forcing correct routing.
 - **Auto-reload** — sessionStorage-based JavaScript detects when the stream is ready (500KB received) and automatically reloads Fluidd once to show the camera feed.
 
-### Final Solution
+### Final Solution — June 7, 2026
 
 The complete working solution consists of:
 
@@ -106,9 +106,9 @@ HelixScreen has been added to the helper script as option 11 and documented in t
 
 ---
 
-## ## Sw3Defy K2 Plus Helper Script Wiki
+## Sw3Defy K2 Plus Helper Script Wiki
 
-### v1.0.0 — June 2026
+### v1.0.0 — June 1, 2026
 
 Initial release of the Creality K2 Plus Helper Script Wiki and companion helper script.
 
