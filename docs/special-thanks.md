@@ -1,72 +1,100 @@
 # Special Thanks
 
-## Guilouz
-
-This wiki and helper script are forked from the outstanding work of **Guilouz**, who created the original Creality Helper Script and wiki for the K1 Series and Ender-3 V3 Series.
-
-Without his foundational work — the wiki structure, the feature concepts, the macro patterns, and the deep reverse engineering of Creality's firmware — this K2 Plus adaptation would not exist.
-
-- Original wiki: [guilouz.github.io/Creality-Helper-Script-Wiki](https://guilouz.github.io/Creality-Helper-Script-Wiki/)
-- Original helper script: [github.com/Guilouz/Creality-Helper-Script](https://github.com/Guilouz/Creality-Helper-Script)
-- Support Guilouz: [ko-fi.com/guilouz](https://ko-fi.com/guilouz)
-
-**If you find this wiki useful, please also consider supporting Guilouz — his work made this possible.**
+This project would not exist without the work of many talented developers and the open source community.
 
 ---
 
-## jamincollins
+## Guilouz — Original Creality Helper Script Wiki
 
-The archived [jamincollins/k2-improvements](https://github.com/jamincollins/k2-improvements) repository provided early community research on K2 Plus filesystem paths and service names that helped validate the K2 Plus architecture analysis in this wiki.
+[Guilouz](https://github.com/Guilouz) created the original [Creality Helper Script Wiki](https://github.com/Guilouz/Creality-Helper-Script-Wiki) for K1 Series printers. This project is a fork and complete rewrite for the K2 Plus architecture.
 
----
-
-## Creality
-
-Stock K2 Plus firmware, Klipper configuration templates, and the CFS `box.cfg` implementation are copyright Creality Technology Co., Ltd.
-
-- Creality open source repository: [github.com/CrealityOfficial](https://github.com/CrealityOfficial)
+- [Guilouz GitHub](https://github.com/Guilouz)
+- [Original Wiki](https://guilouz.github.io/Creality-Helper-Script-Wiki/)
 
 ---
 
-## Klipper, Moonraker, Fluidd, Mainsail
+## DnG-Crafts — K2 Camera Fix
 
-This wiki documents features built on top of the open source Klipper ecosystem:
+[DnG-Crafts](https://github.com/DnG-Crafts/K2-Camera) discovered and documented the K2 Plus camera WebRTC signaling protocol and created the original HTML-based camera workaround for Fluidd. Their work made it possible to reverse-engineer the custom base64 JSON WebRTC format used by the K2 Plus camera, leading to the full go2rtc integration.
 
-- **Klipper**: [klipper3d.org](https://www.klipper3d.org/) — Kevin O'Connor and contributors
-- **Moonraker**: [github.com/Arksine/moonraker](https://github.com/Arksine/moonraker) — Eric Callahan
-- **Fluidd**: [docs.fluidd.xyz](https://docs.fluidd.xyz/) — fluidd-core team
-- **Mainsail**: [docs.mainsail.xyz](https://docs.mainsail.xyz/) — mainsail-crew
-- **KAMP**: [github.com/kyleisah/Klipper-Adaptive-Meshing-Purging](https://github.com/kyleisah/Klipper-Adaptive-Meshing-Purging) — kyleisah
+- [K2-Camera GitHub](https://github.com/DnG-Crafts/K2-Camera)
 
 ---
 
-## Sw3Defy
+## AlexxIT — go2rtc
 
-This K2 Plus adaptation is maintained by **Sw3Defy**.
+[go2rtc](https://github.com/AlexxIT/go2rtc) by AlexxIT is the stream conversion software that bridges the K2 Plus proprietary WebRTC camera to Fluidd and Mainsail. The ARM hard-float binary runs perfectly on the K2 Plus hardware.
 
-- Wiki repository: [github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus](https://github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus)
-- Helper script repository: [github.com/sw3defy/Creality-Helper-Script-K2-Plus](https://github.com/sw3defy/Creality-Helper-Script-K2-Plus)
-
-## Sw3Defy
-
-This wiki and helper script were created and maintained by **Sw3Defy**.
-
-If you find it useful, consider leaving a small tip:
-
-<a href="https://buymeacoffee.com/sw3defy" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50"></a>
-&nbsp;&nbsp;
-<a href="https://ko-fi.com/sw3defy" target="_blank"><img src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" alt="Support me on Ko-fi" height="50"></a>
+- [go2rtc GitHub](https://github.com/AlexxIT/go2rtc)
 
 ---
 
-## HelixScreen — prestonbrown & Contributors
+## prestonbrown — HelixScreen
 
-[HelixScreen](https://helixscreen.org) is a modern, lightweight touchscreen interface for Klipper printers, created by [prestonbrown](https://github.com/prestonbrown) and contributors.
-
-Their explicit support for the K2 series — including prebuilt armhf binaries, Python3 installer, and CFS protocol documentation — made HelixScreen integration on the K2 Plus possible.
+[prestonbrown](https://github.com/prestonbrown) created [HelixScreen](https://helixscreen.org), a modern Klipper touchscreen UI with explicit K2 series support including prebuilt armhf binaries and CFS protocol documentation.
 
 - [HelixScreen Website](https://helixscreen.org)
 - [HelixScreen GitHub](https://github.com/prestonbrown/helixscreen)
 - [K2 Series Documentation](https://helixscreen.org/dev/printers/creality-k2/)
 
-If you find HelixScreen useful, consider supporting prestonbrown directly.
+---
+
+## Klipper
+
+[Klipper](https://www.klipper3d.org) is the open source 3D printer firmware that powers the K2 Plus. Without Klipper, none of this would be possible.
+
+- [Klipper Website](https://www.klipper3d.org)
+- [Klipper GitHub](https://github.com/Klipper3d/klipper)
+
+---
+
+## Moonraker
+
+[Moonraker](https://moonraker.readthedocs.io) is the API server that bridges Klipper with web interfaces like Fluidd and Mainsail.
+
+- [Moonraker Documentation](https://moonraker.readthedocs.io)
+- [Moonraker GitHub](https://github.com/Arksine/moonraker)
+
+---
+
+## Fluidd
+
+[Fluidd](https://docs.fluidd.xyz) is the web interface pre-installed on the K2 Plus on port 4408.
+
+- [Fluidd Website](https://docs.fluidd.xyz)
+- [Fluidd GitHub](https://github.com/fluidd-core/fluidd)
+
+---
+
+## Mainsail
+
+[Mainsail](https://docs.mainsail.xyz) is an alternative web interface for Klipper, available on port 4409 after installation.
+
+- [Mainsail Website](https://docs.mainsail.xyz)
+- [Mainsail GitHub](https://github.com/mainsail-crew/mainsail)
+
+---
+
+## KAMP — Klipper Adaptive Meshing & Purging
+
+[KAMP](https://github.com/kyleisah/Klipper-Adaptive-Meshing-Purging) by kyleisah enables adaptive bed meshing and purging for Klipper printers.
+
+- [KAMP GitHub](https://github.com/kyleisah/Klipper-Adaptive-Meshing-Purging)
+
+---
+
+## Material for MkDocs
+
+This wiki is built with [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) by squidfunk.
+
+- [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/)
+
+---
+
+## Support This Project
+
+If you find this wiki and helper script useful, consider supporting the work!
+
+<a href="https://buymeacoffee.com/sw3defy" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50"></a>
+&nbsp;&nbsp;
+<a href="https://ko-fi.com/sw3defy" target="_blank"><img src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" alt="Support me on Ko-fi" height="50"></a>
