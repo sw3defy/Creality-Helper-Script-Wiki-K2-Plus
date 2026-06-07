@@ -189,8 +189,7 @@ If the camera is not visible in Fluidd after opening the interface:
 
 - Go to **Settings → Cameras**
 - Enable the existing camera entry, or delete and recreate with:
-    - **URL Stream:** `http://<printer-ip>:4408/webcam/?action=stream`
-    - **URL Snapshot:** `http://<printer-ip>:4408/webcam/?action=snapshot`
+    Camera is configured automatically when Camera Support is installed (option 11).
 
 ---
 
@@ -886,7 +885,7 @@ TIMELAPSE_RENDER
 
 ## Camera
 
-The K2 Plus streams video via WebRTC (service `S97webrtc`). Moonraker Timelapse captures frames from the MJPEG stream on `127.0.0.1:8080`. Ensure the camera is working in Fluidd before enabling timelapse.
+Moonraker Timelapse uses the snapshot URL from the camera configuration. Ensure [Camera Support](../../configurations/configure-camera.md) is installed before enabling timelapse.
 
 
 ---
