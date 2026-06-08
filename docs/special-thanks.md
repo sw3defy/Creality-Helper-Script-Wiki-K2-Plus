@@ -39,6 +39,14 @@ This project would not exist without the work of many talented developers and th
 
 ---
 
+## vsevolod-volkov — Entware on K2 Plus
+
+[vsevolod-volkov](https://github.com/vsevolod-volkov) discovered the solution to install Entware on the K2 Plus by creating a Python-based dummy wget script to bootstrap the Entware installer, bypassing the ARM ABI incompatibility.
+
+- [K2Plus-entware GitHub](https://github.com/vsevolod-volkov/K2Plus-entware)
+
+---
+
 ## Klipper
 
 [Klipper](https://www.klipper3d.org) is the open source 3D printer firmware that powers the K2 Plus. Without Klipper, none of this would be possible.
