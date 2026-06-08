@@ -100,28 +100,32 @@ When you run the script you will see:
     7) Improved Shapers Calibrations
 
   --- Step 4: Web interface & camera ---
-    8) Mainsail (port 4409)
-    9) Moonraker Timelapse
+    8) Fluidd (install/update/repair - port 4408)
+    9) Mainsail (install/update/repair - port 4409)
+   10) Moonraker Timelapse
+   11) Camera Support for Fluidd and Mainsail
+   12) HelixScreen (touchscreen UI)
 
   --- Step 5: Remote access & notifications ---
-   10) OctoEverywhere
-   11) Mobileraker Companion
-   12) Git Backup
+   13) OctoEverywhere
+   14) Mobileraker Companion
+   15) Entware Package Manager
+   16) Git Backup
 
   [Remove] Menu
-   20) Remove a feature
+   17) Remove a feature
 
   [Backup & Restore] Menu
-   30) Backup Klipper configuration
-   31) Restore Klipper configuration
+   18) Backup Klipper configuration
+   19) Restore Klipper configuration
 
   [Tools] Menu
-   40) Restart Klipper
-   41) Restart Moonraker
-   42) Restart Nginx
-   43) View Klipper log
-   44) View Moonraker log
-   45) Show installed features
+   20) Restart Klipper
+   21) Restart Moonraker
+   22) Restart Nginx
+   23) View Klipper log
+   24) View Moonraker log
+   25) Show installed features
 
     0) Exit
 
