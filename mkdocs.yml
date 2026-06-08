@@ -108,6 +108,8 @@ nav:
           - HelixScreen: helper-script/helixscreen-k2plus.md
           - OctoEverywhere: helper-script/octoeverywhere.md
           - Mobileraker Companion: helper-script/mobileraker-companion-k2plus.md
+          - Entware Package Manager: helper-script/entware-k2plus.md
+          - Git Backup: helper-script/git-backup.md
           - SimplyPrint: helper-script/simplyprint-k2plus.md
           - CFS — Color Filament System: helper-script/cfs-k2plus.md
       - Backup & Restore Menu:
