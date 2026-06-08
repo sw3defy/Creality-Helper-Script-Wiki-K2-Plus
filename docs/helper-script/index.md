@@ -144,7 +144,8 @@ The menu is already arranged in the correct dependency order — install top to 
 4. **Save Z-Offset Macros** (option 4) and **M600** (option 5) — optional, in any order.
 5. **KAMP** (option 6) — requires Moonraker Extensions (object processing). Install after option 1.
 6. **Improved Shapers** (option 7) — independent, any time after Klipper is running.
-7. **Mainsail, Timelapse, remote access** (options 8–12) — install in any order, any time.
+7. **Fluidd, Mainsail, Timelapse, Camera, HelixScreen** (options 8–12) — install in any order, any time.
+8. **Remote access & notifications** (options 13–16) — install in any order, any time.
 
 ---
 
@@ -190,7 +191,7 @@ To completely remove the helper script and all installed features:
 ```bash
 # Remove all installed .cfg files and includes
 sh /mnt/UDISK/helper-script/helper.sh
-# Select option 20 (Remove menu) and remove each feature
+# Select option 17 (Remove menu) and remove each feature
 
 # Restore Moonraker startup to stock
 cp /etc/rc.d/S56moonraker.orig /etc/rc.d/S56moonraker 2>/dev/null || \
