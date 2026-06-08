@@ -985,7 +985,7 @@ OctoEverywhere provides free remote access to your printer from anywhere in the 
 
 ## Installation
 
-From the Helper Script menu, select **option 13 — OctoEverywhere**.
+From the Helper Script menu, select **option 14 — OctoEverywhere**.
 
 ---
 
