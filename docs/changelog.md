@@ -1,5 +1,20 @@
 # Changelog
 
+## Entware Package Manager — June 8, 2026
+
+Entware package manager successfully installed on the K2 Plus using a Python-based wget shim to bootstrap the installer. This bypasses the ARM ABI incompatibility (K2 Plus uses armhf hard-float, Entware's armv7sf soft-float binaries work via the shim approach).
+
+Added as **option 15** in the helper script.
+
+**What Entware provides:**
+- Hundreds of Linux packages via opkg
+- git, nano, htop, curl, openssh-sftp-server and much more
+- Persistent across reboots via rc.local
+
+Full credit to [vsevolod-volkov](https://github.com/vsevolod-volkov/K2Plus-entware) for the wget shim solution.
+
+---
+
 ## Mainsail Camera Support — June 7, 2026
 
 Camera support extended to Mainsail in addition to Fluidd.
