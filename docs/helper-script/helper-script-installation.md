@@ -187,7 +187,7 @@ To completely remove the helper script and all installed features:
 ```bash
 # Remove all installed .cfg files and includes
 sh /mnt/UDISK/helper-script/helper.sh
-# Select option 20 (Remove menu) and remove each feature
+# Select option 17 (Remove menu) and remove each feature
 
 # Restore Moonraker startup to stock
 cp /etc/rc.d/S56moonraker.orig /etc/rc.d/S56moonraker 2>/dev/null || \

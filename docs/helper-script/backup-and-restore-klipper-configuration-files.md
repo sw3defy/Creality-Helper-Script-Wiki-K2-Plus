@@ -6,7 +6,7 @@ Regular backups protect your Klipper configuration from accidental deletion, fac
 
 ## Backup from Helper Script
 
-From the helper script menu, select **option 30 — Backup Klipper configuration**.
+From the helper script menu, select **option 18 — Backup Klipper configuration**.
 
 The script creates a compressed archive of your entire `/mnt/UDISK/printer_data/config/` directory and saves it to `/mnt/UDISK/helper-script/backups/`. The last 5 backups are kept automatically.
 
@@ -14,7 +14,7 @@ The script creates a compressed archive of your entire `/mnt/UDISK/printer_data/
 
 ## Restore from Helper Script
 
-From the helper script menu, select **option 31 — Restore Klipper configuration**.
+From the helper script menu, select **option 19 — Restore Klipper configuration**.
 
 The script shows a numbered list of available backups with dates and sizes. Select the one you want to restore, confirm, and Klipper restarts automatically.
 
