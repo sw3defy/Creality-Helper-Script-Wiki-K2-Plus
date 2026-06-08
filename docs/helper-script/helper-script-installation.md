@@ -140,7 +140,8 @@ The menu is already arranged in the correct dependency order — install top to 
 4. **Save Z-Offset Macros** (option 4) and **M600** (option 5) — optional, in any order.
 5. **KAMP** (option 6) — requires Moonraker Extensions (object processing). Install after option 1.
 6. **Improved Shapers** (option 7) — independent, any time after Klipper is running.
-7. **Mainsail, Timelapse, remote access** (options 8–12) — install in any order, any time.
+7. **Fluidd, Mainsail, Timelapse, Camera, HelixScreen** (options 8–12) — install in any order, any time.
+8. **Remote access & notifications** (options 13–16) — install in any order, any time.
 
 ---
 
