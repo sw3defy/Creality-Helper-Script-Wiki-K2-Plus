@@ -159,7 +159,6 @@ Initial release of the Creality K2 Plus Helper Script Wiki and companion helper 
 - Features included: Moonraker Extensions, Fluidd (repair/update), Mainsail, KAMP, Fans Control Macros, Useful Macros, Improved Shapers Calibrations, Save Z-Offset Macros, M600 Support, Moonraker Timelapse, Camera Support for Fluidd and Mainsail (WebRTC via go2rtc), HelixScreen, Entware Package Manager, Git Backup, OctoEverywhere, Mobileraker Companion
 - CFS-aware macros for K2 Plus Combo
 - Chamber heater integration in START_PRINT and WARMUP
-- Full K1 Max macro set ported: BELTS_SHAPER_CALIBRATION, EXCITATE_AXIS_AT_FREQ, TEST_RESONANCES_GRAPHS, AUTOTUNE_SHAPERS
 
 ---
 
