@@ -97,6 +97,9 @@ Useful if the printer is not connected to the network or SSH is not available.
 
 1. Format a USB drive as **FAT32**.
 2. Create an empty file named `wipe_all` (no extension) at the root of the drive.
+
+    !!! tip "Creating the file on Windows"
+        Open Notepad, do not type anything, go to **File → Save As**, navigate to the USB drive, set **Save as type** to **All Files (\*.\*)**, and name the file `wipe_all` with no extension.
 3. Plug the USB drive into the **front** USB port while the printer is on.
 4. The factory reset executes at the next startup.
 
