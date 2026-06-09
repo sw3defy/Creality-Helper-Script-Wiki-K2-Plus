@@ -96,7 +96,7 @@ This preserves user preferences and network settings while resetting printer con
 Useful if the printer is not connected to the network or SSH is not available.
 
 1. Format a USB drive as **FAT32**.
-2. Create an empty file named `factory_reset` (no extension) at the root of the drive.
+2. Create an empty file named `wipe_all` (no extension) at the root of the drive.
 3. Plug the USB drive into the **front** USB port while the printer is on.
 4. The factory reset executes at the next startup.
 
