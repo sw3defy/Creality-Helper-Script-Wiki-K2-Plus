@@ -130,12 +130,6 @@ When you run the script you will see:
 
 ---
 
-## Important Notes
-
-    After installing each feature, the script will ask **Restart Klipper? [y/N]**. Always answer **y**. Klipper must restart to load the newly installed configuration before installing the next feature.
-
----
-
 ## Recommended Installation Order
 
 The menu is already arranged in the correct dependency order — install top to bottom:
