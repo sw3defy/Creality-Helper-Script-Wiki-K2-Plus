@@ -130,6 +130,35 @@ See the [OrcaSlicer](../slicers/orcaslicer.md) page for full slicer configuratio
 
 ## Troubleshooting
 
+
+**CFS load/unload fails with key865, key789, key22 errors**
+
+This is a known bug in the stock Creality firmware where all CFS-related macros
+in `box.cfg` and `gcode_macro.cfg` are prefixed with an underscore (e.g.
+`_BOX_QUIT_MATERIAL`, `_WAIT_TEMP_START`). In Klipper, a leading underscore
+makes a macro private/hidden — it cannot be called by the CFS system, the UI,
+or other macros. This causes the entire load/unload sequence to silently fail.
+
+The helper script automatically patches this on startup. If you are not using
+the helper script, apply the fix manually:
+
+```bash
+cp /mnt/UDISK/printer_data/config/box.cfg /mnt/UDISK/printer_data/config/box.cfg.bak
+sed -i 's/\[gcode_macro _BOX_/[gcode_macro BOX_/g' /mnt/UDISK/printer_data/config/box.cfg
+```
+
+Then do a `FIRMWARE_RESTART` from Mainsail or Fluidd.
+
+Errors resolved by this fix:
+
+- `key865` — retrude error, failed to exit connections
+- `key789` — position tracking error on X/Y axes (位置跟踪误差过大)
+- `key22` — no trigger on Y after full movement
+- `key274` — unknown g-code state: helix_cfs_load
+- `Unknown command: WAIT_TEMP_START`
+- `Unknown command: END_PRINT_POINT`
+- `Unknown command: CANCEL_CHAMBER_FAN_SWITCH`
+
 **CFS not responding / filament not loading**
 - Verify the RS-485 cable is seated on both the CFS unit and the printer mainboard.
 - Check that `/dev/ttyS5` is present: `ls /dev/ttyS*`
