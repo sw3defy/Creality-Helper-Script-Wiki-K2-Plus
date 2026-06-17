@@ -83,6 +83,7 @@ variable_hz_per_sec: 1.0
 variable_accel_per_hz: 200.0
 gcode:
   {% if printer.toolhead.homed_axes != "xyz" %}
+    BED_MESH_CLEAR
     G28
   {% endif %}
 
@@ -121,7 +122,9 @@ gcode:
   {% set accel = params.ACCEL|default(5000)|float %}
 
   {% if printer.toolhead.homed_axes != "xyz" %}
+    BED_MESH_CLEAR
     G28
+    M400
   {% endif %}
 
   {action_respond_info("Exciting %s axis at %.1fHz for %ds" % (axis, freq, time))}
