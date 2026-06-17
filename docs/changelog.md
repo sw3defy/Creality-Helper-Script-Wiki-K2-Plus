@@ -1,5 +1,40 @@
 # Changelog
 
+## Mainsail Macro Fixes — June 17, 2026
+
+Systematic testing of all Mainsail macros revealed and fixed several bugs in the helper script and installed config files.
+
+### Bug Fixes
+
+**`fans.sh` — SET_FAN0 / SET_FAN2 PWM scaling bug:**
+`SET_FAN0` and `SET_FAN2` were converting the S parameter (0-255) to a 0.0-1.0 PWM value before passing it to `SET_PIN`. However, `fan0` and `fan2` in `printer.cfg` have `scale: 255`, which means `SET_PIN` already expects 0-255 values. The double conversion was causing fans to run at tiny fractions of the requested speed. Fixed by removing the PWM conversion — raw 0-255 values are now passed directly.
+
+**`z_offset.sh` — SET_Z_OFFSET / RESET_Z_OFFSET require homing first:**
+`SET_Z_OFFSET` and `RESET_Z_OFFSET` were calling `SET_GCODE_OFFSET Z=x MOVE=1` without first homing the printer. `MOVE=1` requires a homed toolhead or Klipper errors. Fixed by adding `G28` before the offset is applied in both macros.
+
+**`useful_macros.sh` — post-install patch for stock `gcode_macro.cfg`:**
+The stock Creality `gcode_macro.cfg` contains two bugs that cause Mainsail macros to fail:
+
+- **`PROBE_COUNT=` bug:** `G29` and `BED_MESH_CALIBRATE_START_PRINT` build the `PROBE_COUNT` parameter as `'PROBE_COUNT' + params.PROBE_COUNT`, missing the `=` sign, producing invalid gcode like `PROBE_COUNT9,9` instead of `PROBE_COUNT=9,9`.
+- **Internal macro name references:** `END_PRINT` and `START_PRINT` call internal helper macros (`END_PRINT_Z_SAFE`, `Qmode_exit`, `PRINT_PREPARE_CLEAR`, `END_PRINT_POINT`, `WAIT_TEMP_START`) that have been renamed with a `_` prefix to hide them from Mainsail. The call sites were not updated.
+
+`useful_macros.sh` now runs a python3 patch on `gcode_macro.cfg` after install to fix both issues automatically.
+
+**`shapers.sh` — BELTS_SHAPER_CALIBRATION / EXCITATE_AXIS_AT_FREQ homing crash:**
+Both macros call `G28` when the printer is not homed. If a bed mesh is loaded, `G28` triggers `BED_MESH_PROFILE LOAD=default` at the end of homing which then causes a crash because the mesh probe points conflict with the current toolhead position. Fixed by adding `BED_MESH_CLEAR` before `G28` in both macros. `EXCITATE_AXIS_AT_FREQ` also adds `M400` after `G28` to ensure homing completes before the resonance test begins.
+
+### Macro Visibility (Mainsail)
+
+All internal and touchscreen-only macros in `gcode_macro.cfg`, `box.cfg`, `timelapse.cfg`, `sensorless.cfg`, and `printer_params.cfg` were prefixed with `_` to hide them from the Mainsail macro list. This leaves only user-facing macros visible. The `useful_macros.sh` post-install patch handles the renames in `gcode_macro.cfg` automatically on fresh installs.
+
+### Macros Tested and Confirmed Working
+
+The following macros were tested end-to-end on a K2 Plus with firmware v1.1.260206:
+
+`ACCURATE_G28`, `BED_LEVELING`, `BED_MANUAL_CAL`, `BELT_TENSION`, `BELTS_SHAPER_CALIBRATION`, `CALIBRATE_CUT_POS`, `CHAMBER_COOL`, `CHAMBER_HEAT`, `CHAMBER_STATUS`, `EXCITATE_AXIS_AT_FREQ`, `FANS_OFF`, `GET_TIMELAPSE_SETUP`, `INPUT_SHAPER_CALIBRATION`, `M141`, `M600`, `MAINSAIL_HOME`, `MAINTENANCE_ITEM`, `PID_CHAMBER`, `PID_HOTEND`, `RESET_Z_OFFSET`, `RESTORE_FANS`, `RESTORE_SHAPERS`, `SAVE_FANS`, `SAVE_Z_OFFSET`, `SET_FAN0`, `SET_FAN2`, `SET_Z_OFFSET`, `WARMUP`, `Z_AXIS_CALIBRATION`, `Z_TILT_CALIBRATE`
+
+---
+
 ## Entware Package Manager — June 8, 2026
 
 Entware package manager successfully installed on the K2 Plus using a Python-based wget shim to bootstrap the installer. This bypasses the ARM ABI incompatibility (K2 Plus uses armhf hard-float, Entware's armv7sf soft-float binaries work via the shim approach).
