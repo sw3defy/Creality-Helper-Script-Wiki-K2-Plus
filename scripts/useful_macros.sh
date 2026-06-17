@@ -452,26 +452,6 @@ except Exception as e:
     print('gcode_macro.cfg patch failed:', e)
 PATCHPY
 
-    # Patch stock gcode_macro.cfg: fix PROBE_COUNT= bug and internal macro references
-    log_info "Patching gcode_macro.cfg..."
-    python3 << 'PATCHPY'
-import re
-cfg = '/mnt/UDISK/printer_data/config/gcode_macro.cfg'
-try:
-    content = open(cfg).read()
-    content = content.replace("'PROBE_COUNT' + params.PROBE_COUNT",
-                               "'PROBE_COUNT=' + params.PROBE_COUNT")
-    content = re.sub(r'(?m)^  END_PRINT_Z_SAFE$', '  _END_PRINT_Z_SAFE', content)
-    content = re.sub(r'(?m)^  Qmode_exit$', '  _QMODE_EXIT', content)
-    content = re.sub(r'(?m)^  PRINT_PREPARE_CLEAR$', '  _PRINT_PREPARE_CLEAR', content)
-    content = re.sub(r'(?m)^  END_PRINT_POINT$', '  _END_PRINT_POINT', content)
-    content = re.sub(r'(?m)^  WAIT_TEMP_START$', '  _WAIT_TEMP_START', content)
-    content = re.sub(r'(?m)^    PRINT_PREPARE_CLEAR$', '    _PRINT_PREPARE_CLEAR', content)
-    open(cfg, 'w').write(content)
-    print('gcode_macro.cfg patched OK')
-except Exception as e:
-    print('gcode_macro.cfg patch failed:', e)
-PATCHPY
     mark_installed "useful_macros"
     echo ""
     log_success "Useful Macros installed!"
