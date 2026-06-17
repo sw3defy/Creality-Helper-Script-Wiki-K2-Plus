@@ -1,5 +1,40 @@
 # Changelog
 
+## CFS Load/Unload Fix — June 17, 2026
+
+### Bug Fixes
+
+**`box.cfg` and `gcode_macro.cfg` — Macro underscore prefix bug:**
+The stock Creality firmware ships `box.cfg` and `gcode_macro.cfg` with all
+CFS-related macros prefixed with an underscore (e.g. `_BOX_QUIT_MATERIAL`,
+`_WAIT_TEMP_START`, `_END_PRINT_POINT`). In Klipper, a leading underscore
+makes a macro private/hidden — it cannot be called by the CFS system, the UI,
+or other macros. This caused the entire CFS load/unload sequence to silently
+fail with a cascade of errors.
+
+The helper script now automatically patches both files on every startup via
+`patch_stock_configs()` in `system.sh`.
+
+Errors resolved by this fix:
+
+- `key865` — retrude error, failed to exit connections
+- `key789` — position tracking error on X/Y axes
+- `key22` — no trigger on Y after full movement
+- `key274` — unknown g-code state: helix_cfs_load
+- `Unknown command: WAIT_TEMP_START`
+- `Unknown command: END_PRINT_POINT`
+- `Unknown command: CANCEL_CHAMBER_FAN_SWITCH`
+
+**`useful_macros.sh` — Conflicting macro override:**
+`useful_macros.sh` was installing its own versions of `START_PRINT`,
+`END_PRINT`, `PAUSE`, `RESUME`, and `CANCEL_PRINT`, overwriting the stock
+Creality versions which have full CFS integration (`BOX_START_PRINT`,
+`BOX_END`, `BOX_END_PRINT` etc.). This broke filament loading and unloading
+during prints. These macros have been removed from `useful_macros.sh` — the
+stock versions are used instead.
+
+---
+
 ## Mainsail Macro Fixes — June 17, 2026
 
 Systematic testing of all Mainsail macros revealed and fixed several bugs in the helper script and installed config files.
