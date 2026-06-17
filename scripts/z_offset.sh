@@ -28,6 +28,7 @@ gcode:
 description: Reset Z offset to 0
 gcode:
   G28
+  G28
   SET_GCODE_OFFSET Z=0 MOVE=1
   {action_respond_info("Z offset reset to 0")}
 EOF
