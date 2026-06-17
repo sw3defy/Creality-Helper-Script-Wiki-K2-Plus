@@ -1,5 +1,21 @@
 # Changelog
 
+## Bed Mesh Edge Artifact Fix — June 17, 2026
+
+### Fixed
+- **Bed mesh edge spike** — Stock Creality firmware sets `mesh_min: 5,5`
+  which causes the adaptive bed mesh algorithm to probe too close to the
+  bed edge, producing false spike readings at the front-left corner. The
+  helper script now automatically patches this to `mesh_min: 20,20` on
+  startup via `patch_stock_configs()` in `system.sh`.
+
+  The Creality adaptive `BED_MESH_CALIBRATE` ignores the `probe_count`
+  parameter — it always decides its own probe density. Moving `mesh_min`
+  to `20,20` avoids the edge entirely and produces a clean smooth mesh
+  showing the real bed warp profile.
+
+---
+
 ## CFS Load/Unload Fix — June 17, 2026
 
 ### Bug Fixes
