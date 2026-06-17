@@ -20,12 +20,14 @@ gcode:
 description: Apply a Z offset value and save. Usage: SET_Z_OFFSET Z=0.05
 gcode:
   {% set z = params.Z|default(0)|float %}
+  G28
   SET_GCODE_OFFSET Z={z} MOVE=1
   {action_respond_info("Z offset set to %.3f — run SAVE_Z_OFFSET to persist" % z)}
 
 [gcode_macro RESET_Z_OFFSET]
 description: Reset Z offset to 0
 gcode:
+  G28
   SET_GCODE_OFFSET Z=0 MOVE=1
   {action_respond_info("Z offset reset to 0")}
 EOF

@@ -42,9 +42,8 @@ gcode:
 description: Set part cooling fan speed. S=0-255
 gcode:
   {% set speed = params.S|default(0)|int %}
-  {% set pwm = (speed / 255.0)|round(4) %}
   SET_PIN PIN=fan0_en VALUE={% if speed > 0 %}1{% else %}0{% endif %}
-  SET_PIN PIN=fan0 VALUE={pwm}
+  SET_PIN PIN=fan0 VALUE={speed}
 
 # ── Aux fan (fan2) ────────────────────────────────────────────────────────────
 
@@ -52,8 +51,7 @@ gcode:
 description: Set aux fan speed. S=0-255
 gcode:
   {% set speed = params.S|default(0)|int %}
-  {% set pwm = (speed / 255.0)|round(4) %}
-  SET_PIN PIN=fan2 VALUE={pwm}
+  SET_PIN PIN=fan2 VALUE={speed}
 
 # ── Turn off all output fans ──────────────────────────────────────────────────
 
