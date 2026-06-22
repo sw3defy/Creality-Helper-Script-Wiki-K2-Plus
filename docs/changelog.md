@@ -1,5 +1,19 @@
 # Changelog
 
+## Metadata Upload Race Condition Fix — June 22, 2026
+
+### Fixed
+- **queue_gcode_uploads race condition** — Stock `moonraker.conf` ships
+  with `queue_gcode_uploads: False`. This causes Mainsail/Fluidd to
+  poll for gcode metadata before background extraction finishes on
+  larger files, producing a flood of "Metadata not available" errors
+  and leaving print history permanently showing "Unknown" as the
+  slicer. The helper script now flips this to `True`, so the UI
+  properly waits for extraction to complete before requesting
+  metadata.
+
+---
+
 ## Moonraker Include Fix — June 22, 2026
 
 ### Fixed
