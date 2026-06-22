@@ -1,5 +1,31 @@
 # Changelog
 
+## Moonraker Include Fix — June 22, 2026
+
+### Fixed
+- **Moonraker silently ignoring UDISK extension config** — The stock
+  Creality moonraker init script only loads
+  `/usr/share/moonraker/moonraker.conf`. The UDISK config at
+  `printer_data/config/moonraker.conf` (where `[timelapse]` and the
+  HelixScreen update_manager settings live) was never actually read by
+  Moonraker. The helper script now adds a proper `[include]` directive
+  to wire this up automatically, and guards against a recursive
+  include loop.
+
+  This was the root cause of prints getting stuck at 99% and showing
+  as "Cancelled" in history instead of "Complete" — `TIMELAPSE_RENDER`
+  would throw an unregistered-remote-method error partway through
+  `END_PRINT`, which aborted the gcode stream before the file finished
+  reading.
+
+- **Missing END_PRINT underscore fixes** — `_PRINT_PREPARE_CLEAR`,
+  `_END_PRINT_Z_SAFE`, `_QMODE_EXIT`, `_END_PRINT_POINT`, and
+  `_WAIT_TEMP_START` were still called with underscores from inside
+  other macros even though their own definitions were already patched.
+  These internal calls are now fixed too.
+
+---
+
 ## Bed Mesh Edge Artifact Fix — June 17, 2026
 
 ### Fixed
