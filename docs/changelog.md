@@ -1,5 +1,18 @@
 # Changelog
 
+## helper.sh First-Run Fix — June 22, 2026
+
+### Fixed
+- **helper.sh failed to run for everyone on first setup** —
+  `SCRIPTS_DIR` was already set to `.../helper-script/scripts`, but
+  the line that sources `system.sh` appended another `/scripts/`
+  segment, producing a path that doesn't exist:
+  `scripts/scripts/system.sh`. This crashed `helper.sh` immediately
+  on launch, before the menu ever appeared, blocking first-time setup
+  entirely. Reported by a user attempting their first install.
+
+---
+
 ## Metadata Upload Race Condition Fix — June 22, 2026
 
 ### Fixed
