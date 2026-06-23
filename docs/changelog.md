@@ -305,3 +305,20 @@ Initial release of the Creality K2 Plus Helper Script Wiki and companion helper 
 
 This wiki is forked from [Guilouz/Creality-Helper-Script-Wiki](https://github.com/Guilouz/Creality-Helper-Script-Wiki).
 For the K1 Series changelog, see the [original changelog](https://guilouz.github.io/Creality-Helper-Script-Wiki/changelog/).
+## CFS Cut Stall and START_PRINT Crash Fix — June 23, 2026
+### Fixed
+- **CFS cut-position X-axis stall (key789)** — `motor_control.cfg` was
+  missing the closed-loop X-stepper PID/protection tuning block
+  (notably `x_protection_param_prt_track_max_err`), making the X axis
+  trip a position-tracking error during the cut-position move
+  (`CR_BOX_CUT`). The cut never completed cleanly, leaving filament
+  debris that built up over repeated load/unload cycles and caused
+  recurring clogs. `patch_stock_configs()` now restores
+  `motor_control.cfg` from stock automatically if it has been
+  modified or truncated.
+- **START_PRINT crash on empty params** — `M140 S` with no value
+  crashed/shut down the printer when `START_PRINT` was called without
+  explicit BED_TEMP/EXTRUDER_TEMP (e.g. from HelixScreen's
+  file-browser print flow). Fixed to use the macro's own safe default
+  variables instead of raw, unguarded params.
+---
