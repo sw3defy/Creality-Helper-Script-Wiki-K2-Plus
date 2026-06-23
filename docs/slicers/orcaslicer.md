@@ -36,6 +36,20 @@ M104 S0
 START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single] CHAMBER_TEMP=[chamber_temperature]
 ```
 
+!!! warning "Keep the start G-code on one line"
+    The block above must stay as a single line per command —
+    `START_PRINT EXTRUDER_TEMP=... BED_TEMP=... CHAMBER_TEMP=...` all on
+    one line. If your start G-code template has line breaks between
+    `START_PRINT` and its parameters (for example, pasted from an older
+    guide or edited by hand), OrcaSlicer will render each parameter as
+    its own separate line in the sliced file. Klipper then sees
+    `BED_TEMP=60` and `EXTRUDER_TEMP=220` as unrecognized standalone
+    commands and logs `Unknown command` (key61) errors for each one.
+    The print will still run with the correct temperatures from
+    `START_PRINT`'s own logic, but re-slice with a single-line start
+    G-code to clear the errors.
+
+
 **Machine end G-code:**
 ```gcode
 END_PRINT
@@ -64,19 +78,6 @@ TIMELAPSE_TAKE_FRAME
 ```gcode
 M600
 ```
-
-!!! warning "Keep the start G-code on one line"
-    The Machine start G-code above must stay as a single line per command —
-    `START_PRINT EXTRUDER_TEMP=... BED_TEMP=... CHAMBER_TEMP=...` all on
-    one line. If your start G-code template has line breaks between
-    `START_PRINT` and its parameters (for example, pasted from an older
-    guide or edited by hand), OrcaSlicer will render each parameter as
-    its own separate line in the sliced file. Klipper then sees
-    `BED_TEMP=60` and `EXTRUDER_TEMP=220` as unrecognized standalone
-    commands and logs `Unknown command` (key61) errors for each one.
-    The print will still run with the correct temperatures from
-    `START_PRINT`'s own logic, but re-slice with a single-line start
-    G-code to clear the errors.
 
 ---
 
