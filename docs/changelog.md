@@ -1,5 +1,31 @@
 # Changelog
 
+## Camera Fix: Mainsail Black Screen / Fluidd Dependency — June 23, 2026
+### Fixed
+- **Camera showed black screen in Mainsail (worked only while Fluidd was
+  also open)** — root caused to a WebRTC payload-type mismatch in the
+  K2 Plus's `webrtc_local` camera service: it sends RTP using a payload
+  type that isn't listed in its own SDP answer. go2rtc was creating two
+  separate internal receivers as a result, and only the empty one was
+  wired to the browser consumer, so the connection always reported
+  "connected" while no video frame ever rendered. This is a known,
+  documented Creality firmware quirk (see
+  [AlexxIT/go2rtc#2024](https://github.com/AlexxIT/go2rtc/issues/2024)
+  for the K1C variant of the same issue).
+- **Fix:** go2rtc has an official built-in handler for this, added in
+  v1.9.10 — connecting directly to `webrtc_local` on port 8000 with the
+  `#format=creality` source modifier instead of going through an
+  intermediate relay. `go2rtc.yaml`'s stream source is now:
+  `webrtc:http://127.0.0.1:8000/call/webrtc_local#format=creality`.
+- This makes the old `k2rtc.py` port-8090 relay bridge (a hand-rolled
+  workaround from before this fix was known) entirely unnecessary, and
+  it has been removed. The Fluidd/Mainsail `index.html` patches'
+  keepalive-iframe and stale-data-reload polling — which were
+  compensating for the broken video by force-reloading the page when
+  no real bytes ever arrived — have also been simplified, since real
+  video data now flows immediately on connect.
+---
+
 ## Timelapse Frame Capture Fix — June 23, 2026
 ### Fixed
 - **Timelapse never produced a video** — Moonraker's `[timelapse]`
