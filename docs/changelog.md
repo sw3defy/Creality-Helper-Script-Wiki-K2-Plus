@@ -1,5 +1,17 @@
 # Changelog
 
+## Timelapse Frame Capture Fix — June 23, 2026
+### Fixed
+- **Timelapse never produced a video** — Moonraker's `[timelapse]`
+  component calls `wget` to grab each frame from the go2rtc snapshot
+  endpoint, but `wget` lives at `/opt/bin/wget` on this firmware
+  (not a busybox applet) and isn't on the PATH Moonraker's
+  `shell_command` subprocess uses. Every `TIMELAPSE_TAKE_FRAME` call
+  failed with `FileNotFoundError`, so no frames were ever captured
+  and rendering was skipped. `patch_stock_configs()` now symlinks
+  `/usr/bin/wget` to `/opt/bin/wget` on install.
+---
+
 ## helper.sh First-Run Fix — June 22, 2026
 
 ### Fixed
