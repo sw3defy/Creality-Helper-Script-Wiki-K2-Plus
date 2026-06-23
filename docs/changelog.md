@@ -24,6 +24,11 @@
   compensating for the broken video by force-reloading the page when
   no real bytes ever arrived — have also been simplified, since real
   video data now flows immediately on connect.
+- The [Configure Camera](../configurations/configure-camera.md) page
+  has been rewritten to match: it no longer describes the k2rtc.py
+  bridge or the iframe/reload workarounds, and the outdated "single
+  stream" limitation note has been removed since Fluidd and Mainsail
+  can now view the camera independently and at the same time.
 ---
 
 ## Timelapse Frame Capture Fix — June 23, 2026
