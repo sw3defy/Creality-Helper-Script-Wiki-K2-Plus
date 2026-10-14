@@ -87,6 +87,10 @@ main_menu() {
     echo "   21) View Moonraker log"
     echo "   22) Show installed features"
     echo ""
+    echo -e "  ${WHITE}[Hardware] Menu${NC}"
+    echo "   23) Install R3Men Graphite Bed"
+    echo "   24) Install DXC2 Extruder"
+    echo ""
     echo "    0) Exit"
     echo ""
     printf "  Enter choice: "
@@ -125,6 +129,8 @@ handle_choice() {
         20) tail -50 "$LOGS_DIR/klippy.log" | less ;;
         21) tail -50 "$LOGS_DIR/moonraker.log" | less ;;
         22) sh "$SCRIPTS_DIR/system.sh" show_installed ;;
+        23) sh "$SCRIPTS_DIR/hardware_r3men_bed.sh" install ;;
+        24) sh "$SCRIPTS_DIR/hardware_dxc2.sh" install ;;
         0)  echo ""; echo "Goodbye!"; echo ""; exit 0 ;;
         *)  echo -e "${RED}Invalid choice.${NC}"; sleep 1 ;;
     esac
@@ -152,6 +158,8 @@ remove_menu() {
     echo "   12) OctoEverywhere"
     echo "   13) Mobileraker Companion"
     echo "   14) Git Backup"
+    echo "   15) R3Men Graphite Bed"
+    echo "   16) DXC2 Extruder"
     echo "    0) Back"
     echo ""
     printf "  Enter choice: "
@@ -171,6 +179,8 @@ remove_menu() {
         12) sh "$SCRIPTS_DIR/octoeverywhere.sh" remove ;;
         13) sh "$SCRIPTS_DIR/mobileraker.sh" remove ;;
         14) sh "$SCRIPTS_DIR/git_backup.sh" remove ;;
+        13) sh "$SCRIPTS_DIR/hardware_r3men_bed.sh" remove ;;
+        14) sh "$SCRIPTS_DIR/hardware_dxc2.sh" remove ;;
         0)  return ;;
         *)  echo -e "${RED}Invalid choice.${NC}" ;;
     esac
