@@ -23,26 +23,12 @@ HelixScreen is a modern, lightweight touchscreen interface for Klipper 3D printe
 
 ---
 
-## Installation
+## Installation — currently paused
 
-Install from the helper script:
+!!! danger "Do not run the historical remote installer"
+    Fresh HelixScreen installation is blocked in the unmerged Helper Script maintenance branch until the upstream K2 package, backups, and recovery steps are verified. Do not execute an unverified remote shell script on the printer.
 
-
-Select **12) HelixScreen (touchscreen UI)**.
-
-Or install manually via SSH:
-
-```bash
-python3 -c "import urllib.request as u; open('/tmp/install.sh','wb').write(u.urlopen(u.Request('http://dl.helixscreen.org/install.sh', headers={'User-Agent':'helixscreen-installer/1.0'}), timeout=30).read())" && sh /tmp/install.sh
-```
-
-Reboot after installation:
-
-```bash
-reboot
-```
-
----
+**Required future flow:** confirm the installation and mandatory immediate reboot *before* proceeding; install; reboot immediately on success; then allow additional time for first startup. HelixScreen does not have to be installed last in the feature sequence.
 
 ## Known Limitations
 
@@ -50,29 +36,13 @@ reboot
 
 ---
 
-## Updating\n\n!!! warning "Review before updating"\n    A K2 Plus was observed running HelixScreen v0.99.74 in November 2026. Newer versions exist, but an upstream version number alone does not establish safe compatibility. The Helper Script's existing update path has not been certified for newer releases. Do not run it blindly.\n
+## Updating and removal
 
-To update HelixScreen run the helper script and select option 12 again, or via SSH:
+Updates and removal require a firmware-compatible, backed-up recovery procedure. The Helper Script's maintenance update path is under review; do not assume the newest upstream version is compatible or that the web UI Update Manager can update HelixScreen safely.
 
-```bash
-/opt/helixscreen/install.sh --update
-```
+Do not hard-reset the printer because HelixScreen takes longer to start after installation.
 
-Do **not** assume the Fluidd/Mainsail update manager supports HelixScreen on K2 Plus. Verify the upstream K2-specific upgrade path first. An upgrade requires a planned reboot and a verified backup/recovery procedure. See [Safe update audit](safe-update-audit.md).
-
----
-
-## Removing
-
-To restore the stock Creality touchscreen UI:
-Select **Remove a feature** → **HelixScreen**, or via SSH:
-
-```bash
-/opt/helixscreen/install.sh --uninstall
-reboot
-```
-
----
+See [Safe Update Audit](safe-update-audit.md).
 
 ## More Information
 
