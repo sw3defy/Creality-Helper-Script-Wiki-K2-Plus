@@ -1,5 +1,9 @@
 # Entware Package Manager — K2 Plus
 
+!!! warning "November 2026 safety review"
+    The `/opt` directory can be shared with HelixScreen. Never remove all of `/opt` when uninstalling Entware; the maintenance branch blocks unsafe blanket removal.
+
+
 Entware is a software package manager for embedded systems. It provides hundreds of Linux packages via `opkg` on the K2 Plus.
 
 !!! success "Tested and working on K2 Plus"
