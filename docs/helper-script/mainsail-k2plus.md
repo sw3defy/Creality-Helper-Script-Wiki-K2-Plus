@@ -8,35 +8,20 @@ Mainsail is an alternative web interface to Fluidd. It is not pre-installed on t
 
 ---
 
-## Installation
+## Installation and update status
 
-From the helper script menu, select **option 9 — Mainsail (port 4409)**.
+Mainsail is served on port `4409` when installed. The existing Helper Script includes a Mainsail installation path, but the **reviewed maintenance updater is not yet a released, hardware-validated procedure**.
 
-The script will:
-1. Download the latest Mainsail release
-2. Install static files to `/usr/share/mainsail/`
-3. Add a new nginx server block for port `4409`
-4. Restart nginx
+!!! warning "Camera-preserving UI update under review"
+    [Helper Script PR #7](https://github.com/sw3defy/Creality-Helper-Script-K2-Plus/pull/7) stages official Mainsail assets, preserves the existing camera UI injection when it can identify it safely, and retains a rollback copy of the previous UI. The new UI may no longer expose the private Vue store API used by the existing camera script. Do not treat passing CI tests as proof that the camera will work after upgrading.
 
----
+The updater requires explicit `INSTALL` confirmation. It does **not** modify nginx, Moonraker, Klipper, or camera services. An existing `/usr/share/mainsail.previous-helper` backup prevents a second replacement until reviewed.
 
-## Access Mainsail
+Before updating, follow the [Safe Update Audit](safe-update-audit.md) and [hardware camera compatibility checklist](https://github.com/sw3defy/Creality-Helper-Script-K2-Plus/blob/maintenance/2026-11-safe-update-audit/docs/web-ui-camera-compatibility.md).
 
-After installation:
+### Access Mainsail
 
-```
-http://<printer-ip>:4409
-```
-
----
-
-## Update / Repair Mainsail
-
-Run the helper script and select option 9 again. If Mainsail is already installed you will be offered:
-
-- **Update** — download and install the latest release
-- **Repair** — re-download and reinstall
-- **Restore nginx block only** — restore port 4409 without re-downloading
+Once installed, open `http://<printer-ip>:4409`.
 
 ---
 
