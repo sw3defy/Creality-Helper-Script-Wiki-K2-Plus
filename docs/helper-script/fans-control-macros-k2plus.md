@@ -1,5 +1,9 @@
 # Fans Control Macros — K2 Plus
 
+!!! warning "November 2026 safety review — installer blocked"
+    The development branch has disabled fan-macro installation and removal pending a stock-compatible migration. The inspected K2 Plus already defines `M106` and `M107` in Creality's `gcode_macro.cfg`; an older installed `fans_control.cfg` defined them again, losing stock P selection, minimum-speed and Q-mode handling. Do not install replacement `M106`/`M107` macros or directly drive pins as a workaround. Mainsail/Fluidd **macro buttons** can invoke stock commands, but their **native fan sliders** must be separately verified: some Klipper UI sliders can control fan objects directly. Stock-equivalent sliders are a design requirement, **not yet an implemented feature**. The examples below describe historical or existing configurations, not a currently approved installation path.
+
+
 The K2 Plus has a more complex fan topology than the K1 Series. There are three independently controllable output fans, a hotend cooling fan (automatic), and a chamber fan that doubles as both a cooling `temperature_fan` and a PTC heater companion. This page documents what each fan does, how to control them, and what the helper script macros provide.
 
 !!! note "K2 Plus fan map differs from K1"
