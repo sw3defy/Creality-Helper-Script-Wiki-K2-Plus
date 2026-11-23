@@ -3,7 +3,7 @@
 HelixScreen is a modern, lightweight touchscreen interface for Klipper 3D printers. It replaces the stock Creality touchscreen UI with a feature-rich Klipper-native interface.
 
 !!! success "Tested and working on K2 Plus"
-    HelixScreen v0.99.72 was tested and confirmed working on the Creality K2 Plus.
+    HelixScreen v0.99.72 was previously tested on a K2 Plus. This does not establish compatibility for newer releases or firmware.
 
 ---
 
@@ -24,7 +24,7 @@ HelixScreen is a modern, lightweight touchscreen interface for Klipper 3D printe
 Install from the helper script:
 
 
-Select **11) HelixScreen (touchscreen UI)**.
+Select **12) HelixScreen (touchscreen UI)**.
 
 Or install manually via SSH:
 
@@ -46,7 +46,7 @@ reboot
 
 ---
 
-## Updating
+## Updating\n\n!!! warning "Review before updating"\n    A K2 Plus was observed running HelixScreen v0.99.74 in November 2026. Newer versions exist, but an upstream version number alone does not establish safe compatibility. The Helper Script's existing update path has not been certified for newer releases. Do not run it blindly.\n
 
 To update HelixScreen run the helper script and select option 12 again, or via SSH:
 
@@ -54,7 +54,7 @@ To update HelixScreen run the helper script and select option 12 again, or via S
 /opt/helixscreen/install.sh --update
 ```
 
-You can also update from the Fluidd/Mainsail update manager — HelixScreen registers itself automatically.
+Do **not** assume the Fluidd/Mainsail update manager supports HelixScreen on K2 Plus. Verify the upstream K2-specific upgrade path first. An upgrade requires a planned reboot and a verified backup/recovery procedure. See [Safe update audit](safe-update-audit.md).
 
 ---
 
