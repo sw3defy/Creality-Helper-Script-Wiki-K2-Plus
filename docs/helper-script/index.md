@@ -1,5 +1,9 @@
 # Helper Script for Creality K2 Plus
 
+!!! warning "Maintenance audit — November 2026"
+    The instructions on this page describe the historical published Helper Script and may not match the **unmerged maintenance branch**. Moonraker Extensions, fan macros, improved shapers, and Timelapse installation/removal are currently blocked in that branch while stock-compatible migration is reviewed. Do **not** follow old directions to patch `S56moonraker`, add reverse Moonraker includes, or replace Creality's `M106`/`M107`. HelixScreen requires a confirmed installation followed by an immediate reboot, with extra patience during startup. See [Safe Update Audit](safe-update-audit.md) for the actual status.
+
+
 ---
 
 # Install Helper Script — K2 Plus
