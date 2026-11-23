@@ -1,5 +1,9 @@
 # M600 Support — K2 Plus
 
+!!! warning "November 2026 safety review"
+    M600 and PAUSE/RESUME can interact with Creality CFS load/unload/cut sequences. The maintenance installer is blocked until single-filament and CFS behavior are verified on the target firmware.
+
+
 M600 is the standard filament change G-code command. On the K2 Plus, M600 behavior differs depending on whether you are using single-filament mode or the CFS.
 
 ---
