@@ -1,5 +1,9 @@
 # Useful Macros — K2 Plus
 
+!!! warning "November 2026 compatibility review"
+    Preserve Creality's stock `START_PRINT`, `END_PRINT`, `PAUSE`, `RESUME`, and CFS flows. Older Helper Script documentation may describe replacement macros or automatic stock-file patching; those approaches require firmware-specific validation and are not approved by the current safety review.
+
+
 The helper script installs a set of commonly used macros adapted for the K2 Plus hardware. These replace the K1 Series macro set and account for the K2 Plus's dual-Z, actively heated chamber, CoreXY kinematics, and CFS.
 
 !!! note "K1 macros are not compatible"
