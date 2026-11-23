@@ -110,3 +110,30 @@ but must not be treated as validated upgrade procedures.
 
 The main menu's previous automatic startup patch invocations have been
 removed. No pre-existing printer boot hooks are removed automatically.
+
+## Full installation test readiness — NOT YET READY (23 November 2026)
+
+A full install-all test on a physical K2 Plus must **not** be attempted
+from this draft branch. The review identified duplicate CHAMBER_* macros
+between Fans Control and Useful Macros, possible collisions with stock
+calibration commands, unverified M600/PAUSE_BASE behavior with CFS, and
+firmware-dependent shaper and Z-offset commands. These feature installers
+are now fail-closed while replacements are developed.
+
+Fresh HelixScreen installation is also paused because the legacy path
+downloads and executes an unverified HTTP script. The update path now
+requires a reboot after a successful update. HelixScreen removal remains
+blocked until the uninstall/recovery sequence is verified.
+
+The Helper Script repository now includes offline shell-syntax and safety
+invariant checks in `tests/test_safety.py`, triggered by a GitHub Actions
+workflow. Passing static checks is necessary but **not sufficient** for
+hardware testing.
+
+**Hardware test entry criteria:** static checks pass; every intended
+installer has an implemented, reversible and version-compatible path;
+a full printer/firmware/config backup and verified recovery procedure
+exist; the exact K2 Plus firmware and board revision are recorded; the
+camera is confirmed working before and after; and CFS load, unload,
+cut, purge, homing and printing are tested incrementally. Run one
+feature at a time, never an unattended install-all sequence.
