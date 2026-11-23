@@ -1,5 +1,9 @@
 # Tools Menu
 
+!!! warning "November 2026 compatibility review"
+    Firmware recovery and service restart commands are high risk. The maintenance audit has not validated firmware flashing, rollback, or restart commands for every K2 Plus firmware. Do not use a factory reset or hard reset as a routine troubleshooting step.
+
+
 ---
 
 # Restore a Previous Firmware — K2 Plus
