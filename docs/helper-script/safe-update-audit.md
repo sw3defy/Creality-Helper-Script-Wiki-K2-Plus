@@ -92,3 +92,21 @@ This is a **code-stage implementation**, not yet validated on the K2 Plus
 against its installed Moonraker API. In particular, the reported Fluidd
 configuration-editing issue still needs reproduction and compatibility
 testing before recommending a version.
+
+## Moonraker configuration audit (menu option 27)
+
+The maintenance branch now provides a **read-only** Moonraker audit
+(`scripts/moonraker_audit.sh`). It reports the selected startup config,
+the include directives in the stock and UDISK files, relevant sections, and
+a direct two-file recursive-include pattern. It does not modify the
+printer. This is a diagnostic, not a comprehensive Moonraker parser.
+
+The existing Moonraker Extensions **install and remove** paths are both
+blocked pending an ownership-aware migration. KAMP and Timelapse **install,
+upgrade and removal** are likewise blocked because the legacy scripts can
+overwrite custom settings, duplicate sections or delete components whose
+ownership is unknown. Their old implementations are retained for review
+but must not be treated as validated upgrade procedures.
+
+The main menu's previous automatic startup patch invocations have been
+removed. No pre-existing printer boot hooks are removed automatically.
