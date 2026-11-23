@@ -1,5 +1,9 @@
 # Moonraker and Nginx — K2 Plus
 
+!!! danger "November 2026: do not follow the legacy Moonraker patching instructions below"
+    Inspection of `/etc/rc.d/S56moonraker` found that the active service already loads `/mnt/UDISK/printer_data/config/moonraker.conf`. The stock `/usr/share/moonraker/moonraker.conf` includes that user config. Adding the stock config as an include **inside the user config** can cause recursion. The old installer also attempted to change startup scripts and restart services through an unverified path. Its mutation code has now been removed from the **unmerged development branch**, and installation/removal is blocked. The historical steps below are retained only for context; **do not execute them**. An ownership-aware migration, backups, and rollback are still pending.
+
+
 !!! warning "K2 Plus differs significantly from K1"
     On the K1 Series, Moonraker and Nginx are installed by the helper script. On the K2 Plus, **both are pre-installed from the factory firmware** and run from the read-only `/usr/share/` partition. The approach here is therefore fundamentally different: instead of installing from scratch, you are **extending** the stock installation.
 
