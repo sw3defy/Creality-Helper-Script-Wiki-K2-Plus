@@ -7,6 +7,9 @@ The K2 Plus has a built-in camera that uses a proprietary WebRTC protocol on por
 
 ---
 
+!!! warning "Web UI upgrades"
+    The current camera installation is documented as working on the tested K2 Plus configuration. A newer Fluidd or Mainsail release may change the private Vue API used by the injected dashboard script. The [maintenance updater in PR #7](https://github.com/sw3defy/Creality-Helper-Script-K2-Plus/pull/7) preserves the script and maintains a rollback directory, but it has not yet been validated on printer hardware. Do not assume that preservation of the script alone proves the camera will render after a UI upgrade. See the [Safe Update Audit](../helper-script/safe-update-audit.md).
+
 ## How It Works
 
 The K2 Plus's `webrtc_local` service sends RTP using a payload type that it never lists in its own SDP answer. Without accounting for this, a generic WebRTC client (including a default go2rtc connection) ends up with the actual video data routed to an internal receiver that nothing is consuming, so the connection reports "connected" while no video frame ever renders.
