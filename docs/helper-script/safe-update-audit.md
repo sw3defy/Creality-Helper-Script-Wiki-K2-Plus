@@ -52,3 +52,23 @@ A version marked `unknown` is not evidence that software is absent.
 
 **Status:** This is an audit procedure, not a certification that any upstream
 release is safe for every K2 Plus firmware.
+
+## Installer review — in progress
+
+The maintenance branch has additional fail-safe changes:
+
+- Entware removal no longer deletes all of `/opt`, which is shared with
+  HelixScreen. An Entware-specific removal procedure remains to be designed.
+- The HelixScreen update path now requires a second explicit confirmation,
+  checks the updater's exit status, and offers a controlled reboot. **This does
+  not establish compatibility of the newest HelixScreen with K2 Plus.**
+- The older Moonraker Extensions installer is temporarily blocked. Its
+  stock-config wrapper and include topology require firmware-specific testing
+  before the installer can safely be re-enabled.
+- KAMP and Timelapse installers no longer automatically invoke that blocked
+  Moonraker Extensions path when the dependency is missing. Their own upgrade
+  paths still require review.
+
+**Do not install this draft on a production printer yet.** These safeguards
+are staged in GitHub only; existing printer installations and pre-existing
+`rc.local` hooks are unchanged.
