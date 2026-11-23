@@ -1,5 +1,9 @@
 # Mobileraker Companion — K2 Plus
 
+!!! warning "November 2026 safety review"
+    Moonraker restart paths are firmware-dependent. The inspected K2 Plus has `/etc/rc.d/S56moonraker`; do not assume the documented `/etc/init.d/S56moonraker` command works.
+
+
 Mobileraker Companion enables push notifications for Klipper using Moonraker. It works on the K2 Plus with one known caveat.
 
 ---
