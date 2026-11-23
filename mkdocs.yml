@@ -91,7 +91,8 @@ nav:
 
   - Helper Script for Creality K2 Plus:
       - Helper Script for Creality K2 Plus: helper-script/index.md
-      - Install Helper Script: helper-script/helper-script-installation.md\n      - Safe Update Audit: helper-script/safe-update-audit.md
+      - Install Helper Script: helper-script/helper-script-installation.md
+      - Safe Update Audit: helper-script/safe-update-audit.md
       - Install Menu:
           - Install Menu: helper-script/install-menu/index.md
           - Moonraker Extensions: helper-script/moonraker-k2plus.md
