@@ -205,3 +205,8 @@ CFS, camera, fan, homing, and print-start/end behavior.
 
 The development menu explicitly labels guarded installation
 features as **BLOCKED** while safety review is pending.
+
+
+## Timelapse / Benchy nozzle-clogging investigation — 24 November 2026
+
+Three failed Benchy prints ended with nozzle clogs, including with a Micro Swiss high-flow nozzle. The read-only investigation found 300 Timelapse frame commands in each of five Benchy G-code files. Current Timelapse settings have parking enabled but capture disabled, and its live pause/resume targets are `PAUSE_BASE` / `RESUME_BASE`, **not** Creality's full `PAUSE` / `RESUME` (which would lower nozzle target to 140°C). Causation and settings at the time of failure remain unverified. Keep Timelapse disabled pending further inspection. [Full evidence and next checks](timelapse-clogging-investigation-2026-11.md).
