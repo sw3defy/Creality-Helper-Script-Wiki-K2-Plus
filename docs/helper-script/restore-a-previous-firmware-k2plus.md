@@ -1,5 +1,9 @@
 # Restore a Previous Firmware — K2 Plus
 
+!!! warning "November 2026 safety review"
+    Firmware rollback and factory reset are destructive recovery operations, not routine troubleshooting steps. Confirm the exact firmware package and recovery procedure and keep an off-printer backup before proceeding.
+
+
 If a firmware update causes issues, you can restore a previous version using the same USB drive installation method.
 
 ---
