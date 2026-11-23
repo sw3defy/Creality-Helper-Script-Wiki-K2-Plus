@@ -1,5 +1,9 @@
 # Improved Shapers Calibrations — K2 Plus
 
+!!! warning "November 2026: shaper installer temporarily blocked"
+    The inspected stock `gcode_macro.cfg` already defines `AUTOTUNE_SHAPERS`. An older installed `shapers_calibration.cfg` also defined it, with `SAVE_CONFIG` (which writes configuration and restarts Klipper). The unmerged development template renames the helper command to `HELPER_SAVE_SHAPERS`, but the installer remains blocked pending hardware-specific verification. Do not assume the sample calibration values below are suitable for your machine.
+
+
 The K2 Plus uses a **LIS2DW** accelerometer connected via SPI to the nozzle MCU. This is different from the K1 Series which uses an ADXL345. The helper script's improved resonance testing procedure works on both, but the Klipper config sections differ.
 
 ---

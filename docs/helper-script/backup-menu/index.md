@@ -1,5 +1,9 @@
 # Backup & Restore Menu
 
+!!! warning "November 2026 compatibility review"
+    Backups should be checked for completeness and restore capability **before** any migration. The current review has not validated that every Helper Script restore routine is safe on all K2 Plus firmware revisions. Do not restore live configuration automatically based solely on this guide.
+
+
 ---
 
 # Backup & Restore Klipper Configuration Files — K2 Plus

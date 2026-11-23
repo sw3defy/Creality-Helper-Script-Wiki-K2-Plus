@@ -1,5 +1,21 @@
 # Changelog
 
+## November 23, 2026 — K2 Plus stock-compatibility and Moonraker safety audit (development only)
+
+!!! warning "Not yet released"
+    These changes are committed to **draft, unmerged maintenance branches** in the [Helper Script](https://github.com/sw3defy/Creality-Helper-Script-K2-Plus/pull/7) and [Wiki](https://github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus/pull/6). They are **not** evidence that the published installer or a printer has been updated.
+
+- **Fan controls:** diagnostic found stock `M106`/`M107` and duplicate older helper definitions in `fans_control.cfg`. The fan installer/remover remain blocked. Stock commands must retain P selection, minimum speeds, and Q-mode. The desired Mainsail/Fluidd slider integration must call stock behavior; native slider support is **not yet implemented or validated**.
+- **Moonraker:** verified that `/etc/rc.d/S56moonraker` points to the UDISK user config and the stock config includes it. Removed the old install/removal code that could create reverse includes, patch startup, restart services, or archive shared configuration. Both actions now fail closed.
+- **Improved Shapers:** detected `AUTOTUNE_SHAPERS` collision; the development template uses `HELPER_SAVE_SHAPERS`, but installation and removal remain blocked.
+- **Timelapse:** installation/removal remain blocked because legacy code could replace shared Moonraker/Klipper components.
+- **HelixScreen:** required future workflow is explicit consent followed by mandatory immediate reboot after installation, regardless of feature order. First startup may take longer; never hard-reset solely because of a slow boot. This is **not yet certified as implemented**.
+- **Diagnostics:** read-only firmware inspector, targeted diagnostic, Moonraker audit, and offline migration assessment were added or refined. Offline assessment must not be run against live printer paths.
+- **Testing:** static regression checks were added. A complete passing test run and firmware-specific installation validation have **not** yet been established. No printer files, services, or firmware were modified as part of this audit.
+
+---
+
+
 ## Camera Fix: Mainsail Black Screen / Fluidd Dependency — June 23, 2026
 ### Fixed
 - **Camera showed black screen in Mainsail (worked only while Fluidd was

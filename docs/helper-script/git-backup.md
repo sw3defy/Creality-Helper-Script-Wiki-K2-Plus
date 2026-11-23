@@ -1,5 +1,9 @@
 # Git Backup — K2 Plus
 
+!!! warning "November 2026 safety review"
+    Automatic backups are not a substitute for an off-printer, tested restore. Never publish printer credentials, tokens, or private configuration to a public repository.
+
+
 Git Backup watches the Klipper configuration folder and automatically backs it up to a GitHub repository whenever a change is made.
 
 !!! note "Entware required"

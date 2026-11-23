@@ -1,5 +1,9 @@
 # Fluidd — K2 Plus
 
+!!! warning "November 2026 compatibility review"
+    Fluidd updates and nginx repair must be verified against the active K2 firmware and existing camera routing before changing stock web assets. Native fan sliders have **not** been confirmed to invoke Creality's stock `M106`/`M107`; do not assume stock-equivalent behavior.
+
+
 Fluidd is the primary web interface on the K2 Plus, pre-installed at port `4408` from the factory. This page covers updating, repairing, and restoring Fluidd using the Helper Script.
 
 !!! note "Pre-installed"

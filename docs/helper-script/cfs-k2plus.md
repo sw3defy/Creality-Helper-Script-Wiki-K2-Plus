@@ -1,5 +1,9 @@
 # CFS — Color Filament System (K2 Plus Combo)
 
+!!! warning "November 2026 compatibility review"
+    Preserve Creality's stock CFS hardware configuration and load/unload macros. Previous Helper Script stock-macro patching is under safety review; do not automatically rename or rewrite CFS-related macros as part of an installer.
+
+
 This page covers the built-in CFS (Color Filament System) that ships with the K2 Plus Combo. The CFS is Creality's multi-material hub allowing automatic filament switching between up to 16 spools (4 units × 4 slots each).
 
 !!! note "Combo only"
@@ -131,33 +135,26 @@ See the [OrcaSlicer](../slicers/orcaslicer.md) page for full slicer configuratio
 ## Troubleshooting
 
 
-**CFS load/unload fails with key865, key789, key22 errors**
+**CFS load/unload or cutter errors (including key865, key789 or key22)**
 
-This is a known bug in the stock Creality firmware where all CFS-related macros
-in `box.cfg` and `gcode_macro.cfg` are prefixed with an underscore (e.g.
-`_BOX_QUIT_MATERIAL`, `_WAIT_TEMP_START`). In Klipper, a leading underscore
-makes a macro private/hidden — it cannot be called by the CFS system, the UI,
-or other macros. This causes the entire load/unload sequence to silently fail.
+These errors have been observed during K2 Plus troubleshooting, but they
+do **not** prove a single firmware bug or a universal fix. Causes may include
+macro compatibility, mechanical filament resistance, motor tuning, homing or
+endstop behavior. The exact cause of the previously observed purge/endstop
+failure has not been established.
 
-The helper script automatically patches this on startup. If you are not using
-the helper script, apply the fix manually:
+!!! danger "Do not apply bulk macro renaming or motor resets"
+    Do not blindly rename underscore-prefixed macros in `box.cfg` or
+    `gcode_macro.cfg`, replace `motor_control.cfg` from ROM, or move purge
+    coordinates. These changes require review against the actual installed
+    Creality firmware and active configuration. The Helper Script's automatic
+    stock-config patch is disabled in the maintenance branch pending that review.
 
-```bash
-cp /mnt/UDISK/printer_data/config/box.cfg /mnt/UDISK/printer_data/config/box.cfg.bak
-sed -i 's/\[gcode_macro _BOX_/[gcode_macro BOX_/g' /mnt/UDISK/printer_data/config/box.cfg
-```
-
-Then do a `FIRMWARE_RESTART` from Mainsail or Fluidd.
-
-Errors resolved by this fix:
-
-- `key865` — retrude error, failed to exit connections
-- `key789` — position tracking error on X/Y axes (位置跟踪误差过大)
-- `key22` — no trigger on Y after full movement
-- `key274` — unknown g-code state: helix_cfs_load
-- `Unknown command: WAIT_TEMP_START`
-- `Unknown command: END_PRINT_POINT`
-- `Unknown command: CANCEL_CHAMBER_FAN_SWITCH`
+Before changing anything, back up `printer.cfg` (including its
+`SAVE_CONFIG` section), `box.cfg`, `gcode_macro.cfg`, and
+`motor_control.cfg`. Compare installed macros with the firmware's expected
+CFS load, unload, cut and purge sequences. See the
+[Safe update audit](safe-update-audit.md).
 
 **CFS not responding / filament not loading**
 - Verify the RS-485 cable is seated on both the CFS unit and the printer mainboard.

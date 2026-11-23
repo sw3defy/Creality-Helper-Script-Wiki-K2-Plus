@@ -1,6 +1,10 @@
 # Install Helper Script — K2 Plus
 
-The Creality K2 Plus Helper Script is a native shell-based tool built specifically for the K2 Plus and K2 Plus Combo. It installs features by writing Klipper `.cfg` files to `/mnt/UDISK/printer_data/config/` and extending Moonraker non-destructively — without overwriting any stock firmware files.
+!!! warning "Maintenance audit — November 2026"
+    The instructions on this page describe the historical published Helper Script and may not match the **unmerged maintenance branch**. Moonraker Extensions, fan macros, improved shapers, and Timelapse installation/removal are currently blocked in that branch while stock-compatible migration is reviewed. Do **not** follow old directions to patch `S56moonraker`, add reverse Moonraker includes, or replace Creality's `M106`/`M107`. HelixScreen requires a confirmed installation followed by an immediate reboot, with extra patience during startup. See [Safe Update Audit](safe-update-audit.md) for the actual status.
+
+
+The Creality K2 Plus Helper Script is a native shell-based tool built specifically for the K2 Plus and K2 Plus Combo. It installs features by writing Klipper `.cfg` files to `/mnt/UDISK/printer_data/config/` and extending Moonraker non-destructively — but some existing startup and configuration patch paths can modify stock or active files. Review and back up those files before running it.
 
 !!! warning "K2 Plus only"
     This helper script is written specifically for the **Creality K2 Plus** and **K2 Plus Combo**.
@@ -19,11 +23,11 @@ The helper script takes a safe, reversible approach to every feature:
 
 | What it does | How |
 |---|---|
-| Extends Moonraker | Writes `/mnt/UDISK/printer_data/config/moonraker.conf` with `[include /usr/share/moonraker/moonraker.conf]` at the top, then patches the startup script to load it |
+| Extends Moonraker | The inspected K2 Plus already starts Moonraker with the UDISK user configuration. Extension installation is blocked pending a verified migration; never add a reverse include to the stock configuration. |
 | Adds Klipper features | Writes `.cfg` files to `/mnt/UDISK/printer_data/config/` and adds `[include]` lines to `printer.cfg` |
-| Service restarts | Uses `/etc/init.d/S55klipper`, `S56moonraker`, `S80nginx` — **not** `supervisorctl` (which does not exist on K2 Plus) |
-| Uninstall | Removes the `.cfg` file, removes the `[include]` line, restarts Klipper. Moonraker patch is reversible via the Remove menu. |
-| Stock files | Never modified. `/usr/share/moonraker/moonraker.conf`, `/etc/nginx/nginx.conf`, and all `/usr/share/klipper/` files are left untouched. |
+| Service restarts | Firmware-specific service commands must be inspected before use. The observed startup script is `/etc/rc.d/S56moonraker`; do not assume `/etc/init.d/S56moonraker` exists. |
+| Uninstall | Only remove files proven to be owned by the Helper Script after backup and validation. Moonraker extension removal is currently blocked in the maintenance branch. |
+| Stock files | **Do not assume untouched.** Review `scripts/system.sh` and its startup patches before running the Helper Script; some paths modify active/stock configurations. |
 
 ---
 
@@ -47,7 +51,7 @@ print('Extracting...')
 with zipfile.ZipFile('/tmp/helper.zip', 'r') as z:
     z.extractall('/tmp/')
 if os.path.exists('/mnt/UDISK/helper-script'):
-    shutil.rmtree('/mnt/UDISK/helper-script')
+    raise RuntimeError('Existing install detected: stop and use reviewed selective update procedure')
 shutil.move('/tmp/Creality-Helper-Script-K2-Plus-main', '/mnt/UDISK/helper-script')
 os.remove('/tmp/helper.zip')
 print('Done')
@@ -130,78 +134,29 @@ When you run the script you will see:
 
 ---
 
-## Recommended Installation Order
+## Installation order and safety gates
 
-The menu is already arranged in the correct dependency order — install top to bottom:
+The historical menu order is **not** a validated installation plan. In the unmerged maintenance branch, Moonraker Extensions, Fans Control, Improved Shapers, KAMP, Timelapse, and several other installers are blocked pending review. Never install all features in one pass.
 
-1. **Moonraker Extensions** (option 1) — always first. Sets up the Update Manager, enables object processing, and creates the persistent Moonraker config that all other features build on.
-2. **Fans Control Macros** (option 2) — before Useful Macros. The `START_PRINT` macro references the `CHAMBER_HEAT` and `FANS_OFF` macros that this installs.
-3. **Useful Macros** (option 3) — installs `START_PRINT`, `END_PRINT`, `PAUSE`, `RESUME`. Configure your slicer start/end G-code after this step.
-4. **Save Z-Offset Macros** (option 4) and **M600** (option 5) — optional, in any order.
-5. **KAMP** (option 6) — requires Moonraker Extensions (object processing). Install after option 1.
-6. **Improved Shapers** (option 7) — independent, any time after Klipper is running.
-7. **Fluidd, Mainsail, Timelapse, Camera, HelixScreen** (options 8–12) — install in any order, any time.
-8. **Remote access & notifications** (options 13–16) — install in any order, any time.
+HelixScreen can appear anywhere in the intended feature sequence, but its installation requires explicit confirmation and an immediate reboot afterward. First startup may be slower. The installer must implement and validate this before it is enabled.
 
----
+See [Safe Update Audit](safe-update-audit.md) for the current development status.
 
 ## Update
 
+Read the [Safe update audit](safe-update-audit.md) before making changes.\n
 Once Moonraker Extensions is installed, the Update Manager panel in Fluidd shows available updates:
 
 - Go to **Settings → Software Updates** in Fluidd
 - Click **Update** next to `creality-helper-script`
 
-Or update manually via SSH:
-
-```bash
-python3 -c "
-import urllib.request, zipfile, os, shutil
-print('Downloading update...')
-urllib.request.urlretrieve(
-    'https://github.com/sw3defy/Creality-Helper-Script-K2-Plus/archive/refs/heads/main.zip',
-    '/tmp/helper.zip'
-)
-with zipfile.ZipFile('/tmp/helper.zip', 'r') as z:
-    z.extractall('/tmp/')
-for f in os.listdir('/tmp/Creality-Helper-Script-K2-Plus-main'):
-    src = '/tmp/Creality-Helper-Script-K2-Plus-main/' + f
-    dst = '/mnt/UDISK/helper-script/' + f
-    if os.path.isdir(src):
-        if os.path.exists(dst): shutil.rmtree(dst)
-        shutil.copytree(src, dst)
-    else:
-        shutil.copy2(src, dst)
-shutil.rmtree('/tmp/Creality-Helper-Script-K2-Plus-main')
-os.remove('/tmp/helper.zip')
-print('Update complete')
-"
-```
-
+Do **not** run the former bulk-copy update procedure: it could overwrite local camera integration files and other printer-specific changes. First back up the existing Helper Script and active Klipper configuration, then use a reviewed selective update plan. See [Safe update audit](safe-update-audit.md).\n
 ---
 
-## Uninstall Everything
+## Uninstall and rollback
 
-To completely remove the helper script and all installed features:
-
-```bash
-# Remove all installed .cfg files and includes
-sh /mnt/UDISK/helper-script/helper.sh
-# Select option 17 (Remove menu) and remove each feature
-
-# Restore Moonraker startup to stock
-cp /etc/rc.d/S56moonraker.orig /etc/rc.d/S56moonraker 2>/dev/null || \
-  sed -i 's|CONF=/mnt/UDISK/printer_data/config/moonraker.conf|CONF=/usr/share/moonraker/moonraker.conf|g' /etc/rc.d/S56moonraker
-
-# Restart services
-/etc/init.d/S55klipper restart
-/etc/init.d/S56moonraker restart
-
-# Remove the helper script directory
-rm -rf /mnt/UDISK/helper-script
-```
-
----
+!!! danger "Do not use the old bulk uninstall procedure"
+    The old procedure repointed the Moonraker service to the stock configuration and removed shared files. The inspected printer already starts from the UDISK user configuration. Do **not** change the service config path, delete the helper directory, or restart services as a blanket uninstall. Back up first, inventory ownership, and wait for the reviewed selective migration/removal procedure.
 
 ## Installed Features Location
 

@@ -1,5 +1,9 @@
 # Moonraker Timelapse — K2 Plus
 
+!!! warning "November 2026: installation and removal blocked"
+    The legacy Timelapse installer can overwrite Moonraker component files and Klipper macros. Existing K2 Plus configurations may already contain `[timelapse]`; do not blindly reinstall, delete, or replace it. The unmerged development branch blocks both operations until component ownership, camera compatibility, and a reversible migration are verified. The instructions below document historical usage, not a currently approved installation procedure.
+
+
 Moonraker Timelapse is a third-party Moonraker component that creates timelapse recordings of prints by capturing a frame at each layer change.
 
 ---

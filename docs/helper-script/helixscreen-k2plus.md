@@ -1,9 +1,13 @@
 # HelixScreen — K2 Plus
 
+!!! danger "Mandatory reboot after installation"
+    On the K2 Plus, HelixScreen installation must be followed by an immediate, explicit printer reboot, regardless of when HelixScreen is installed in the feature sequence. The planned Helper Script flow will ask for confirmation **before** installation and reboot. Allow extra time for the first boot after installation; do not hard-reset merely because startup is slower. This is a required design change, not a claim that the current published installer already enforces it. Verify backups and a recovery plan before proceeding.
+
+
 HelixScreen is a modern, lightweight touchscreen interface for Klipper 3D printers. It replaces the stock Creality touchscreen UI with a feature-rich Klipper-native interface.
 
 !!! success "Tested and working on K2 Plus"
-    HelixScreen v0.99.72 was tested and confirmed working on the Creality K2 Plus.
+    HelixScreen v0.99.72 was previously tested on a K2 Plus. This does not establish compatibility for newer releases or firmware.
 
 ---
 
@@ -19,26 +23,12 @@ HelixScreen is a modern, lightweight touchscreen interface for Klipper 3D printe
 
 ---
 
-## Installation
+## Installation — currently paused
 
-Install from the helper script:
+!!! danger "Do not run the historical remote installer"
+    Fresh HelixScreen installation is blocked in the unmerged Helper Script maintenance branch until the upstream K2 package, backups, and recovery steps are verified. Do not execute an unverified remote shell script on the printer.
 
-
-Select **11) HelixScreen (touchscreen UI)**.
-
-Or install manually via SSH:
-
-```bash
-python3 -c "import urllib.request as u; open('/tmp/install.sh','wb').write(u.urlopen(u.Request('http://dl.helixscreen.org/install.sh', headers={'User-Agent':'helixscreen-installer/1.0'}), timeout=30).read())" && sh /tmp/install.sh
-```
-
-Reboot after installation:
-
-```bash
-reboot
-```
-
----
+**Required future flow:** confirm the installation and mandatory immediate reboot *before* proceeding; install; reboot immediately on success; then allow additional time for first startup. HelixScreen does not have to be installed last in the feature sequence.
 
 ## Known Limitations
 
@@ -46,29 +36,13 @@ reboot
 
 ---
 
-## Updating
+## Updating and removal
 
-To update HelixScreen run the helper script and select option 12 again, or via SSH:
+Updates and removal require a firmware-compatible, backed-up recovery procedure. The Helper Script's maintenance update path is under review; do not assume the newest upstream version is compatible or that the web UI Update Manager can update HelixScreen safely.
 
-```bash
-/opt/helixscreen/install.sh --update
-```
+Do not hard-reset the printer because HelixScreen takes longer to start after installation.
 
-You can also update from the Fluidd/Mainsail update manager — HelixScreen registers itself automatically.
-
----
-
-## Removing
-
-To restore the stock Creality touchscreen UI:
-Select **Remove a feature** → **HelixScreen**, or via SSH:
-
-```bash
-/opt/helixscreen/install.sh --uninstall
-reboot
-```
-
----
+See [Safe Update Audit](safe-update-audit.md).
 
 ## More Information
 

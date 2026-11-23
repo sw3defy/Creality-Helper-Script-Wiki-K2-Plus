@@ -1,6 +1,6 @@
 # Reset Factory Settings — K2 Plus
 
-A factory reset wipes all user data and returns the printer to its out-of-box state. Use this before installing a new firmware version or when troubleshooting persistent issues.
+A factory reset wipes all user data and returns the printer to its out-of-box state. A factory reset is a destructive recovery measure, **not** a routine prerequisite for firmware installation or general troubleshooting. Use it only when the firmware-specific recovery procedure explicitly requires it and after verifying off-printer backups.
 
 !!! danger "This is irreversible"
     A factory reset permanently deletes all data under `/mnt/UDISK/`. Back up your Klipper config files first.

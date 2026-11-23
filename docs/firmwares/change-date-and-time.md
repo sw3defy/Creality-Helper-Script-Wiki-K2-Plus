@@ -50,19 +50,7 @@ python3 -c "import json; d=json.load(open('/mnt/UDISK/creality/userdata/config/s
 
 ---
 
-## Fix SSL Errors When Cloning
+## Fix TLS certificate errors safely
 
-If you see SSL certificate errors when running `git clone`:
+First check the clock with `date`, synchronize time using the printer's supported NTP settings, and confirm that trusted CA certificates are installed. Do **not** disable Git SSL verification globally; that makes downloads vulnerable to interception. If certificate validation still fails, stop and resolve the trust-store or network issue before downloading firmware or scripts.
 
-```bash
-# Sync time first
-/etc/init.d/S98sysntpd restart
-sleep 10
-
-# If still failing, disable SSL verification temporarily
-git config --global http.sslVerify false
-git clone --depth 1 https://github.com/sw3defy/Creality-Helper-Script-K2-Plus.git /mnt/UDISK/helper-script
-
-# Re-enable after cloning
-git config --global http.sslVerify true
-```

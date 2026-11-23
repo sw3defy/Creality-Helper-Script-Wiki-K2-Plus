@@ -28,9 +28,9 @@ Download firmware from the Creality Cloud K2 Plus firmware page:
 
 ## Installation & Update
 
-- Follow the [Reset Factory Settings](../helper-script/reset-factory-settings.md) section before installing a new firmware version.
+- **Do not factory-reset as a routine prerequisite.** Back up configuration off-printer, follow the official firmware-specific update instructions, and reset only if the validated recovery procedure explicitly requires it.
 
-- When the factory reset is complete, insert a USB drive into your computer.
+- Insert a USB drive into your computer.
 
 - Format the USB drive as **FAT32** with 4096 allocation unit size (or exFAT on some drives).
 

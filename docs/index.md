@@ -1,5 +1,9 @@
 # Creality K2 Plus — Helper Script Wiki
 
+!!! warning "Maintenance audit — November 2026"
+    The instructions on this page describe the historical published Helper Script and may not match the **unmerged maintenance branch**. Moonraker Extensions, fan macros, improved shapers, and Timelapse installation/removal are currently blocked in that branch while stock-compatible migration is reviewed. Do **not** follow old directions to patch `S56moonraker`, add reverse Moonraker includes, or replace Creality's `M106`/`M107`. HelixScreen requires a confirmed installation followed by an immediate reboot, with extra patience during startup. See [Safe Update Audit](helper-script/safe-update-audit.md) for the actual status.
+
+
 <div style="display:flex;gap:20px;margin-bottom:20px;">
 <div style="flex:1;text-align:center;"><img src="https://drive.google.com/thumbnail?id=1CIxSAh3cxYCOOIXIYoKQgjuqBXqa_m67&sz=w600" alt="Creality K2 Plus"><br><strong>Creality K2 Plus</strong></div>
 <div style="flex:1;text-align:center;"><img src="https://drive.google.com/thumbnail?id=1rho-b_3_4d2JEmcygVluVi7r-sPNvQe9&sz=w600" alt="Creality K2 Plus Combo"><br><strong>Creality K2 Plus Combo (with CFS)</strong></div>

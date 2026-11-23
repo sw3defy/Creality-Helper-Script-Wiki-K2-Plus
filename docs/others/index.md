@@ -1,5 +1,9 @@
 # Others
 
+!!! note "Verified startup path — November 2026"
+    The inspected K2 Plus Moonraker service uses `/mnt/UDISK/printer_data/config/moonraker.conf` as its active configuration. The stock file in `/usr/share/moonraker/` includes that user configuration. Paths and restart commands can vary by firmware; do not patch the service or add reverse includes.
+
+
 ---
 
 # Boards Layout — K2 Plus
@@ -153,7 +157,7 @@ These paths live on a read-only partition and **cannot be edited in place**. Mod
 | Klipper config templates | `/usr/share/klipper/config/F008_CR0CN240319C13_1/` |
 | Moonraker Python env | `/usr/share/moonraker-env/bin/python` |
 | Moonraker source | `/usr/share/moonraker/` |
-| Moonraker config | `/usr/share/moonraker/moonraker.conf` |
+| Moonraker stock config | `/usr/share/moonraker/moonraker.conf` |
 | Fluidd static files | `/usr/share/fluidd/` |
 | Nginx config | `/etc/nginx/nginx.conf` |
 
@@ -167,7 +171,7 @@ The K2 Plus uses OpenWrt-style rc.d init scripts. There is no `systemd` or `supe
 |---|---|---|
 | klipper MCU bridge | `/etc/init.d/S54klipper_mcu` | `/etc/rc.d/K54klipper_mcu` (if present) |
 | Klipper (klippy) | `/etc/init.d/S55klipper` | — |
-| Moonraker | `/etc/init.d/S56moonraker` | — |
+| Moonraker | `/etc/rc.d/S56moonraker` (observed on inspected printer) | Verify firmware-specific service commands |
 | Nginx | `/etc/init.d/S80nginx` | — |
 | WebRTC (camera) | `/etc/init.d/S97webrtc` | `/etc/rc.d/K97webrtc` |
 
@@ -175,7 +179,7 @@ To restart a service over SSH:
 
 ```bash
 /etc/init.d/S55klipper restart
-/etc/init.d/S56moonraker restart
+# Moonraker restart command not verified; inspect /etc/rc.d/S56moonraker first
 /etc/init.d/S80nginx restart
 ```
 

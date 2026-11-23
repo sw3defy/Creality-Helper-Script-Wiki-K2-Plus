@@ -1,5 +1,9 @@
 # Restore a Previous Firmware — K2 Plus
 
+!!! warning "November 2026 safety review"
+    undefined
+
+
 If a firmware update causes issues, you can restore a previous version using the same USB installation method used for regular updates.
 
 !!! warning "Back up first"
