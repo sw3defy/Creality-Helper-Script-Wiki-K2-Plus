@@ -25,30 +25,14 @@ Replace `<printer-ip>` with your printer's IP address (found in **Settings → N
 
 ## Update / Repair Fluidd
 
-From the helper script menu, select **option 8 — Fluidd (install/update/repair)**. 
+!!! warning "Development update path — not yet hardware validated"
+    The safety-reviewed updater is currently in [Helper Script PR #7](https://github.com/sw3defy/Creality-Helper-Script-K2-Plus/pull/7), **not the released main branch**. It stages official web assets, attempts to preserve the existing camera JavaScript and retains a rollback directory. Passing offline tests does not prove compatibility with the K2 Plus firmware or newer Fluidd versions.
 
-When Fluidd is already installed you will be offered:
+    Do not replace the live `/usr/share/fluidd` directory until the printer-side compatibility checks are complete. In particular, the current camera integration uses a private Vue store API that may change in upstream Fluidd.
 
-- **Update** — download and install the latest release
-- **Repair** — re-download and reinstall the current latest (fixes corrupted files)
-- **Restore nginx block only** — fixes port 4408 access without re-downloading Fluidd
+The existing printer includes Fluidd on port `4408`. The maintenance updater changes only the web UI assets and does not restart nginx, Moonraker, Klipper or the camera services. It requires an explicit `INSTALL` confirmation, and an existing `/usr/share/fluidd.previous-helper` rollback directory is never overwritten.
 
----
-
-## Manual Update via SSH
-
-```bash
-# Download latest Fluidd
-wget -O /tmp/fluidd.zip https://github.com/fluidd-core/fluidd/releases/latest/download/fluidd.zip
-
-# Install
-mkdir -p /usr/share/fluidd
-unzip -q -o /tmp/fluidd.zip -d /usr/share/fluidd
-rm /tmp/fluidd.zip
-
-# Restart nginx
-/etc/init.d/S80nginx restart
-```
+For the planned controlled test procedure, see [Safe Update Audit](safe-update-audit.md) and the [camera compatibility checklist](https://github.com/sw3defy/Creality-Helper-Script-K2-Plus/blob/maintenance/2026-11-safe-update-audit/docs/web-ui-camera-compatibility.md).
 
 ---
 
