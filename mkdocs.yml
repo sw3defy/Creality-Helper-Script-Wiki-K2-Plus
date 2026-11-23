@@ -93,6 +93,7 @@ nav:
       - Helper Script for Creality K2 Plus: helper-script/index.md
       - Install Helper Script: helper-script/helper-script-installation.md
       - Safe Update Audit: helper-script/safe-update-audit.md
+      - Timelapse & Benchy Clogging Investigation: helper-script/timelapse-clogging-investigation-2026-11.md
       - Install Menu:
           - Install Menu: helper-script/install-menu/index.md
           - Moonraker Extensions: helper-script/moonraker-k2plus.md
