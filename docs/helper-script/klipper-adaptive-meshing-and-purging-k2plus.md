@@ -1,5 +1,9 @@
 # Klipper Adaptive Meshing & Purging — K2 Plus
 
+!!! warning "November 2026 compatibility review"
+    A diagnostic found `KAMP/KAMP_Settings.cfg` present but not included in the inspected active `printer.cfg` include graph. Installed files alone do not prove KAMP is active. Moonraker configuration must not be patched with a reverse stock include, and adaptive mesh/CFS compatibility needs verification before installation.
+
+
 KAMP (Klipper Adaptive Meshing & Purging) is integrated into the Creality Helper Script. It generates a bed mesh only over the area being printed, reducing homing and leveling time significantly on a large 350×350mm bed.
 
 ---
