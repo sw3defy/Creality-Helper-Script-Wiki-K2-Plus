@@ -1,7 +1,7 @@
 # Creality K2 Plus — Helper Script Wiki
 
 !!! warning "Maintenance audit — November 2026"
-    The instructions on this page describe the historical published Helper Script and may not match the **unmerged maintenance branch**. Moonraker Extensions, fan macros, improved shapers, and Timelapse installation/removal are currently blocked in that branch while stock-compatible migration is reviewed. Do **not** follow old directions to patch `S56moonraker`, add reverse Moonraker includes, or replace Creality's `M106`/`M107`. HelixScreen requires a confirmed installation followed by an immediate reboot, with extra patience during startup. See [Safe Update Audit](helper-script/safe-update-audit.md) for the actual status.
+    The public site documents the released Helper Script and the separate, **unmerged** [maintenance PR #7](https://github.com/sw3defy/Creality-Helper-Script-K2-Plus/pull/7). Its latest offline CI checks pass, but printer-side compatibility testing has not been completed. Camera support remains available; the proposed Fluidd/Mainsail updater preserves camera injections and retains rollback backups. Other legacy installers remain under safety review. Do not use old directions to patch `S56moonraker` or replace Creality's stock `M106`/`M107` macros. HelixScreen installation requires an immediate controlled reboot and a longer first startup. Read [Safe Update Audit](helper-script/safe-update-audit.md) before changing your printer.
 
 
 <div style="display:flex;gap:20px;margin-bottom:20px;">
