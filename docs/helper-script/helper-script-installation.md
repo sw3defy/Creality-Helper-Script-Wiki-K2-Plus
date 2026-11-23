@@ -1,5 +1,9 @@
 # Install Helper Script — K2 Plus
 
+!!! warning "Maintenance audit — November 2026"
+    The instructions on this page describe the historical published Helper Script and may not match the **unmerged maintenance branch**. Moonraker Extensions, fan macros, improved shapers, and Timelapse installation/removal are currently blocked in that branch while stock-compatible migration is reviewed. Do **not** follow old directions to patch `S56moonraker`, add reverse Moonraker includes, or replace Creality's `M106`/`M107`. HelixScreen requires a confirmed installation followed by an immediate reboot, with extra patience during startup. See [Safe Update Audit](safe-update-audit.md) for the actual status.
+
+
 The Creality K2 Plus Helper Script is a native shell-based tool built specifically for the K2 Plus and K2 Plus Combo. It installs features by writing Klipper `.cfg` files to `/mnt/UDISK/printer_data/config/` and extending Moonraker non-destructively — but some existing startup and configuration patch paths can modify stock or active files. Review and back up those files before running it.
 
 !!! warning "K2 Plus only"
