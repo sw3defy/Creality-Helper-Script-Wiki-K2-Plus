@@ -72,3 +72,23 @@ The maintenance branch has additional fail-safe changes:
 **Do not install this draft on a production printer yet.** These safeguards
 are staged in GitHub only; existing printer installations and pre-existing
 `rc.local` hooks are unchanged.
+
+## Fluidd and Mainsail — staged web-asset updates
+
+The maintenance branch includes `scripts/web_ui_release.py`, which fetches
+the official latest published release metadata, requires the user to type
+`INSTALL`, downloads the selected release, validates archive paths and
+size limits, and stages the new static files before replacing the web UI
+directory. It preserves the previous directory as
+`/usr/share/fluidd.previous-helper` or
+`/usr/share/mainsail.previous-helper` for manual rollback.
+
+The installer **does not edit nginx configuration, change camera routes, or
+restart nginx, Moonraker, or Klipper**. A pre-existing rollback directory
+blocks another update until a recovery plan is reviewed. It is deliberately
+not an unattended update mechanism.
+
+This is a **code-stage implementation**, not yet validated on the K2 Plus
+against its installed Moonraker API. In particular, the reported Fluidd
+configuration-editing issue still needs reproduction and compatibility
+testing before recommending a version.
