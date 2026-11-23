@@ -1,5 +1,9 @@
 # HelixScreen — K2 Plus
 
+!!! danger "Mandatory reboot after installation"
+    On the K2 Plus, HelixScreen installation must be followed by an immediate, explicit printer reboot, regardless of when HelixScreen is installed in the feature sequence. The planned Helper Script flow will ask for confirmation **before** installation and reboot. Allow extra time for the first boot after installation; do not hard-reset merely because startup is slower. This is a required design change, not a claim that the current published installer already enforces it. Verify backups and a recovery plan before proceeding.
+
+
 HelixScreen is a modern, lightweight touchscreen interface for Klipper 3D printers. It replaces the stock Creality touchscreen UI with a feature-rich Klipper-native interface.
 
 !!! success "Tested and working on K2 Plus"
