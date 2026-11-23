@@ -137,3 +137,37 @@ exist; the exact K2 Plus firmware and board revision are recorded; the
 camera is confirmed working before and after; and CFS load, unload,
 cut, purge, homing and printing are tested incrementally. Run one
 feature at a time, never an unattended install-all sequence.
+
+## K2 Plus Firmware Inspector — menu option 28
+
+The development branch includes a read-only firmware inspector. Select
+**28) K2 Plus Firmware Inspector (read-only)** to generate
+`/tmp/k2-inspection.txt`. Retrieve the report through WinSCP and
+**review it before sharing**. The inspector lists configuration file
+paths, short SHA-256 digests, selected macro/extension section names,
+and include references, and compares matching relative paths across
+ROM, shared and active configuration trees.
+
+The inspector does **not** read out full configuration contents or
+write to the printer's persistent configuration. The report itself
+is written to the temporary `/tmp` directory. It does not access
+camera settings, restart services or perform installation.
+
+**Limitations:** this is an initial inventory, not a full firmware
+compatibility certification. Stock firmware configuration may live in
+board-specific nested directories; relative-path comparison does not
+automatically pair these with active files. Macro definitions outside
+the scanned trees are not covered. Inspect the output for sensitive
+path or macro names before uploading.
+
+For first use without updating the installed Helper Script, transfer
+`scripts/firmware_inspector.py` from the development branch to
+`/tmp/firmware_inspector.py` using WinSCP, then run:
+
+```sh
+python3 /tmp/firmware_inspector.py > /tmp/k2-inspection.txt
+```
+
+Download `/tmp/k2-inspection.txt` with WinSCP. Do **not** replace
+the installed Helper Script with this untested maintenance branch just
+to run the inspector.
