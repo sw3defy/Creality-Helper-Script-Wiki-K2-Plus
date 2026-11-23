@@ -23,10 +23,10 @@ The helper script takes a safe, reversible approach to every feature:
 
 | What it does | How |
 |---|---|
-| Extends Moonraker | Writes `/mnt/UDISK/printer_data/config/moonraker.conf` with `[include /usr/share/moonraker/moonraker.conf]` at the top, then patches the startup script to load it |
+| Extends Moonraker | The inspected K2 Plus already starts Moonraker with the UDISK user configuration. Extension installation is blocked pending a verified migration; never add a reverse include to the stock configuration. |
 | Adds Klipper features | Writes `.cfg` files to `/mnt/UDISK/printer_data/config/` and adds `[include]` lines to `printer.cfg` |
-| Service restarts | Uses `/etc/init.d/S55klipper`, `S56moonraker`, `S80nginx` — **not** `supervisorctl` (which does not exist on K2 Plus) |
-| Uninstall | Removes the `.cfg` file, removes the `[include]` line, restarts Klipper. Moonraker patch is reversible via the Remove menu. |
+| Service restarts | Firmware-specific service commands must be inspected before use. The observed startup script is `/etc/rc.d/S56moonraker`; do not assume `/etc/init.d/S56moonraker` exists. |
+| Uninstall | Only remove files proven to be owned by the Helper Script after backup and validation. Moonraker extension removal is currently blocked in the maintenance branch. |
 | Stock files | **Do not assume untouched.** Review `scripts/system.sh` and its startup patches before running the Helper Script; some paths modify active/stock configurations. |
 
 ---
@@ -134,22 +134,17 @@ When you run the script you will see:
 
 ---
 
-## Recommended Installation Order
+## Installation order and safety gates
 
-The menu is already arranged in the correct dependency order — install top to bottom:
+The historical menu order is **not** a validated installation plan. In the unmerged maintenance branch, Moonraker Extensions, Fans Control, Improved Shapers, KAMP, Timelapse, and several other installers are blocked pending review. Never install all features in one pass.
 
-1. **Moonraker Extensions** (option 1) — always first. Sets up the Update Manager, enables object processing, and creates the persistent Moonraker config that all other features build on.
-2. **Fans Control Macros** (option 2) — before Useful Macros. The `START_PRINT` macro references the `CHAMBER_HEAT` and `FANS_OFF` macros that this installs.
-3. **Useful Macros** (option 3) — review the current script and active CFS macros first. Do not override Creality's stock print, pause, resume or CFS sequences.
-4. **Save Z-Offset Macros** (option 4) and **M600** (option 5) — optional, in any order.
-5. **KAMP** (option 6) — requires Moonraker Extensions (object processing). Install after option 1.
-6. **Improved Shapers** (option 7) — independent, any time after Klipper is running.
-7. **Fluidd, Mainsail, Timelapse, Camera, HelixScreen** (options 8–12) — review dependencies individually. Installing HelixScreen requires a controlled reboot; do not assume all orders are safe.
-8. **Remote access & notifications** (options 13–16) — install in any order, any time.
+HelixScreen can appear anywhere in the intended feature sequence, but its installation requires explicit confirmation and an immediate reboot afterward. First startup may be slower. The installer must implement and validate this before it is enabled.
 
----
+See [Safe Update Audit](safe-update-audit.md) for the current development status.
 
-## Update\n\nRead the [Safe update audit](safe-update-audit.md) before making changes.\n
+## Update
+
+Read the [Safe update audit](safe-update-audit.md) before making changes.\n
 Once Moonraker Extensions is installed, the Update Manager panel in Fluidd shows available updates:
 
 - Go to **Settings → Software Updates** in Fluidd
@@ -158,28 +153,10 @@ Once Moonraker Extensions is installed, the Update Manager panel in Fluidd shows
 Do **not** run the former bulk-copy update procedure: it could overwrite local camera integration files and other printer-specific changes. First back up the existing Helper Script and active Klipper configuration, then use a reviewed selective update plan. See [Safe update audit](safe-update-audit.md).\n
 ---
 
-## Uninstall Everything
+## Uninstall and rollback
 
-To completely remove the helper script and all installed features:
-
-```bash
-# Remove all installed .cfg files and includes
-sh /mnt/UDISK/helper-script/helper.sh
-# Select option 17 (Remove menu) and remove each feature
-
-# Restore Moonraker startup to stock
-cp /etc/rc.d/S56moonraker.orig /etc/rc.d/S56moonraker 2>/dev/null || \
-  sed -i 's|CONF=/mnt/UDISK/printer_data/config/moonraker.conf|CONF=/usr/share/moonraker/moonraker.conf|g' /etc/rc.d/S56moonraker
-
-# Restart services
-/etc/init.d/S55klipper restart
-/etc/init.d/S56moonraker restart
-
-# Remove the helper script directory
-rm -rf /mnt/UDISK/helper-script
-```
-
----
+!!! danger "Do not use the old bulk uninstall procedure"
+    The old procedure repointed the Moonraker service to the stock configuration and removed shared files. The inspected printer already starts from the UDISK user configuration. Do **not** change the service config path, delete the helper directory, or restart services as a blanket uninstall. Back up first, inventory ownership, and wait for the reviewed selective migration/removal procedure.
 
 ## Installed Features Location
 
