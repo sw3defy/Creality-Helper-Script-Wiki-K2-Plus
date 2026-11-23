@@ -4,6 +4,13 @@ The K2 Plus Helper Script supports multiple independent add-ons. An entry in
 `/mnt/UDISK/helper-script/.installed` records that an installer ran; it is **not**
 evidence of the installed application version or of compatibility.
 
+!!! warning "Current release gate — 23 November 2026"
+    The camera-preserving Fluidd/Mainsail updater and its offline regression tests are in [development PR #7](https://github.com/sw3defy/Creality-Helper-Script-K2-Plus/pull/7). GitHub Actions tests have passed, including ZIP validation, preservation of injected camera scripts and rollback scenarios. **No printer-side compatibility test has been completed for these changes.** The production Helper Script has not been updated with PR #7. Begin with read-only SSH checks and verified backups; update one web UI at a time only during controlled testing.
+
+    The existing camera installer remains available. Do not disable it or replace its go2rtc, watchdog, nginx or Moonraker integrations. The injected camera scripts use private Vue internals and require a live check after any Fluidd/Mainsail update.
+
+    [Hardware acceptance checklist](https://github.com/sw3defy/Creality-Helper-Script-K2-Plus/blob/maintenance/2026-11-safe-update-audit/docs/web-ui-camera-compatibility.md)
+
 ## Read-only audit
 
 After obtaining the reviewed Helper Script branch, run:
