@@ -1,5 +1,9 @@
 # CFS — Color Filament System (K2 Plus Combo)
 
+!!! warning "November 2026 compatibility review"
+    Preserve Creality's stock CFS hardware configuration and load/unload macros. Previous Helper Script stock-macro patching is under safety review; do not automatically rename or rewrite CFS-related macros as part of an installer.
+
+
 This page covers the built-in CFS (Color Filament System) that ships with the K2 Plus Combo. The CFS is Creality's multi-material hub allowing automatic filament switching between up to 16 spools (4 units × 4 slots each).
 
 !!! note "Combo only"
