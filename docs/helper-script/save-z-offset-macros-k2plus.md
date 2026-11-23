@@ -1,5 +1,9 @@
 # Save Z-Offset Macros — K2 Plus
 
+!!! warning "November 2026 safety review"
+    Z-offset operations may home the printer and write `SAVE_CONFIG`, restarting Klipper. The maintenance installer remains blocked pending firmware-specific validation. Back up the current `printer.cfg` and calibrated values first.
+
+
 The K2 Plus uses a `prtouch_v3` strain-gauge probe for bed leveling. Z-offset is stored in the `SAVE_CONFIG` block of `printer.cfg` at `/mnt/UDISK/printer_data/config/printer.cfg`.
 
 !!! note "Path difference from K1"
