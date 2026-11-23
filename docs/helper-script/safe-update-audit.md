@@ -171,3 +171,30 @@ python3 /tmp/firmware_inspector.py > /tmp/k2-inspection.txt
 Download `/tmp/k2-inspection.txt` with WinSCP. Do **not** replace
 the installed Helper Script with this untested maintenance branch just
 to run the inspector.
+
+## Firmware Inspector v2 — include graph and collision detection
+
+The inspector now omits timestamped `printer-YYYYMMDD_HHMMSS.cfg`
+and `moonraker-YYYYMMDD_HHMMSS.conf` backup snapshots from the
+inventory, walks literal Klipper `[include ...]` references starting
+at `printer.cfg`, and reports duplicate `[gcode_macro NAME]`
+definitions in the resolved include graph. Wildcard includes are
+reported as unresolved rather than guessed. This is a **static
+inspection**, not a live Klipper parser or compatibility test.
+
+### Findings from first printer report (November 2026)
+
+The uploaded inventory showed these macro-name collisions among
+directly included files:
+
+- `M106`: `gcode_macro.cfg` and `fans_control.cfg`
+- `M107`: `gcode_macro.cfg` and `fans_control.cfg`
+- `AUTOTUNE_SHAPERS`: `gcode_macro.cfg` and `shapers_calibration.cfg`
+
+Do not automatically remove or replace either definition. Inspect
+actual macro implementations, `rename_existing` usage, and the
+live Klipper status before planning any repair. Preserve stock
+CFS, camera, fan, homing, and print-start/end behavior.
+
+The development menu explicitly labels guarded installation
+features as **BLOCKED** while safety review is pending.
