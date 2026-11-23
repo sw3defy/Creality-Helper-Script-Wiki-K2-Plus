@@ -1,5 +1,9 @@
 # OctoEverywhere — K2 Plus
 
+!!! warning "November 2026 safety review"
+    Moonraker startup and restart commands differ between firmware builds. Do not assume `/etc/init.d/S56moonraker` exists on the inspected K2 Plus; verify the actual service path before installing or restarting.
+
+
 OctoEverywhere provides free remote access to your printer from anywhere in the world — including live webcam, full Fluidd/Mainsail control, and AI print failure detection.
 
 ---
