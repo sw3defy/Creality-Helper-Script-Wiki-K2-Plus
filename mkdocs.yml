@@ -1,5 +1,5 @@
 site_name: Creality K2 Plus — Helper Script Wiki
-site_description: Complete guide to rooting the Creality K2 Plus and K2 Plus Combo and adding features with the Creality K2 Plus Helper Script.
+site_description: Work in progress — public Helper Script installation suspended pending hardware validation.
 site_url: https://sw3defy.github.io/Creality-Helper-Script-Wiki-K2-Plus/
 
 repo_name: GitHub
@@ -7,6 +7,7 @@ repo_url: https://github.com/sw3defy/Creality-Helper-Script-Wiki-K2-Plus
 
 theme:
   name: material
+  custom_dir: overrides
   language: en
   logo: assets/img/home/logo.png
   favicon: assets/img/home/favicon.png
