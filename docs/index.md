@@ -1,7 +1,7 @@
 # Creality K2 Plus — Helper Script Wiki
 
-!!! warning "Maintenance audit — November 2026"
-    The public site documents the released Helper Script and the separate, **unmerged** [maintenance PR #7](https://github.com/sw3defy/Creality-Helper-Script-K2-Plus/pull/7). Its latest offline CI checks pass, but printer-side compatibility testing has not been completed. Camera support remains available; the proposed Fluidd/Mainsail updater preserves camera injections and retains rollback backups. Other legacy installers remain under safety review. Do not use old directions to patch `S56moonraker` or replace Creality's stock `M106`/`M107` macros. HelixScreen installation requires an immediate controlled reboot and a longer first startup. Read [Safe Update Audit](helper-script/safe-update-audit.md) before changing your printer.
+!!! danger "WORK IN PROGRESS — 24 November 2026"
+    Public Helper Script installation is temporarily suspended. Do not follow legacy installation or modification instructions anywhere in this wiki. Existing printers are unchanged. We are rebuilding and testing each installer, starting with Moonraker Extensions & Update Manager. Our target is to complete fixes and hardware validation by Sunday, 29 November 2026 (end of this week). This is a development goal, not a guaranteed release date; public installation will resume only after acceptance checks pass. Follow [development PR #7](https://github.com/sw3defy/Creality-Helper-Script-K2-Plus/pull/7) and the [Changelog](changelog.md).
 
 
 <div style="display:flex;gap:20px;margin-bottom:20px;">
@@ -39,7 +39,7 @@ If you find this wiki and helper script useful, consider supporting the work!
 
 This project is a fork of the excellent [Guilouz Creality Helper Script Wiki](https://github.com/Guilouz/Creality-Helper-Script-Wiki), adapted from the ground up for the K2 Plus. The K2 Plus has a fundamentally different architecture from the K1 Series — different filesystem paths, service manager, pre-installed software, and unique hardware (heated chamber, dual Z motors, CFS multi-material system).
 
-All content specific to the K2 Plus has been verified on live hardware via SSH. See [Special Thanks](special-thanks.md) for full attribution.
+Historical documentation includes live hardware observations, but the replacement installers and current instructions are still undergoing validation. See [Special Thanks](special-thanks.md) for full attribution.
 
 ---
 
@@ -69,12 +69,9 @@ Understanding these differences is important before following any guide. K1-targ
 
 ---
 
-## Quick Start
+## Quick Start — temporarily suspended
 
-1. [Enable root access and connect via SSH](firmwares/install-and-update-rooted-firmware-k2plus.md#enable-root-access)
-2. [Install the Helper Script](helper-script/helper-script-installation.md)
-3. Install features in the [recommended order](helper-script/helper-script-installation.md#recommended-installation-order)
-4. [Configure OrcaSlicer](slicers/orcaslicer.md) with the correct K2 Plus start/end G-code
+Do not install or update using historical instructions. See the [installation status](helper-script/helper-script-installation.md) and [development changelog](changelog.md).
 
 ---
 
